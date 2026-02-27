@@ -1,5 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 
+// ─── Startup Log ─────────────────────────────────────────────────────────────
+console.log(
+  `%c[Placement RAG Agent] App loaded — ${new Date().toISOString()}`,
+  "color:#1E90FF;font-weight:bold"
+);
+if (!import.meta.env.VITE_GEMINI_API_KEY) {
+  console.warn(
+    "[Placement RAG Agent] VITE_GEMINI_API_KEY is not set. " +
+    "AI responses will be unavailable until the variable is configured."
+  );
+}
+
 // ─── Knowledge Bases ────────────────────────────────────────────────────────
 const KNOWLEDGE_BASES = {
   Google: {
@@ -728,30 +740,38 @@ Format your response with clear sections using markdown. Be concise but thorough
 
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   if (!apiKey) {
-    return "Gemini API key not found. Add VITE_GEMINI_API_KEY to your .env file and restart the dev server.";
+    console.error("[Placement RAG Agent] VITE_GEMINI_API_KEY is missing at runtime.");
+    return "⚠️ Gemini API key not configured. The site administrator needs to set the VITE_GEMINI_API_KEY environment variable and redeploy.";
   }
 
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: systemPrompt }],
-      },
-      contents: [
-        {
-          role: "user",
-          parts: [{ text: userContent }],
+  let response;
+  try {
+    response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: systemPrompt }],
         },
-      ],
-      generationConfig: {
-        maxOutputTokens: 1000,
-      },
-    }),
-  });
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: userContent }],
+          },
+        ],
+        generationConfig: {
+          maxOutputTokens: 1000,
+        },
+      }),
+    });
+  } catch (networkErr) {
+    console.error("[Placement RAG Agent] Network error calling Gemini API:", networkErr);
+    return "⚠️ Network error — could not reach the Gemini API. Please check your connection and try again.";
+  }
 
   if (!response.ok) {
     const errorBody = await response.text();
+    console.error(`[Placement RAG Agent] Gemini API ${response.status}:`, errorBody);
     throw new Error(`Gemini API error (${response.status}): ${errorBody}`);
   }
 
@@ -973,6 +993,8 @@ const SUGGESTIONS = [
 
 // ─── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
+  const apiKeyPresent = Boolean(import.meta.env.VITE_GEMINI_API_KEY);
+
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -1012,9 +1034,10 @@ export default function App() {
         { role: "assistant", content: aiResponse, citations: ragResults },
       ]);
     } catch (err) {
+      console.error("[Placement RAG Agent] handleSend error:", err);
       setMessages((prev) => [
         ...prev.slice(0, -1),
-        { role: "assistant", content: "An error occurred while processing your query. Please try again.", citations: [] },
+        { role: "assistant", content: `⚠️ Something went wrong: ${err.message || "Unknown error"}. Please try again.`, citations: [] },
       ]);
     }
     setLoading(false);
@@ -1152,6 +1175,32 @@ export default function App() {
           ))}
         </div>
       </div>
+
+      {/* API key missing warning banner */}
+      {!apiKeyPresent && (
+        <div style={{
+          background: "rgba(255,165,0,0.12)",
+          border: "1px solid rgba(255,165,0,0.4)",
+          borderRadius: "8px",
+          padding: "0.7rem 1.2rem",
+          margin: "0.75rem auto 0",
+          maxWidth: "900px",
+          width: "calc(100% - 3rem)",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.6rem",
+          position: "relative",
+          zIndex: 10,
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+        }}>
+          <span style={{ fontSize: "1.25rem" }}>⚠️</span>
+          <span style={{ color: "#FFA500", fontSize: "0.82rem", fontFamily: "'Space Mono', monospace", lineHeight: 1.5 }}>
+            <strong>API Key Missing</strong> — VITE_GEMINI_API_KEY is not set. AI-powered answers are disabled.
+            Set the environment variable in Render and redeploy, or add it to your local <code>.env</code> file.
+          </span>
+        </div>
+      )}
 
       {/* Messages */}
       <div style={{
