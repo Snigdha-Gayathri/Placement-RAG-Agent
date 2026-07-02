@@ -1,55 +1,191 @@
-# Placement RAG Agent
+# Placement RAG Agent (Secure, Gemini-Only)
 
-AI-powered interview preparation app built with React + Vite.
+Production-grade interview RAG application with a layered, defense-in-depth security pipeline.
 
-## Local setup
+The existing React RAG UX is preserved. A secure Python backend is added to protect retrieval, prompt construction, model invocation, and output delivery.
 
-1. Install dependencies:
+## Security Architecture
 
-	```bash
-	npm ci
-	```
+The request pipeline is implemented as independent modules:
 
-2. Create `.env` in the project root (you can copy values from `.env.example`).
-
-3. Set your Gemini API key in `.env`:
-
-	```dotenv
-	VITE_GEMINI_API_KEY=your_actual_api_key
-	```
-
-4. Start development server:
-
-	```bash
-	npm run dev
-	```
-
-## Production build
-
-```bash
-npm run build
+```text
+User Request
+	|
+	v
+Input Validation
+	|
+	v
+Prompt Injection Detection
+	|
+	v
+Rate Limiter
+	|
+	v
+Retriever
+	|
+	v
+Retrieved Chunk Validation
+	|
+	v
+Context Sanitization
+	|
+	v
+Gemini
+	|
+	v
+Output Validation
+	|
+	v
+Output Sanitization
+	|
+	v
+Grounding Verification
+	|
+	v
+Final Response
 ```
 
-The static production output is generated in `dist/`.
+## Threat Model Coverage
 
-## Deploy on Render
+Implemented protections include:
 
-This repo includes `render.yaml` for one-click Blueprint deployment.
+- Prompt injection and multi-turn instruction hijacking
+- Indirect prompt injection through retrieved text
+- Document and retrieval poisoning patterns
+- Jailbreak attempts and roleplay attacks
+- Prompt leakage and system prompt extraction attempts
+- Sensitive output disclosure (keys, tokens, private key snippets, traces)
+- Oversized input and flooding controls
+- Hallucination and unsupported-claim mitigation via grounding checks
+- API abuse controls with sliding-window rate limiting
 
-### Option A: Blueprint (recommended)
+## Repository Structure
 
-1. Push this repo to GitHub.
-2. In Render, select **New +** → **Blueprint**.
-3. Connect the repository.
-4. Render reads `render.yaml` and creates the static service.
-5. In service settings, set environment variable:
-	- `VITE_GEMINI_API_KEY` = your Gemini API key
-6. Trigger deploy.
+- Frontend UI: [src/App.jsx](src/App.jsx)
+- Backend API entrypoint: [backend/app/main.py](backend/app/main.py)
+- Secure pipeline orchestrator: [backend/app/service.py](backend/app/service.py)
+- Security package:
+  - [security/config.py](security/config.py)
+  - [security/input_validator.py](security/input_validator.py)
+  - [security/prompt_injection.py](security/prompt_injection.py)
+  - [security/rate_limiter.py](security/rate_limiter.py)
+  - [security/retrieval_guard.py](security/retrieval_guard.py)
+  - [security/context_sanitizer.py](security/context_sanitizer.py)
+  - [security/hallucination_guard.py](security/hallucination_guard.py)
+  - [security/grounding.py](security/grounding.py)
+  - [security/output_validator.py](security/output_validator.py)
+  - [security/output_sanitizer.py](security/output_sanitizer.py)
+  - [security/logger.py](security/logger.py)
+  - [security/utils.py](security/utils.py)
+  - [security/constants.py](security/constants.py)
 
-### Option B: Manual Static Site setup
+## Configuration
 
-- Build command: `npm ci && npm run build`
-- Publish directory: `dist`
-- Environment variable: `VITE_GEMINI_API_KEY`
+All thresholds are configurable with environment variables.
 
-For client-side routing support, `render.yaml` already adds a rewrite from `/*` to `/index.html`.
+Required:
+
+- `GEMINI_API_KEY`: Gemini API key (server-side only)
+
+Frontend:
+
+- `VITE_API_BASE_URL`: Backend base URL. Defaults to same-origin if omitted.
+
+Guardrail thresholds:
+
+- `MAX_QUERY_LENGTH` (default: `2000`)
+- `MAX_CONTEXT_LENGTH` (default: `12000`)
+- `MAX_OUTPUT_TOKENS` (default: `800`)
+- `MAX_RETRIEVED_CHUNKS` (default: `8`)
+- `RATE_LIMIT` (default: `30`)
+- `RATE_WINDOW_SECONDS` (default: `60`)
+- `SIMILARITY_THRESHOLD` (default: `0.12`)
+- `HALLUCINATION_THRESHOLD` (default: `0.45`)
+- `PROMPT_INJECTION_THRESHOLD` (default: `0.65`)
+- `ALLOWED_FILE_TYPES` (default: `txt,md,pdf,docx`)
+
+See [.env.example](.env.example) for the full template.
+
+## Local Development
+
+1. Install frontend dependencies:
+
+```bash
+npm ci
+```
+
+2. Install backend dependencies:
+
+```bash
+python -m pip install -r backend/requirements.txt
+```
+
+3. Configure environment variables (copy values from `.env.example`).
+
+4. Run backend API:
+
+```bash
+uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+5. Run frontend:
+
+```bash
+npm run dev
+```
+
+The frontend sends chat requests to `/api/chat` and uses Vite proxy in development.
+
+## Production Deployment
+
+Render blueprint in [render.yaml](render.yaml) defines:
+
+- Python API service (`placement-rag-agent-api`)
+- Static UI service (`placement-rag-agent-ui`)
+
+Set `GEMINI_API_KEY` on the API service and `VITE_API_BASE_URL` for the UI service.
+
+## Testing
+
+Run all security tests:
+
+```bash
+python -m pytest tests/security -q
+```
+
+Run with coverage:
+
+```bash
+python -m pytest tests/security --cov=security --cov-report=term-missing
+```
+
+Current security package coverage target is achieved (`>=90%`).
+
+## Security Logging
+
+Structured JSON logs include:
+
+- Timestamp
+- Request ID
+- Query length
+- Processing time
+- Retrieved safe chunk count
+- Discarded chunk count
+- Injection score
+- Guard decisions
+
+Sensitive values are redacted. Raw documents and raw retrieved context are not logged.
+
+## Limitations
+
+- Rate limiter is in-memory (single-instance scope)
+- Hallucination checks are heuristic, not formal verification
+- Retrieval currently consumes client-provided candidate chunks and relies on strict filtering
+
+## Future Improvements
+
+- Add distributed rate limiting (Redis)
+- Introduce cryptographic request signatures between UI and API
+- Add stronger semantic entailment checks for grounding
+- Integrate specialized guardrail frameworks (NeMo Guardrails, Guardrails AI, Llama Guard) while keeping Gemini as the only LLM provider
+- Add policy-driven allow and deny controls per tenant or role

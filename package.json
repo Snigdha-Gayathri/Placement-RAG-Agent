@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000",
+    "test:security": "python -m pytest tests/security --cov=security --cov-report=term-missing"
   },
   "dependencies": {
     "react": "^19.2.0",

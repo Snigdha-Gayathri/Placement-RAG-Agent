@@ -5,10 +5,10 @@ console.log(
   `%c[Placement RAG Agent] App loaded — ${new Date().toISOString()}`,
   "color:#1E90FF;font-weight:bold"
 );
-if (!import.meta.env.VITE_GEMINI_API_KEY) {
+if (!import.meta.env.VITE_API_BASE_URL) {
   console.warn(
-    "[Placement RAG Agent] VITE_GEMINI_API_KEY is not set. " +
-    "AI responses will be unavailable until the variable is configured."
+    "[Placement RAG Agent] VITE_API_BASE_URL is not set. " +
+    "Using same-origin API path /api/chat by default."
   );
 }
 
@@ -712,71 +712,38 @@ function searchKnowledgeBases(query) {
   return results;
 }
 
-// ─── Gemini API Call ─────────────────────────────────────────────────────────
-async function callGeminiWithRAG(userMessage, ragContext) {
-  const contextText = ragContext
-    .map(
-      (r) =>
-        `[${r.company}]:\n` +
-        r.matches.map((m) => `• ${m.q} (tags: ${m.tags.join(", ")})`).join("\n")
-    )
-    .join("\n\n");
-
-  const systemPrompt = `You are an expert IT Interview Intelligence Agent. You have access to curated interview question databases from top tech companies: Google, Amazon, Microsoft, Meta, Netflix, and Apple.
-
-When a user asks about interview questions for a company or topic, you MUST:
-1. Analyze the retrieved knowledge base context provided to you
-2. Synthesize a comprehensive, well-structured answer
-3. Always cite which company each question or insight comes from using [Company] notation
-4. Group questions by category/theme when possible
-5. Add brief expert tips for each category
-6. Keep responses focused, useful, and actionable
-
-Format your response with clear sections using markdown. Be concise but thorough. Always end with a "Pro Tips" section.`;
-
-  const userContent = ragContext.length > 0
-    ? `User Query: ${userMessage}\n\n--- RETRIEVED CONTEXT FROM KNOWLEDGE BASES ---\n${contextText}\n--- END CONTEXT ---\n\nPlease synthesize the above knowledge base results into a helpful, well-cited answer.`
-    : `User Query: ${userMessage}\n\nNote: No specific matches were found in the knowledge bases for this query. Please provide a helpful general response about IT interview preparation.`;
-
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  if (!apiKey) {
-    console.error("[Placement RAG Agent] VITE_GEMINI_API_KEY is missing at runtime.");
-    return "⚠️ Gemini API key not configured. The site administrator needs to set the VITE_GEMINI_API_KEY environment variable and redeploy.";
+// ─── Secure Backend API Call ────────────────────────────────────────────────
+async function callGeminiWithRAG(userMessage) {
+  let apiBase = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/$/, "");
+  if (apiBase && !/^https?:\/\//i.test(apiBase)) {
+    apiBase = `https://${apiBase}`;
   }
 
   let response;
   try {
-    response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+    response = await fetch(`${apiBase}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        systemInstruction: {
-          parts: [{ text: systemPrompt }],
-        },
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: userContent }],
-          },
-        ],
-        generationConfig: {
-          maxOutputTokens: 1000,
-        },
-      }),
+      body: JSON.stringify({ query: userMessage }),
     });
   } catch (networkErr) {
-    console.error("[Placement RAG Agent] Network error calling Gemini API:", networkErr);
-    return "⚠️ Network error — could not reach the Gemini API. Please check your connection and try again.";
+    console.error("[Placement RAG Agent] Network error calling secure API:", networkErr);
+    throw new Error("⚠️ Network error — could not reach the secure RAG API. Please check your connection and try again.");
   }
 
   if (!response.ok) {
-    const errorBody = await response.text();
-    console.error(`[Placement RAG Agent] Gemini API ${response.status}:`, errorBody);
-    throw new Error(`Gemini API error (${response.status}): ${errorBody}`);
+    let detail = "Request could not be processed.";
+    try {
+      const body = await response.json();
+      detail = body?.detail || detail;
+    } catch (_err) {
+      // Keep generic detail to avoid leaking internals.
+    }
+    throw new Error(detail);
   }
 
   const data = await response.json();
-  return data.candidates?.[0]?.content?.parts?.map((part) => part.text).filter(Boolean).join("\n") || "I encountered an issue processing your request.";
+  return data;
 }
 
 // ─── Markdown Renderer ────────────────────────────────────────────────────────
@@ -993,8 +960,6 @@ const SUGGESTIONS = [
 
 // ─── Main App ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const apiKeyPresent = Boolean(import.meta.env.VITE_GEMINI_API_KEY);
-
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -1023,15 +988,16 @@ export default function App() {
     setLoading(true);
 
     try {
-      // RAG: search knowledge bases
-      const ragResults = searchKnowledgeBases(query);
-
-      // Call Gemini with RAG context
-      const aiResponse = await callGeminiWithRAG(query, ragResults);
+      // Call backend-only /chat with just the user query
+      const aiResponse = await callGeminiWithRAG(query);
 
       setMessages((prev) => [
         ...prev.slice(0, -1),
-        { role: "assistant", content: aiResponse, citations: ragResults },
+        {
+          role: "assistant",
+          content: aiResponse?.answer || aiResponse?.text || "I encountered an issue processing your request.",
+          citations: aiResponse?.meta?.citations || aiResponse?.citations || [],
+        },
       ]);
     } catch (err) {
       console.error("[Placement RAG Agent] handleSend error:", err);
