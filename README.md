@@ -161,6 +161,24 @@ python -m pytest tests/security --cov=security --cov-report=term-missing
 
 Current security package coverage target is achieved (`>=90%`).
 
+Backend-driven refactor notes:
+
+- The frontend now sends only { "query": "..." } to `/api/chat` and does not perform any retrieval or send rag_context.
+- Install the Python package in editable mode to run backend tests locally:
+
+	```bash
+	python -m pip install -e .
+	python -m pytest tests/security
+	```
+
+- Start the backend with:
+
+	```bash
+	uvicorn backend.app.main:app --reload --port 8000
+	```
+
+Ensure `VECTOR_DB_PATH` and `GEMINI_API_KEY` environment variables are set before running ingest/reindex operations.
+
 ## Security Logging
 
 Structured JSON logs include:

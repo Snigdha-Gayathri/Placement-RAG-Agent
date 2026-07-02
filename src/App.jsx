@@ -970,6 +970,8 @@ export default function App() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeCompanies] = useState(new Set(COMPANIES));
+  const apiKeyPresent = Boolean(import.meta.env.VITE_GEMINI_API_KEY);
+
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
