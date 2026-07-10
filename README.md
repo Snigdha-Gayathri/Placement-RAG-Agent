@@ -2,6 +2,8 @@
 
 **A production-grade interview prep RAG assistant with a defense-in-depth security pipeline — Gemini-only, secure by design.**
 
+![Python](https://img.shields.io/badge/Backend-Python%20%2F%20FastAPI-3776AB) ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB) ![Gemini](https://img.shields.io/badge/LLM-Gemini-4285F4) ![Security](https://img.shields.io/badge/Security-Defense--in--Depth-critical) ![Coverage](https://img.shields.io/badge/Security%20Coverage-%E2%89%A590%25-brightgreen)
+
 Placement RAG Agent is an interview-prep RAG application that keeps its existing React chat UX but wraps every request in a **layered security pipeline** — input validation, prompt-injection detection, rate limiting, retrieval guarding, context sanitization, output validation, and grounding verification — before and after a single, tightly-scoped call to Gemini.
 
 ## Table of Contents
