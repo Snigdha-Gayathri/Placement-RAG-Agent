@@ -1,209 +1,206 @@
-# Placement RAG Agent (Secure, Gemini-Only)
+# 🎯 Placement RAG Agent
 
-Production-grade interview RAG application with a layered, defense-in-depth security pipeline.
+**A production-grade interview prep RAG assistant with a defense-in-depth security pipeline — Gemini-only, secure by design.**
 
-The existing React RAG UX is preserved. A secure Python backend is added to protect retrieval, prompt construction, model invocation, and output delivery.
+Placement RAG Agent is an interview-prep RAG application that keeps its existing React chat UX but wraps every request in a **layered security pipeline** — input validation, prompt-injection detection, rate limiting, retrieval guarding, context sanitization, output validation, and grounding verification — before and after a single, tightly-scoped call to Gemini.
 
-## Security Architecture
+## Table of Contents
 
-The request pipeline is implemented as independent modules:
+- [Why This Exists](#why-this-exists)
+- [Security Architecture](#-security-architecture)
+- [Threat Model Coverage](#-threat-model-coverage)
+- [Repository Structure](#-repository-structure)
+- [Configuration](#-configuration)
+- [Local Development](#-local-development)
+- [Production Deployment](#-production-deployment)
+- [Testing](#-testing)
+- [Security Logging](#-security-logging)
+- [Limitations](#-limitations--future-work)
+- [License](#-license)
 
-```text
+## Why This Exists
+
+RAG chat assistants for interview prep are an easy target for prompt injection — through both direct chat input and poisoned retrieved documents. This project treats that threat seriously: every request passes through independent, composable guard modules rather than relying on the LLM alone to "be careful."
+
+## 🔒 Security Architecture
+
+The request pipeline is implemented as independent, testable modules:
+
+```
 User Request
-	|
-	v
+     │
+     ▼
 Input Validation
-	|
-	v
+     │
+     ▼
 Prompt Injection Detection
-	|
-	v
+     │
+     ▼
 Rate Limiter
-	|
-	v
+     │
+     ▼
 Retriever
-	|
-	v
+     │
+     ▼
 Retrieved Chunk Validation
-	|
-	v
+     │
+     ▼
 Context Sanitization
-	|
-	v
-Gemini
-	|
-	v
+     │
+     ▼
+       Gemini
+     │
+     ▼
 Output Validation
-	|
-	v
+     │
+     ▼
 Output Sanitization
-	|
-	v
+     │
+     ▼
 Grounding Verification
-	|
-	v
+     │
+     ▼
 Final Response
 ```
 
-## Threat Model Coverage
+## 🛡️ Threat Model Coverage
 
-Implemented protections include:
+| Threat | Mitigation |
+|---|---|
+| Prompt injection / multi-turn instruction hijacking | `security/prompt_injection.py` scoring + thresholding |
+| Indirect injection via retrieved text | `security/retrieval_guard.py` chunk validation |
+| Document / retrieval poisoning | Retrieved chunk validation + context sanitization |
+| Jailbreaks and roleplay attacks | Prompt injection detector + output validation |
+| Prompt leakage / system prompt extraction | Output sanitizer strips sensitive disclosures |
+| Sensitive output disclosure (keys, tokens, traces) | `security/output_sanitizer.py` |
+| Oversized input / flooding | Input validation + sliding-window rate limiter |
+| Hallucination / unsupported claims | `security/hallucination_guard.py` + `security/grounding.py` |
+| API abuse | `security/rate_limiter.py` (sliding window) |
 
-- Prompt injection and multi-turn instruction hijacking
-- Indirect prompt injection through retrieved text
-- Document and retrieval poisoning patterns
-- Jailbreak attempts and roleplay attacks
-- Prompt leakage and system prompt extraction attempts
-- Sensitive output disclosure (keys, tokens, private key snippets, traces)
-- Oversized input and flooding controls
-- Hallucination and unsupported-claim mitigation via grounding checks
-- API abuse controls with sliding-window rate limiting
+## 📁 Repository Structure
 
-## Repository Structure
+```
+Placement-RAG-Agent/
+├── src/
+│   └── App.jsx                    # React frontend (chat UX, sends { "query": "..." })
+├── backend/
+│   └── app/
+│       ├── main.py                # FastAPI entrypoint
+│       └── service.py             # Secure pipeline orchestrator
+├── security/
+│   ├── config.py                  # Guardrail configuration
+│   ├── input_validator.py
+│   ├── prompt_injection.py
+│   ├── rate_limiter.py
+│   ├── retrieval_guard.py
+│   ├── context_sanitizer.py
+│   ├── hallucination_guard.py
+│   ├── grounding.py
+│   ├── output_validator.py
+│   ├── output_sanitizer.py
+│   ├── logger.py
+│   ├── utils.py
+│   └── constants.py
+├── documents/                     # Source documents for retrieval
+├── tests/security/                # Security test suite
+├── .env.example
+└── render.yaml                    # Render blueprint (API + static UI)
+```
 
-- Frontend UI: [src/App.jsx](src/App.jsx)
-- Backend API entrypoint: [backend/app/main.py](backend/app/main.py)
-- Secure pipeline orchestrator: [backend/app/service.py](backend/app/service.py)
-- Security package:
-  - [security/config.py](security/config.py)
-  - [security/input_validator.py](security/input_validator.py)
-  - [security/prompt_injection.py](security/prompt_injection.py)
-  - [security/rate_limiter.py](security/rate_limiter.py)
-  - [security/retrieval_guard.py](security/retrieval_guard.py)
-  - [security/context_sanitizer.py](security/context_sanitizer.py)
-  - [security/hallucination_guard.py](security/hallucination_guard.py)
-  - [security/grounding.py](security/grounding.py)
-  - [security/output_validator.py](security/output_validator.py)
-  - [security/output_sanitizer.py](security/output_sanitizer.py)
-  - [security/logger.py](security/logger.py)
-  - [security/utils.py](security/utils.py)
-  - [security/constants.py](security/constants.py)
+## ⚙️ Configuration
 
-## Configuration
+All guardrail thresholds are configurable via environment variables. See `.env.example` for the full template.
 
-All thresholds are configurable with environment variables.
+**Required:**
 
-Required:
+| Variable | Description |
+|---|---|
+| `GEMINI_API_KEY` | Gemini API key (server-side only) |
 
-- `GEMINI_API_KEY`: Gemini API key (server-side only)
+**Frontend:**
 
-Frontend:
+| Variable | Description |
+|---|---|
+| `VITE_API_BASE_URL` | Backend base URL — defaults to same-origin if omitted |
 
-- `VITE_API_BASE_URL`: Backend base URL. Defaults to same-origin if omitted.
+**Guardrail thresholds (defaults shown):**
 
-Guardrail thresholds:
+| Variable | Default |
+|---|---|
+| `MAX_QUERY_LENGTH` | `2000` |
+| `MAX_CONTEXT_LENGTH` | `12000` |
+| `MAX_OUTPUT_TOKENS` | `800` |
+| `MAX_RETRIEVED_CHUNKS` | `8` |
+| `RATE_LIMIT` | `30` |
+| `RATE_WINDOW_SECONDS` | `60` |
+| `SIMILARITY_THRESHOLD` | `0.12` |
+| `HALLUCINATION_THRESHOLD` | `0.45` |
+| `PROMPT_INJECTION_THRESHOLD` | `0.65` |
+| `ALLOWED_FILE_TYPES` | `txt,md,pdf,docx` |
 
-- `MAX_QUERY_LENGTH` (default: `2000`)
-- `MAX_CONTEXT_LENGTH` (default: `12000`)
-- `MAX_OUTPUT_TOKENS` (default: `800`)
-- `MAX_RETRIEVED_CHUNKS` (default: `8`)
-- `RATE_LIMIT` (default: `30`)
-- `RATE_WINDOW_SECONDS` (default: `60`)
-- `SIMILARITY_THRESHOLD` (default: `0.12`)
-- `HALLUCINATION_THRESHOLD` (default: `0.45`)
-- `PROMPT_INJECTION_THRESHOLD` (default: `0.65`)
-- `ALLOWED_FILE_TYPES` (default: `txt,md,pdf,docx`)
-
-See [.env.example](.env.example) for the full template.
-
-## Local Development
-
-1. Install frontend dependencies:
+## 🚀 Local Development
 
 ```bash
+# 1. Frontend dependencies
 npm ci
-```
 
-2. Install backend dependencies:
-
-```bash
+# 2. Backend dependencies
 python -m pip install -r backend/requirements.txt
-```
 
-3. Configure environment variables (copy values from `.env.example`).
+# 3. Configure environment (copy values from .env.example)
+cp .env.example .env
 
-4. Run backend API:
-
-```bash
+# 4. Run backend API
 uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000
-```
 
-5. Run frontend:
-
-```bash
+# 5. Run frontend
 npm run dev
 ```
 
-The frontend sends chat requests to `/api/chat` and uses Vite proxy in development.
+The frontend sends chat requests to `/api/chat` and uses the Vite dev proxy. It sends only `{ "query": "..." }` — retrieval and context assembly happen entirely server-side.
 
-## Production Deployment
+> Ensure `VECTOR_DB_PATH` and `GEMINI_API_KEY` are set before running ingest/reindex operations.
 
-Render blueprint in [render.yaml](render.yaml) defines:
+## ☁️ Production Deployment
 
-- Python API service (`placement-rag-agent-api`)
-- Static UI service (`placement-rag-agent-ui`)
+The included `render.yaml` blueprint defines two services:
 
-Set `GEMINI_API_KEY` on the API service and `VITE_API_BASE_URL` for the UI service.
+- `placement-rag-agent-api` — Python API service
+- `placement-rag-agent-ui` — Static UI service
 
-## Testing
+Set `GEMINI_API_KEY` on the API service and `VITE_API_BASE_URL` on the UI service.
 
-Run all security tests:
+## 🧪 Testing
 
 ```bash
+# Editable install for local test runs
+python -m pip install -e .
+
+# Run all security tests
 python -m pytest tests/security -q
-```
 
-Run with coverage:
-
-```bash
+# With coverage
 python -m pytest tests/security --cov=security --cov-report=term-missing
 ```
 
-Current security package coverage target is achieved (`>=90%`).
+The security package targets **≥90% coverage**.
 
-Backend-driven refactor notes:
+## 📝 Security Logging
 
-- The frontend now sends only { "query": "..." } to `/api/chat` and does not perform any retrieval or send rag_context.
-- Install the Python package in editable mode to run backend tests locally:
+Structured JSON logs capture: timestamp, request ID, query length, processing time, retrieved/discarded chunk counts, injection score, and guard decisions. Sensitive values are redacted, and raw documents or raw retrieved context are never logged.
 
-	```bash
-	python -m pip install -e .
-	python -m pytest tests/security
-	```
+## ⚠️ Limitations & Future Work
 
-- Start the backend with:
+- Rate limiter is currently in-memory (single-instance scope) — Redis-backed distributed limiting is planned
+- Hallucination checks are heuristic, not formally verified — stronger semantic entailment checks are planned
+- Retrieval currently consumes client-provided candidate chunks with strict filtering
+- Future: cryptographic request signatures between UI and API, integration with dedicated guardrail frameworks (NeMo Guardrails, Guardrails AI, Llama Guard) while keeping Gemini as the sole LLM provider, and policy-driven allow/deny controls per tenant or role
 
-	```bash
-	uvicorn backend.app.main:app --reload --port 8000
-	```
+## 📄 License
 
-Ensure `VECTOR_DB_PATH` and `GEMINI_API_KEY` environment variables are set before running ingest/reindex operations.
+No license file specified in the repository — add one if you intend to open-source this project.
 
-## Security Logging
+## Contact
 
-Structured JSON logs include:
-
-- Timestamp
-- Request ID
-- Query length
-- Processing time
-- Retrieved safe chunk count
-- Discarded chunk count
-- Injection score
-- Guard decisions
-
-Sensitive values are redacted. Raw documents and raw retrieved context are not logged.
-
-## Limitations
-
-- Rate limiter is in-memory (single-instance scope)
-- Hallucination checks are heuristic, not formal verification
-- Retrieval currently consumes client-provided candidate chunks and relies on strict filtering
-
-## Future Improvements
-
-- Add distributed rate limiting (Redis)
-- Introduce cryptographic request signatures between UI and API
-- Add stronger semantic entailment checks for grounding
-- Integrate specialized guardrail frameworks (NeMo Guardrails, Guardrails AI, Llama Guard) while keeping Gemini as the only LLM provider
-- Add policy-driven allow and deny controls per tenant or role
+- GitHub: [Snigdha-Gayathri](https://github.com/Snigdha-Gayathri)
+- LinkedIn: [snigdha-gayathri](https://linkedin.com/in/snigdha-gayathri)
