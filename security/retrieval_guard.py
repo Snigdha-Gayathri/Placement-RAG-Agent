@@ -29,17 +29,17 @@ class RetrievalGuard:
     def __init__(self, config: SecurityConfig) -> None:
         self._config = config
 
-    def filter_chunks(self, query: str, chunks: list[RetrievedChunk]) -> RetrievalGuardResult:
-        safe: list[RetrievedChunk] = []
+    def filter_chunks(self, query: str, chunks: list[Any]) -> RetrievalGuardResult:
+        safe: list[Any] = []
         seen: set[str] = set()
         reasons: list[str] = []
         discarded = 0
 
-        for chunk in sorted(chunks, key=lambda c: c.similarity, reverse=True):
+        for chunk in sorted(chunks, key=lambda c: getattr(c, "similarity", getattr(c, "score", getattr(c, "similarity_score", 0.0))), reverse=True):
             if len(safe) >= self._config.max_retrieved_chunks:
                 break
 
-            text = normalize_text(chunk.text)
+            text = normalize_text(getattr(chunk, "text", str(chunk)))
 
             if len(text) > self._config.max_context_length:
                 discarded += 1
@@ -56,7 +56,8 @@ class RetrievalGuard:
                 reasons.append("retrieval_block_pattern")
                 continue
 
-            score = max(chunk.similarity, jaccard_similarity(query, text))
+            sim_val = getattr(chunk, "similarity", getattr(chunk, "score", getattr(chunk, "similarity_score", 0.0)))
+            score = max(float(sim_val), jaccard_similarity(query, text))
             if score < self._config.similarity_threshold:
                 discarded += 1
                 reasons.append("low_similarity")
@@ -69,6 +70,6 @@ class RetrievalGuard:
                 continue
 
             seen.add(fingerprint)
-            safe.append(RetrievedChunk(source=chunk.source, text=text, similarity=score))
+            safe.append(chunk)
 
         return RetrievalGuardResult(safe_chunks=safe, discarded_count=discarded, reasons=reasons)

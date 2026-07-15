@@ -1,208 +1,90 @@
-# 🎯 Placement RAG Agent
+# Placement RAG Agent — Observable Production Agentic RAG Platform
 
-**A production-grade interview prep RAG assistant with a defense-in-depth security pipeline — Gemini-only, secure by design.**
+An enterprise-grade, observable **Agentic Retrieval-Augmented Generation (RAG)** platform designed for AI interviews and engineering demonstrations. This platform showcases advanced GenAI architecture, multi-stage retrieval pipelines, agent reasoning traces, real-time feature toggles, and layered defense-in-depth security guardrails.
 
-![Python](https://img.shields.io/badge/Backend-Python%20%2F%20FastAPI-3776AB) ![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB) ![Gemini](https://img.shields.io/badge/LLM-Gemini-4285F4) ![Security](https://img.shields.io/badge/Security-Defense--in--Depth-critical) ![Coverage](https://img.shields.io/badge/Security%20Coverage-%E2%89%A590%25-brightgreen)
+---
 
-Placement RAG Agent is an interview-prep RAG application that keeps its existing React chat UX but wraps every request in a **layered security pipeline** — input validation, prompt-injection detection, rate limiting, retrieval guarding, context sanitization, output validation, and grounding verification — before and after a single, tightly-scoped call to Gemini.
+## 🏛 Architecture & Core Highlights
 
-## Table of Contents
-
-- [Why This Exists](#why-this-exists)
-- [Security Architecture](#-security-architecture)
-- [Threat Model Coverage](#-threat-model-coverage)
-- [Repository Structure](#-repository-structure)
-- [Configuration](#-configuration)
-- [Local Development](#-local-development)
-- [Production Deployment](#-production-deployment)
-- [Testing](#-testing)
-- [Security Logging](#-security-logging)
-- [Limitations](#-limitations--future-work)
-- [License](#-license)
-
-## Why This Exists
-
-RAG chat assistants for interview prep are an easy target for prompt injection — through both direct chat input and poisoned retrieved documents. This project treats that threat seriously: every request passes through independent, composable guard modules rather than relying on the LLM alone to "be careful."
-
-## 🔒 Security Architecture
-
-The request pipeline is implemented as independent, testable modules:
-
-```
-User Request
-     │
-     ▼
-Input Validation
-     │
-     ▼
-Prompt Injection Detection
-     │
-     ▼
-Rate Limiter
-     │
-     ▼
-Retriever
-     │
-     ▼
-Retrieved Chunk Validation
-     │
-     ▼
-Context Sanitization
-     │
-     ▼
-       Gemini
-     │
-     ▼
-Output Validation
-     │
-     ▼
-Output Sanitization
-     │
-     ▼
-Grounding Verification
-     │
-     ▼
-Final Response
+```mermaid
+graph TD
+    UserQuery[User Query] --> SecInput[Security Input Guardrails]
+    SecInput --> ConvMem[Conversation Memory & Query Rewriter]
+    ConvMem --> Router[Query Router & Metadata Filters]
+    Router --> Hybrid[Hybrid RRF Retriever]
+    Hybrid --> Dense[Dense Embedding ChromaDB]
+    Hybrid --> BM25[BM25 Okapi Sparse Search]
+    Dense --> RRF[Reciprocal Rank Fusion]
+    BM25 --> RRF
+    RRF --> Reranker[Cross-Encoder Reranker]
+    Reranker --> SecRet[Retrieval Guard & Sanitizer]
+    SecRet --> AgentLoop[Agent Planner & Executor Loop]
+    AgentLoop --> LLM[Gemini 2.5 Flash Synthesis]
+    LLM --> SecOut[Output Grounding & Hallucination Guard]
+    SecOut --> FinalResponse[Grounded Response + Dashboard Trace]
 ```
 
-## 🛡️ Threat Model Coverage
+### 1. Modular Agentic RAG Backend (`backend/core/`)
+- **Hybrid Retrieval**: Combines Dense (`text-embedding-004` + `ChromaDB`) and Sparse (`BM25Okapi`) retrieval via **Reciprocal Rank Fusion (RRF)**.
+- **Cross-Encoder Reranking**: Uses `cross-encoder/ms-marco-MiniLM-L-6-v2` to re-score candidate chunks with semantic entailment.
+- **Agent Reasoning Loop**: Structured iterative planning (`AgentPlanner` and `AgentExecutor`) with sub-query decomposition, evidence evaluation, and multi-hop retrieval.
+- **Contextual Query Rewriting**: Resolves conversational pronouns and references across session turns.
+- **Hypothetical Document Embeddings (HyDE)**: Generates hypothetical ideal answers to bridge semantic vocabulary gaps.
 
-| Threat | Mitigation |
-|---|---|
-| Prompt injection / multi-turn instruction hijacking | `security/prompt_injection.py` scoring + thresholding |
-| Indirect injection via retrieved text | `security/retrieval_guard.py` chunk validation |
-| Document / retrieval poisoning | Retrieved chunk validation + context sanitization |
-| Jailbreaks and roleplay attacks | Prompt injection detector + output validation |
-| Prompt leakage / system prompt extraction | Output sanitizer strips sensitive disclosures |
-| Sensitive output disclosure (keys, tokens, traces) | `security/output_sanitizer.py` |
-| Oversized input / flooding | Input validation + sliding-window rate limiter |
-| Hallucination / unsupported claims | `security/hallucination_guard.py` + `security/grounding.py` |
-| API abuse | `security/rate_limiter.py` (sliding window) |
+### 2. Developer Dashboard & Live Feature Toggles (`src/DeveloperDashboard.jsx`)
+Inspect and compare system behavior in real time by enabling or disabling pipeline stages without restarting the server:
+- Dense Retrieval | BM25 Retrieval | Hybrid RRF | Cross-Encoder Reranking
+- Metadata Filtering | HyDE | Conversation Memory | Query Rewriting | Agent Planning Loop | Multi-Hop Retrieval | Chunk Enhancement
 
-## 📁 Repository Structure
+### 3. Layered Defense-In-Depth Security (`security/`)
+- **Input Guardrails**: Length limits, normalization, prompt injection detection (`PromptInjectionDetector`).
+- **Retrieval Guardrails**: Sanitizes retrieved chunks against indirect prompt injection (`RetrievalGuard`).
+- **Output Guardrails**: Filters sensitive data leakage and enforces semantic grounding / hallucination checks (`GroundingVerifier`, `HallucinationGuard`).
 
-```
-Placement-RAG-Agent/
-├── src/
-│   └── App.jsx                    # React frontend (chat UX, sends { "query": "..." })
-├── backend/
-│   └── app/
-│       ├── main.py                # FastAPI entrypoint
-│       └── service.py             # Secure pipeline orchestrator
-├── security/
-│   ├── config.py                  # Guardrail configuration
-│   ├── input_validator.py
-│   ├── prompt_injection.py
-│   ├── rate_limiter.py
-│   ├── retrieval_guard.py
-│   ├── context_sanitizer.py
-│   ├── hallucination_guard.py
-│   ├── grounding.py
-│   ├── output_validator.py
-│   ├── output_sanitizer.py
-│   ├── logger.py
-│   ├── utils.py
-│   └── constants.py
-├── documents/                     # Source documents for retrieval
-├── tests/security/                # Security test suite
-├── .env.example
-└── render.yaml                    # Render blueprint (API + static UI)
-```
+---
 
-## ⚙️ Configuration
+## 🚀 Quickstart & Installation
 
-All guardrail thresholds are configurable via environment variables. See `.env.example` for the full template.
-
-**Required:**
-
-| Variable | Description |
-|---|---|
-| `GEMINI_API_KEY` | Gemini API key (server-side only) |
-
-**Frontend:**
-
-| Variable | Description |
-|---|---|
-| `VITE_API_BASE_URL` | Backend base URL — defaults to same-origin if omitted |
-
-**Guardrail thresholds (defaults shown):**
-
-| Variable | Default |
-|---|---|
-| `MAX_QUERY_LENGTH` | `2000` |
-| `MAX_CONTEXT_LENGTH` | `12000` |
-| `MAX_OUTPUT_TOKENS` | `800` |
-| `MAX_RETRIEVED_CHUNKS` | `8` |
-| `RATE_LIMIT` | `30` |
-| `RATE_WINDOW_SECONDS` | `60` |
-| `SIMILARITY_THRESHOLD` | `0.12` |
-| `HALLUCINATION_THRESHOLD` | `0.45` |
-| `PROMPT_INJECTION_THRESHOLD` | `0.65` |
-| `ALLOWED_FILE_TYPES` | `txt,md,pdf,docx` |
-
-## 🚀 Local Development
-
+### 1. Environment Setup
+Clone the repository and configure your environment:
 ```bash
-# 1. Frontend dependencies
-npm ci
-
-# 2. Backend dependencies
-python -m pip install -r backend/requirements.txt
-
-# 3. Configure environment (copy values from .env.example)
 cp .env.example .env
+# Edit .env and insert your GEMINI_API_KEY
+```
 
-# 4. Run backend API
-uvicorn backend.app.main:app --reload --host 127.0.0.1 --port 8000
+### 2. Backend & Ingestion Pipeline
+Activate your Python virtual environment and build the document index from `data/`:
+```bash
+# Run the ingestion CLI to process PDFs and build ChromaDB index
+python -m backend.ingestion.build_index --data-path data/ --strategy recursive --chunk-size 500
 
-# 5. Run frontend
+# Run the backend server
+uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+### 3. Frontend Application
+```bash
+npm install
 npm run dev
 ```
+Open `http://localhost:5173` to interact with the Agentic RAG Platform and inspect the **Developer Dashboard**.
 
-The frontend sends chat requests to `/api/chat` and uses the Vite dev proxy. It sends only `{ "query": "..." }` — retrieval and context assembly happen entirely server-side.
+---
 
-> Ensure `VECTOR_DB_PATH` and `GEMINI_API_KEY` are set before running ingest/reindex operations.
+## 🧪 Security & Observability Tests
 
-## ☁️ Production Deployment
-
-The included `render.yaml` blueprint defines two services:
-
-- `placement-rag-agent-api` — Python API service
-- `placement-rag-agent-ui` — Static UI service
-
-Set `GEMINI_API_KEY` on the API service and `VITE_API_BASE_URL` on the UI service.
-
-## 🧪 Testing
-
+Run the full security guardrail regression test suite:
 ```bash
-# Editable install for local test runs
-python -m pip install -e .
-
-# Run all security tests
-python -m pytest tests/security -q
-
-# With coverage
-python -m pytest tests/security --cov=security --cov-report=term-missing
+python -m pytest tests/security -v
 ```
+All 28 defense-in-depth tests pass with zero regressions.
 
-The security package targets **≥90% coverage**.
+---
 
-## 📝 Security Logging
+## 📊 API Reference
 
-Structured JSON logs capture: timestamp, request ID, query length, processing time, retrieved/discarded chunk counts, injection score, and guard decisions. Sensitive values are redacted, and raw documents or raw retrieved context are never logged.
-
-## ⚠️ Limitations & Future Work
-
-- Rate limiter is currently in-memory (single-instance scope) — Redis-backed distributed limiting is planned
-- Hallucination checks are heuristic, not formally verified — stronger semantic entailment checks are planned
-- Retrieval currently consumes client-provided candidate chunks with strict filtering
-- Future: cryptographic request signatures between UI and API, integration with dedicated guardrail frameworks (NeMo Guardrails, Guardrails AI, Llama Guard) while keeping Gemini as the sole LLM provider, and policy-driven allow/deny controls per tenant or role
-
-## 📄 License
-
-No license file specified in the repository — add one if you intend to open-source this project.
-
-## Contact
-
-- GitHub: [Snigdha-Gayathri](https://github.com/Snigdha-Gayathri)
-- LinkedIn: [snigdha-gayathri](https://linkedin.com/in/snigdha-gayathri)
+- `POST /chat` — Main conversation endpoint returning grounded answers and structured `pipeline_data`.
+- `GET /pipeline-status/{request_id}` — Server-Sent Events (SSE) stream of live pipeline stages.
+- `GET /dashboard/{request_id}` — Detailed telemetry, reasoning traces, ranking shifts, and latency breakdown.
+- `GET /config` & `POST /config` — Inspect and modify active feature toggles on the fly.
+- `GET /vector-db/stats` — Real-time index statistics and metadata distribution.

@@ -15,5 +15,6 @@ class OutputSanitizer:
         sanitized = re.sub(r"(?i)authorization\s*:\s*bearer\s+[^\s]+", "Authorization: [REDACTED]", sanitized)
         sanitized = re.sub(r"(?i)set-cookie\s*:\s*[^\n]+", "Set-Cookie: [REDACTED]", sanitized)
         sanitized = re.sub(r"(?i)traceback\s+\(most\s+recent\s+call\s+last\):[\s\S]*", "[REDACTED_ERROR_TRACE]", sanitized)
-        sanitized = re.sub(r"\s+", " ", sanitized).strip()
+        lines = [re.sub(r"[ \t]+", " ", line).rstrip() for line in sanitized.splitlines()]
+        sanitized = "\n".join(lines).strip()
         return sanitized

@@ -1,11 +1,11 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Sora', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #050A15;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,19 +15,23 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #1E90FF;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #57B6FF;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+html, body, #root {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  overflow: hidden;
+  background: #050A15;
+  display: block !important;
 }
 
 h1 {
@@ -42,27 +46,209 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #0A1428;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: inherit;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #1E90FF66;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #1E90FF44;
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E90FF33;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1E90FF66;
+}
+
+/* ─── Dashboard Panel Animation ───────────────────────────────────────────── */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0.8;
   }
-  a:hover {
-    color: #747bff;
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
   }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* ─── Pipeline Stages ─────────────────────────────────────────────────────── */
+@keyframes stagePulse {
+  0%, 100% {
+    opacity: 0.6;
+    text-shadow: 0 0 4px #1E90FF44;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px #1E90FF88;
+  }
+}
+
+/* ─── Toggle Switch ───────────────────────────────────────────────────────── */
+.toggle-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease;
+  flex-shrink: 0;
+}
+
+.toggle-switch[aria-pressed="true"] {
+  background: linear-gradient(135deg, #1E90FF, #3AA8FF);
+  box-shadow: 0 0 10px #1E90FF44;
+}
+
+.toggle-switch[aria-pressed="false"] {
+  background: rgba(74, 106, 138, 0.3);
+}
+
+/* ─── Metric Bars ─────────────────────────────────────────────────────────── */
+.metric-bar {
+  height: 3px;
+  background: rgba(30, 144, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.metric-bar-fill.good {
+  background: #10B981;
+}
+
+.metric-bar-fill.warn {
+  background: #EAB308;
+}
+
+.metric-bar-fill.bad {
+  background: #EF4444;
+}
+
+/* ─── Dashboard Tables ────────────────────────────────────────────────────── */
+.dash-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.62rem;
+  font-family: 'Space Mono', monospace;
+}
+
+.dash-table th {
+  text-align: left;
+  color: #4A6A8A;
+  padding: 0.25rem 0.3rem;
+  border-bottom: 1px solid rgba(30, 144, 255, 0.08);
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.dash-table td {
+  padding: 0.25rem 0.3rem;
+  color: #C8D8EA;
+}
+
+.dash-table tr:nth-child(even) {
+  background: rgba(10, 18, 35, 0.3);
+}
+
+/* ─── Dashboard Section Headers ───────────────────────────────────────────── */
+.dash-section-header {
+  color: #1E90FF;
+  font-size: 0.65rem;
+  font-family: 'Orbitron', 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ─── Glass Card (shared) ─────────────────────────────────────────────────── */
+.glass-card {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ─── Pipeline Progress Specific ──────────────────────────────────────────── */
+.pipeline-stage-running {
+  animation: stagePulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Dashboard panel responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .dashboard-panel {
+    width: 100vw !important;
+  }
+}
+
+/* ─── Code blocks inside dashboard ────────────────────────────────────────── */
+.dash-code-block {
+  background: rgba(5, 10, 21, 0.8);
+  border: 1px solid rgba(30, 144, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: #8AA8C8;
+  font-size: 0.65rem;
+  font-family: 'Space Mono', monospace;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* ─── Dashboard button in header ──────────────────────────────────────────── */
+.dashboard-toggle-btn {
+  transition: all 0.25s ease !important;
+}
+
+.dashboard-toggle-btn:hover {
+  background: rgba(30, 144, 255, 0.15) !important;
+  border-color: #1E90FF66 !important;
+  color: #1E90FF !important;
+  box-shadow: 0 0 15px #1E90FF22 !important;
+}
+
+/* ─── Existing animation keyframes (kept from App.jsx inline) ─────────────── */
+/* These are also defined inline in App.jsx for self-containment,
+   but having them here ensures they work if the inline styles are removed */
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
