@@ -68,7 +68,7 @@ from backend.observability.dashboard import (
     RetrievedChunkInfo,
     SecurityInfo,
 )
-from backend.observability.pipeline_tracker import PipelineTracker, StageName
+from backend.observability.pipeline_tracker import PipelineTracker, StageName, StageStatus
 
 logger = logging.getLogger(__name__)
 
@@ -113,46 +113,60 @@ class SecureRAGService:
 
         # Modern RAG & Agentic components
         self.chroma_store = ChromaVectorStore()
-        self.embedder = GeminiEmbedding()
-        self.dense_retriever = DenseRetriever(self.embedder, self.chroma_store)
-        self.bm25_retriever = BM25Retriever(self.chroma_store)
-        self.hybrid_retriever = HybridRetriever(self.dense_retriever, self.bm25_retriever)
+        self._embedder = None
+        self._dense_retriever = None
+        self._bm25_retriever = None
+        self._hybrid_retriever = None
         self.query_router = QueryRouter()
-        self.reranker = CrossEncoderReranker()
+        self._reranker = None
         self.memory = ConversationMemory()
         self.query_rewriter = QueryRewriter()
         self.gemini = GeminiClient()
-        self.hyde_generator = HyDEGenerator(self.gemini, self.embedder)
-        self.agent_executor = AgentExecutor(self.hybrid_retriever, self.gemini)
+        self._hyde_generator = None
+        self._agent_executor = None
         self.metrics_engine = RAGMetrics()
 
-        if self.chroma_store.get_stats().total_chunks == 0:
-            self._auto_populate_initial_index()
+    @property
+    def embedder(self) -> GeminiEmbedding:
+        if self._embedder is None:
+            self._embedder = GeminiEmbedding()
+        return self._embedder
 
-    def _auto_populate_initial_index(self) -> None:
-        try:
-            if not self.legacy_vector_store._state or "documents" not in self.legacy_vector_store._state:
-                return
-            legacy_docs = self.legacy_vector_store._state["documents"]
-            doc_chunks: list[DocumentChunk] = []
-            for i, d in enumerate(legacy_docs):
-                meta = ChunkMetadata(
-                    chunk_id=d.get("chunk_id", f"init_{i}"),
-                    source_file=d.get("source_path", "knowledge_base.md"),
-                    company=d.get("metadata", {}).get("company", "General"),
-                    topic=d.get("metadata", {}).get("topic", "General"),
-                    chunk_strategy="legacy",
-                )
-                doc_chunks.append(DocumentChunk(text=d.get("text", ""), metadata=meta))
-            if doc_chunks:
-                texts = [dc.text for dc in doc_chunks]
-                embeddings = asyncio.run(self.embedder.embed_batch(texts))
-                self.chroma_store.add_documents(doc_chunks, embeddings)
-                if hasattr(self.bm25_retriever, "_index_corpus"):
-                    self.bm25_retriever._index_corpus()
-                logger.info("Auto-populated ChromaDB with %d initial documents.", len(doc_chunks))
-        except Exception as exc:
-            logger.warning("Failed to auto-populate initial index: %s", exc)
+    @property
+    def dense_retriever(self) -> DenseRetriever:
+        if self._dense_retriever is None:
+            self._dense_retriever = DenseRetriever(self.embedder, self.chroma_store)
+        return self._dense_retriever
+
+    @property
+    def bm25_retriever(self) -> BM25Retriever:
+        if self._bm25_retriever is None:
+            self._bm25_retriever = BM25Retriever(self.chroma_store)
+        return self._bm25_retriever
+
+    @property
+    def hybrid_retriever(self) -> HybridRetriever:
+        if self._hybrid_retriever is None:
+            self._hybrid_retriever = HybridRetriever(self.dense_retriever, self.bm25_retriever)
+        return self._hybrid_retriever
+
+    @property
+    def reranker(self) -> CrossEncoderReranker:
+        if self._reranker is None:
+            self._reranker = CrossEncoderReranker()
+        return self._reranker
+
+    @property
+    def hyde_generator(self) -> HyDEGenerator:
+        if self._hyde_generator is None:
+            self._hyde_generator = HyDEGenerator(self.gemini, self.embedder)
+        return self._hyde_generator
+
+    @property
+    def agent_executor(self) -> AgentExecutor:
+        if self._agent_executor is None:
+            self._agent_executor = AgentExecutor(self.hybrid_retriever, self.gemini)
+        return self._agent_executor
 
     def get_feature_toggles(self) -> dict[str, bool]:
         return dict(DEFAULT_FEATURE_TOGGLES)

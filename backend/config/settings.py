@@ -103,6 +103,20 @@ class PipelineConfig:
     @classmethod
     def from_env(cls) -> PipelineConfig:
         """Create a config instance populated from environment variables."""
+        for candidate in [Path(".env"), _PROJECT_ROOT / ".env"]:
+            if candidate.exists():
+                try:
+                    from dotenv import load_dotenv
+                    load_dotenv(candidate)
+                except ImportError:
+                    for line in candidate.read_text(encoding="utf-8").splitlines():
+                        line = line.strip()
+                        if line and not line.startswith("#") and "=" in line:
+                            k, v = line.split("=", 1)
+                            if not os.getenv(k.strip()):
+                                os.environ[k.strip()] = v.strip()
+                break
+
         cfg = cls(
             llm_provider=_env("RAG_LLM_PROVIDER", "gemini"),
             llm_model=_env("RAG_LLM_MODEL", "gemini-2.5-flash"),
