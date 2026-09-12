@@ -747,12 +747,16 @@ function searchKnowledgeBases(query) {
 // ─── Secure Backend API Call ────────────────────────────────────────────────
 async function callGeminiWithRAG(userMessage, sessionId, requestId) {
   const apiBase = getApiBase();
+  const apiKey = import.meta.env.VITE_API_KEY || "rag-client-key-2026";
 
   let response;
   try {
     response = await fetch(`${apiBase}/api/chat`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": apiKey,
+      },
       body: JSON.stringify({
         query: userMessage,
         session_id: sessionId,
@@ -810,7 +814,8 @@ function MarkdownRenderer({ content }) {
                 marginTop: "2.4rem",
                 marginBottom: "1.1rem",
                 lineHeight: "1.3",
-                borderBottom: "1px solid rgba(255,255,255,0.18)",
+                borderBottom: "1px solid rgba(30, 144, 255, 0.28)",
+                boxShadow: "0 1px 0 rgba(0, 0, 0, 0.9)",
                 paddingBottom: "0.5rem",
               }}
               {...props}
@@ -826,7 +831,7 @@ function MarkdownRenderer({ content }) {
                 marginTop: "2.1rem",
                 marginBottom: "0.9rem",
                 lineHeight: "1.35",
-                borderBottom: "1px solid rgba(255,255,255,0.12)",
+                borderBottom: "1px solid rgba(30, 144, 255, 0.18)",
                 paddingBottom: "0.4rem",
               }}
               {...props}
@@ -917,7 +922,9 @@ function MarkdownRenderer({ content }) {
             <hr
               style={{
                 border: "none",
-                borderTop: "1px solid rgba(255, 255, 255, 0.18)",
+                height: "1px",
+                background: "rgba(255, 255, 255, 0.08)",
+                boxShadow: "0 1px 0 rgba(30, 144, 255, 0.15)",
                 margin: "2.4rem 0",
               }}
               {...props}
@@ -926,10 +933,17 @@ function MarkdownRenderer({ content }) {
           blockquote: ({ node, ...props }) => (
             <blockquote
               style={{
-                borderLeft: "4px solid rgba(255, 255, 255, 0.35)",
+                borderLeft: "4px solid rgba(30, 144, 255, 0.65)",
+                background: "#040404",
+                boxShadow: "inset 3px 3px 7px rgba(0, 0, 0, 0.85), inset -2px -2px 5px rgba(255, 255, 255, 0.02)",
+                borderRadius: "0 10px 10px 0",
+                paddingTop: "0.6rem",
+                paddingBottom: "0.6rem",
                 paddingLeft: "1.2rem",
+                paddingRight: "1rem",
+                paddingY: "0.6rem",
                 margin: "1.4rem 0",
-                color: "#D1D5DB",
+                color: "#C9CFD6",
                 fontStyle: "italic",
                 lineHeight: "1.75",
                 fontFamily: "'Times New Roman', Times, serif",
@@ -948,16 +962,17 @@ function MarkdownRenderer({ content }) {
             return !inline && (match || String(children).includes("\n")) ? (
               <pre
                 style={{
-                  background: "rgba(8, 14, 26, 0.95)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  borderRadius: "8px",
+                  background: "#040404",
+                  border: "1px solid rgba(0, 0, 0, 0.85)",
+                  boxShadow: "inset 4px 4px 10px rgba(0, 0, 0, 0.9), inset -3px -3px 8px rgba(255, 255, 255, 0.02)",
+                  borderRadius: "12px",
                   padding: "1.2rem",
                   margin: "1.5rem 0",
                   overflowX: "auto",
                   fontFamily: "'Space Mono', monospace",
                   fontSize: "0.9rem",
                   lineHeight: "1.6",
-                  color: "#D1D5DB",
+                  color: "#A7B7CC",
                 }}
               >
                 <code className={className} style={{ fontFamily: "'Space Mono', monospace" }} {...props}>
@@ -967,13 +982,16 @@ function MarkdownRenderer({ content }) {
             ) : (
               <code
                 style={{
-                  background: "rgba(255, 255, 255, 0.08)",
+                  background: "#101010",
                   padding: "0.15em 0.45em",
-                  borderRadius: "4px",
+                  borderRadius: "6px",
                   fontFamily: "'Space Mono', monospace",
                   fontSize: "0.88em",
-                  color: "#E2E8F0",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  color: "#57B6FF",
+                  border: "1px solid rgba(0, 0, 0, 0.8)",
+                  borderTop: "1px solid rgba(255, 255, 255, 0.07)",
+                  borderLeft: "1px solid rgba(255, 255, 255, 0.07)",
+                  boxShadow: "1px 1px 3px rgba(0, 0, 0, 0.6)",
                 }}
                 {...props}
               >
@@ -984,7 +1002,7 @@ function MarkdownRenderer({ content }) {
           a: ({ node, ...props }) => (
             <a
               style={{
-                color: "#3B82F6",
+                color: "#1E90FF",
                 textDecoration: "underline",
                 fontWeight: "500",
               }}
@@ -1002,21 +1020,29 @@ function MarkdownRenderer({ content }) {
                   fontSize: "1rem",
                   fontFamily: "'Times New Roman', Times, serif",
                   color: "#F3F6F9",
-                  border: "1px solid rgba(255, 255, 255, 0.16)",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
+                  border: "1px solid rgba(0, 0, 0, 0.8)",
+                  borderRadius: "12px",
+                  background: "#040404",
+                  boxShadow: "inset 4px 4px 10px rgba(0, 0, 0, 0.85), inset -3px -3px 8px rgba(255, 255, 255, 0.02), 3px 3px 8px rgba(0, 0, 0, 0.5)",
                 }}
                 {...props}
               />
             </div>
           ),
           thead: ({ node, ...props }) => (
-            <thead style={{ background: "rgba(255, 255, 255, 0.08)" }} {...props} />
+            <thead
+              style={{
+                background: "linear-gradient(180deg, #101010, #0a0a0a)",
+                boxShadow: "inset 0 -2px 0 rgba(30, 144, 255, 0.35)",
+              }}
+              {...props}
+            />
           ),
           tbody: ({ node, ...props }) => <tbody {...props} />,
           tr: ({ node, ...props }) => (
             <tr
               style={{
-                borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                borderBottom: "1px solid rgba(0, 0, 0, 0.55)",
               }}
               {...props}
             />
@@ -1028,8 +1054,8 @@ function MarkdownRenderer({ content }) {
                 textAlign: "left",
                 fontWeight: "700",
                 color: "#FFFFFF",
-                borderBottom: "2px solid rgba(255, 255, 255, 0.22)",
-                borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                borderBottom: "2px solid rgba(30, 144, 255, 0.45)",
+                borderRight: "1px solid rgba(0, 0, 0, 0.5)",
                 whiteSpace: "nowrap",
               }}
               {...props}
@@ -1040,7 +1066,7 @@ function MarkdownRenderer({ content }) {
               style={{
                 padding: "0.85rem 1.1rem",
                 color: "#F3F6F9",
-                borderRight: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRight: "1px solid rgba(0, 0, 0, 0.45)",
                 lineHeight: "1.65",
               }}
               {...props}
@@ -1076,49 +1102,58 @@ function TypingDots() {
 function CitationCard({ result, index }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="glass-card" style={{
-      border: `1px solid ${result.color}22`,
-      borderLeft: `3px solid ${result.color}88`,
-      borderRadius: "10px",
+    <div style={{
+      border: "1px solid rgba(0, 0, 0, 0.65)",
+      borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+      borderLeft: "3px solid #1E90FF",
+      borderRadius: "12px",
       marginBottom: "0.5rem",
-      background: "rgba(10,18,35,0.6)",
+      background: "#0B0B0B",
+      boxShadow: "var(--shadow-raised)",
       overflow: "hidden",
-      transition: "all 0.3s ease",
-      backdropFilter: "blur(12px)",
-      WebkitBackdropFilter: "blur(12px)",
-      boxShadow: `0 0 15px ${result.color}0A`,
+      transition: "all 0.25s ease",
     }}>
       <div
         onClick={() => setExpanded(!expanded)}
-        style={{ display: "flex", alignItems: "center", gap: "0.6rem", padding: "0.55rem 0.8rem", cursor: "pointer" }}
+        style={{ display: "flex", alignItems: "center", gap: "0.65rem", padding: "0.6rem 0.95rem", cursor: "pointer", userSelect: "none" }}
       >
         <span style={{
-          background: `linear-gradient(135deg, ${result.color}, ${result.color}cc)`,
-          color: "#fff", borderRadius: "5px",
-          padding: "2px 8px", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", fontWeight: "bold",
-          boxShadow: `0 0 10px ${result.color}44`,
-          textShadow: "0 0 4px rgba(255,255,255,0.5)",
+          background: "#1E90FF",
+          color: "#fff",
+          borderRadius: "8px",
+          padding: "2px 8px",
+          fontSize: "0.68rem",
+          fontFamily: "'Space Mono', monospace",
+          fontWeight: "bold",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.6), inset 1px 1px 1px rgba(255, 255, 255, 0.35), 0 0 10px rgba(30, 144, 255, 0.35)",
+          textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
         }}>
           {result.icon || result.company[0]}
         </span>
-        <span style={{ color: "#C8D8EA", fontSize: "0.82rem", fontFamily: "'Space Mono', monospace", flex: 1 }}>
+        <span style={{ color: "#F5F5F5", fontSize: "0.82rem", fontFamily: "'Space Mono', monospace", flex: 1, fontWeight: "bold" }}>
           {result.company}
         </span>
-        <span style={{ color: "#5A7A9A", fontSize: "0.75rem" }}>{result.matches.length} matches</span>
-        <span style={{ color: result.color, fontSize: "0.8rem", transform: expanded ? "rotate(90deg)" : "none", transition: "0.25s", filter: `drop-shadow(0 0 4px ${result.color}66)` }}>▶</span>
+        <span style={{ color: "#8A8A8A", fontSize: "0.75rem", fontFamily: "'Space Mono', monospace" }}>{result.matches.length} matches</span>
+        <span style={{ color: "#1E90FF", fontSize: "0.8rem", transform: expanded ? "rotate(90deg)" : "none", transition: "0.2s", filter: expanded ? "drop-shadow(0 0 4px rgba(30, 144, 255, 0.5))" : "none" }}>▶</span>
       </div>
       {expanded && (
-        <div style={{ padding: "0 0.8rem 0.6rem", borderTop: `1px solid ${result.color}15` }}>
+        <div style={{ padding: "0.2rem 0.95rem 0.75rem", borderTop: "1px solid rgba(0,0,0,0.7)", boxShadow: "inset 3px 3px 6px rgba(0,0,0,0.85), inset -2px -2px 5px rgba(255,255,255,0.02)", background: "#040404" }}>
           {result.matches.map((m, i) => (
-            <div key={i} style={{ padding: "0.4rem 0", borderBottom: i < result.matches.length - 1 ? "1px solid rgba(255,255,255,0.03)" : "none" }}>
-              <p style={{ color: "#B8C8D8", fontSize: "0.82rem", margin: "0 0 0.2rem", lineHeight: 1.5 }}>{m.q}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem" }}>
+            <div key={i} style={{ padding: "0.5rem 0", borderBottom: i < result.matches.length - 1 ? "1px solid rgba(0,0,0,0.45)" : "none" }}>
+              <p style={{ color: "#F5F5F5", fontSize: "0.82rem", margin: "0 0 0.3rem", lineHeight: 1.5 }}>{m.q}</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
                 {m.tags.map((t) => (
                   <span key={t} style={{
-                    background: `${result.color}15`, color: result.color,
-                    fontSize: "0.68rem", padding: "1px 6px", borderRadius: "4px",
+                    background: "#0B0B0B",
+                    color: "#8A8A8A",
+                    fontSize: "0.65rem",
+                    padding: "1px 6px",
+                    borderRadius: "6px",
                     fontFamily: "'Space Mono', monospace",
-                    border: `1px solid ${result.color}1A`,
+                    border: "1px solid rgba(0,0,0,0.6)",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                    borderLeft: "1px solid rgba(255,255,255,0.06)",
+                    boxShadow: "1px 1px 3px rgba(0,0,0,0.55)",
                   }}>{t}</span>
                 ))}
               </div>
@@ -1134,50 +1169,64 @@ function CitationCard({ result, index }) {
 function Message({ msg, apiBase }) {
   const isUser = msg.role === "user";
   return (
-    <div style={{ marginBottom: "1.5rem", display: "flex", flexDirection: "column", alignItems: isUser ? "flex-end" : "flex-start" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.4rem" }}>
+    <div style={{ marginBottom: "1.75rem", display: "flex", flexDirection: "column", alignItems: isUser ? "flex-end" : "flex-start" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", marginBottom: "0.4rem" }}>
         {!isUser && (
           <div style={{
-            width: 28, height: 28, borderRadius: "50%",
-            background: "linear-gradient(135deg, #1E90FF, #0A5EB5)",
+            width: 26, height: 26, borderRadius: "50%",
+            background: "linear-gradient(145deg, #101010, #080808)",
+            border: "1px solid rgba(0, 0, 0, 0.7)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "0.6rem", fontWeight: "bold", color: "#fff", fontFamily: "'Space Mono', monospace",
-            boxShadow: "0 0 12px #1E90FF44",
-            textShadow: "0 0 4px rgba(255,255,255,0.5)",
+            fontSize: "0.6rem", fontWeight: "bold", color: "#1E90FF", fontFamily: "'Space Mono', monospace",
+            boxShadow: "var(--shadow-raised-sm), 0 0 8px rgba(30, 144, 255, 0.25)",
           }}>AI</div>
         )}
-        <span style={{ color: "#4A6A8A", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", letterSpacing: "0.05em" }}>
+        <span style={{ color: "#8A8A8A", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", letterSpacing: "0.05em" }}>
           {isUser ? "you" : "rag_agent"}
         </span>
         {isUser && (
           <div style={{
-            width: 28, height: 28, borderRadius: "50%",
-            background: "rgba(30,144,255,0.08)",
-            border: "1px solid rgba(30,144,255,0.2)",
+            width: 26, height: 26, borderRadius: "50%",
+            background: "linear-gradient(145deg, #101010, #080808)",
+            border: "1px solid rgba(0, 0, 0, 0.7)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.1)",
             display: "flex", alignItems: "center",
-            justifyContent: "center", fontSize: "0.7rem", color: "#6B9FD4",
+            justifyContent: "center", fontSize: "0.7rem", color: "#8A8A8A",
+            boxShadow: "var(--shadow-raised-sm)",
           }}>U</div>
         )}
       </div>
 
       {isUser ? (
-        <div className="glass-card" style={{
-          background: "rgba(14,28,55,0.5)",
-          border: "1px solid rgba(30,144,255,0.15)",
-          borderRadius: "14px 14px 2px 14px",
-          padding: "0.7rem 1rem", maxWidth: "70%", color: "#D0E0F0", fontSize: "0.88rem", lineHeight: 1.6,
-          backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
-          boxShadow: "0 2px 20px rgba(30,144,255,0.06)",
+        <div style={{
+          background: "linear-gradient(145deg, #1565C0, #1976D2)",
+          border: "1px solid rgba(100, 181, 255, 0.45)",
+          borderTop: "1px solid rgba(144, 202, 249, 0.35)",
+          borderLeft: "1px solid rgba(144, 202, 249, 0.35)",
+          boxShadow: "0 4px 18px rgba(30, 144, 255, 0.45), 0 0 0 1px rgba(100, 181, 255, 0.15), inset 0 1px 0 rgba(255,255,255,0.15)",
+          borderRadius: "14px 14px 4px 14px",
+          padding: "0.75rem 1.1rem",
+          maxWidth: "75%",
+          color: "#E3F2FD",
+          fontSize: "0.88rem",
+          lineHeight: 1.6,
         }}>
           {msg.content}
         </div>
       ) : (
         <div style={{ width: "100%", maxWidth: "100%" }}>
           {msg.loading ? (
-            <div className="glass-card" style={{
-              background: "rgba(10,18,35,0.5)", border: "1px solid rgba(30,144,255,0.12)",
-              borderRadius: "2px 14px 14px 14px", padding: "0.7rem 1rem",
-              backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+            <div style={{
+              background: "linear-gradient(145deg, #0a0a0a, #060606)",
+              border: "1px solid rgba(0, 0, 0, 0.7)",
+              borderBottom: "1px solid rgba(255, 255, 255, 0.04)",
+              borderRight: "1px solid rgba(255, 255, 255, 0.04)",
+              boxShadow: "var(--shadow-inset)",
+              borderRadius: "4px 14px 14px 14px",
+              padding: "0.85rem 1.1rem",
             }}>
               {msg.requestId ? (
                 <PipelineProgress
@@ -1196,31 +1245,36 @@ function Message({ msg, apiBase }) {
                 <div style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.4rem",
-                  marginBottom: "0.35rem",
-                  padding: "0.25rem 0.5rem",
-                  background: "rgba(30,144,255,0.04)",
-                  borderRadius: 6,
-                  border: "1px solid rgba(30,144,255,0.08)",
+                  gap: "0.45rem",
+                  marginBottom: "0.4rem",
+                  padding: "0.3rem 0.6rem",
+                  background: "#040404",
+                  boxShadow: "var(--shadow-inset)",
+                  borderRadius: 8,
+                  border: "1px solid rgba(0, 0, 0, 0.75)",
                 }}>
-                  <span style={{ color: "#4A6A8A", fontSize: "0.62rem", fontFamily: "'Space Mono', monospace" }}>↻ query rewritten:</span>
-                  <span style={{ color: "#6B9FD4", fontSize: "0.65rem", fontFamily: "'Space Mono', monospace", fontStyle: "italic" }}>
+                  <span style={{ color: "#8A8A8A", fontSize: "0.62rem", fontFamily: "'Space Mono', monospace" }}>↻ QUERY REWRITTEN:</span>
+                  <span style={{ color: "#1E90FF", fontSize: "0.65rem", fontFamily: "'Space Mono', monospace", fontStyle: "italic", textShadow: "0 0 6px rgba(30, 144, 255, 0.35)" }}>
                     {msg.rewrittenQuery}
                   </span>
                 </div>
               )}
-              <div className="glass-card" style={{
-                background: "rgba(10,18,35,0.5)", border: "1px solid rgba(30,144,255,0.12)",
-                borderRadius: "2px 14px 14px 14px", padding: "1.4rem 1.8rem", marginBottom: "0.75rem",
-                backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
-                boxShadow: "0 4px 30px rgba(30,144,255,0.04)",
+              <div style={{
+                background: "linear-gradient(145deg, #0c0c0c, #070707)",
+                border: "1px solid rgba(0, 0, 0, 0.65)",
+                borderTop: "1px solid rgba(255, 255, 255, 0.07)",
+                borderLeft: "1px solid rgba(255, 255, 255, 0.07)",
+                boxShadow: "var(--shadow-raised-high)",
+                borderRadius: "4px 16px 16px 16px",
+                padding: "1.4rem 1.8rem",
+                marginBottom: "0.85rem",
               }}>
                 <MarkdownRenderer content={msg.content} />
               </div>
               {msg.citations && msg.citations.length > 0 && (
-                <div>
-                  <p style={{ color: "#3A5A7A", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", marginBottom: "0.4rem", letterSpacing: "0.1em" }}>
-                    ◈ SOURCES ({msg.citations.length} knowledge bases)
+                <div style={{ marginTop: "0.6rem" }}>
+                  <p style={{ color: "#8A8A8A", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", marginBottom: "0.45rem", letterSpacing: "0.1em" }}>
+                    ◈ SOURCES ({msg.citations.length} company profiles)
                   </p>
                   {msg.citations.map((c, i) => <CitationCard key={i} result={c} index={i} />)}
                 </div>
@@ -1249,7 +1303,9 @@ export default function App() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeCompanies] = useState(new Set(COMPANIES));
-  const apiKeyPresent = Boolean(import.meta.env.VITE_GEMINI_API_KEY);
+  // The Gemini API key lives server-side only (never exposed to the browser).
+  // Show the warning only when no backend URL is configured at all.
+  const apiKeyPresent = Boolean(import.meta.env.VITE_API_BASE_URL);
 
   // New state: dashboard, session, and request tracking
   const [dashboardOpen, setDashboardOpen] = useState(false);
@@ -1315,141 +1371,118 @@ export default function App() {
     <div style={{
       height: "100vh",
       width: "100vw",
-      background: "#050A15",
+      background: "#050505",
       fontFamily: "'Sora', 'Segoe UI', sans-serif",
       display: "flex",
       flexDirection: "column",
       overflow: "hidden",
+      color: "#F5F5F5",
     }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #1E90FF33; border-radius: 2px; }
-        ::-webkit-scrollbar-thumb:hover { background: #1E90FF66; }
-        @keyframes pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes float1 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
-        @keyframes float2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-40px, -30px) scale(1.1); } }
-        @keyframes float3 { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(20px, -40px); } 50% { transform: translate(-15px, -20px); } 75% { transform: translate(25px, 10px); } }
-        @keyframes borderGlow { 0%, 100% { border-color: rgba(30,144,255,0.13); box-shadow: 0 0 15px #1E90FF11; } 50% { border-color: rgba(30,144,255,0.28); box-shadow: 0 0 30px #1E90FF22; } }
-        @keyframes neonPulse { 0%, 100% { text-shadow: 0 0 7px #1E90FF88, 0 0 20px #1E90FF44, 0 0 40px #1E90FF22; } 50% { text-shadow: 0 0 10px #1E90FFbb, 0 0 30px #1E90FF66, 0 0 60px #1E90FF33; } }
-        @keyframes orbGlow { 0%, 100% { box-shadow: 0 0 20px #1E90FF33, inset 0 0 20px #1E90FF11; } 50% { box-shadow: 0 0 40px #1E90FF55, inset 0 0 30px #1E90FF22; } }
-        @keyframes slideInRight { from { transform: translateX(100%); opacity: 0.8; } to { transform: translateX(0); opacity: 1; } }
-        .msg-enter { animation: fadeIn 0.3s ease forwards; }
-        textarea:focus { outline: none; }
-        textarea { resize: none; }
-        .send-btn { transition: all 0.3s ease !important; }
-        .send-btn:hover { background: linear-gradient(135deg, #1E90FF, #57B6FF) !important; transform: scale(1.05); box-shadow: 0 0 25px #1E90FF66 !important; }
-        .send-btn:active { transform: scale(0.97); }
-        .suggestion-btn { transition: all 0.3s ease !important; }
-        .suggestion-btn:hover { background: rgba(30,144,255,0.12) !important; border-color: #1E90FF66 !important; color: #1E90FF !important; box-shadow: 0 0 20px #1E90FF22 !important; transform: translateY(-1px); }
-        .glass-card { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-        .dashboard-toggle-btn { transition: all 0.25s ease !important; }
-        .dashboard-toggle-btn:hover { background: rgba(30,144,255,0.15) !important; border-color: #1E90FF66 !important; color: #1E90FF !important; box-shadow: 0 0 15px #1E90FF22 !important; }
+        .suggestion-btn {
+          background: linear-gradient(145deg, #0d0d0d, #080808);
+          border: 1px solid rgba(0, 0, 0, 0.6);
+          border-top-color: rgba(255, 255, 255, 0.07);
+          border-left-color: rgba(255, 255, 255, 0.07);
+          color: #8A8A8A;
+          border-radius: 999px;
+          padding: 0.55rem 1.1rem;
+          font-size: 0.75rem;
+          cursor: pointer;
+          font-family: 'Sora', sans-serif;
+          box-shadow: var(--shadow-raised-sm);
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          outline: none;
+        }
+        .suggestion-btn:hover {
+          color: #57B6FF;
+          border-color: rgba(30, 144, 255, 0.4);
+          box-shadow: var(--shadow-raised-sm), 0 0 10px rgba(30, 144, 255, 0.25);
+        }
+        .suggestion-btn:focus-visible {
+          border-color: #1E90FF;
+          box-shadow: var(--shadow-raised-sm), 0 0 8px rgba(30, 144, 255, 0.45);
+        }
+        .suggestion-btn:active {
+          background: #030303;
+          box-shadow: var(--shadow-pressed);
+          border-color: rgba(0, 0, 0, 0.8);
+          color: #8A8A8A;
+        }
       `}</style>
 
-      {/* Animated background layers */}
-      <div style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}>
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 120% 80% at 20% -20%, #0D2347 0%, #07101F 40%, #050A15 70%)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(600px 400px at 80% 100%, #0A1E3D 0%, transparent 70%)" }} />
-        <div style={{ position: "absolute", inset: 0, opacity: 0.03, backgroundImage: "radial-gradient(#1E90FF 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-
-        <div style={{
-          position: "absolute", top: "8%", left: "5%", width: 120, height: 120, borderRadius: "50%",
-          background: "radial-gradient(circle at 35% 35%, #1E90FF33, #1E90FF11 40%, transparent 70%)",
-          animation: "float1 12s ease-in-out infinite", filter: "blur(1px)",
-          boxShadow: "0 0 40px #1E90FF22, inset 0 0 30px #1E90FF11",
-        }} />
-        <div style={{
-          position: "absolute", top: "60%", right: "8%", width: 80, height: 80, borderRadius: "50%",
-          background: "radial-gradient(circle at 40% 30%, #57B6FF22, #1E90FF0D 50%, transparent 70%)",
-          animation: "float2 15s ease-in-out infinite", filter: "blur(1px)",
-          boxShadow: "0 0 30px #1E90FF1A",
-        }} />
-        <div style={{
-          position: "absolute", top: "30%", right: "15%", width: 50, height: 50, borderRadius: "50%",
-          background: "radial-gradient(circle at 30% 30%, #89CEFF1A, transparent 60%)",
-          animation: "float3 10s ease-in-out infinite",
-          boxShadow: "0 0 20px #1E90FF11",
-        }} />
-        <div style={{
-          position: "absolute", bottom: "15%", left: "12%", width: 60, height: 60, borderRadius: "50%",
-          background: "radial-gradient(circle at 40% 35%, #1E90FF1A, transparent 60%)",
-          animation: "float2 18s ease-in-out infinite reverse",
-          boxShadow: "0 0 25px #1E90FF11",
-        }} />
-        <div style={{
-          position: "absolute", top: "45%", left: "50%", width: 35, height: 35, borderRadius: "50%",
-          background: "radial-gradient(circle at 35% 35%, #57B6FF15, transparent 60%)",
-          animation: "float1 20s ease-in-out infinite reverse",
-        }} />
-      </div>
-
       {/* ── Fixed Header across 100% viewport width ── */}
-      <div className="glass-card" style={{
+      <div style={{
         flexShrink: 0,
         width: "100%",
-        borderBottom: "1px solid rgba(30,144,255,0.12)",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.75)",
+        boxShadow: "0 6px 16px rgba(0, 0, 0, 0.6), inset 0 -1px 0 rgba(255, 255, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
         padding: "0.85rem 1.5rem",
         display: "flex",
         alignItems: "center",
-        gap: "1rem",
-        background: "rgba(8,16,32,0.85)",
+        gap: "1.1rem",
+        background: "linear-gradient(180deg, #0c0c0c, #080808)",
         zIndex: 20,
       }}>
-        <div 
-          onClick={() => setDashboardOpen(!dashboardOpen)}
+        <img 
+          src="/favicon.jpeg" 
+          alt="Agentic Placement RAG Logo"
           style={{
-            width: 40, height: 40, borderRadius: "12px",
-            background: "linear-gradient(135deg, #1E90FF, #0A5EB5)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 0 25px #1E90FF44, 0 0 50px #1E90FF1A",
-            animation: "orbGlow 4s ease-in-out infinite",
-            cursor: "pointer",
-            transition: "all 0.3s ease",
+            width: 40,
+            height: 40,
+            borderRadius: "12px",
+            border: "1px solid rgba(0, 0, 0, 0.65)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.08)",
+            boxShadow: "var(--shadow-raised-sm), 0 0 10px rgba(30, 144, 255, 0.25)",
+            objectFit: "cover",
           }}
-          title="Toggle Developer Dashboard"
-        >
-          <span style={{ fontSize: "1.1rem", filter: "drop-shadow(0 0 4px #fff)" }}>⬡</span>
-        </div>
+        />
         <div style={{ flex: 1 }}>
           <h1 style={{
-            fontFamily: "'Orbitron', 'Space Mono', monospace", color: "#1E90FF",
-            fontSize: "0.9rem", fontWeight: "700", letterSpacing: "0.15em",
-            textShadow: "0 0 10px #1E90FF66, 0 0 30px #1E90FF22",
-            animation: "neonPulse 4s ease-in-out infinite",
+            fontFamily: "'Orbitron', 'Space Mono', monospace",
+            color: "#1E90FF",
+            fontSize: "0.9rem",
+            fontWeight: "bold",
+            letterSpacing: "0.15em",
+            textShadow: "0 0 8px rgba(30, 144, 255, 0.45)",
           }}>
             AGENTIC PLACEMENT RAG
           </h1>
-          <p style={{ color: "#4A7DB8", fontSize: "0.65rem", fontFamily: "'Space Mono', monospace", letterSpacing: "0.05em" }}>
-            Agentic Multi-Source Placement Intelligence • {COMPANIES.length} Company Knowledge Bases
+          <p style={{ color: "#8A8A8A", fontSize: "0.65rem", fontFamily: "'Space Mono', monospace", letterSpacing: "0.05em" }}>
+            Agentic Multi-Source Intelligence • 50 Company Knowledge Bases • Retrieval, Reasoning & Reranking
           </p>
         </div>
 
         <button
-          className="dashboard-toggle-btn"
+          className={dashboardOpen ? "neo-button active" : "neo-button"}
           onClick={() => setDashboardOpen(!dashboardOpen)}
           style={{
-            background: dashboardOpen ? "rgba(30,144,255,0.15)" : "rgba(30,144,255,0.06)",
-            border: `1px solid ${dashboardOpen ? "rgba(30,144,255,0.4)" : "rgba(30,144,255,0.15)"}`,
-            borderRadius: "6px",
-            padding: "6px 12px",
+            borderRadius: "999px",
+            padding: "7px 16px",
             fontSize: "0.7rem",
             fontFamily: "'Space Mono', monospace",
             fontWeight: "bold",
-            color: dashboardOpen ? "#1E90FF" : "#4A6A8A",
+            background: dashboardOpen ? "#030303" : "linear-gradient(145deg, #2A6FDB, #1E5BC6)",
+            border: "1px solid rgba(30, 144, 255, 0.4)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.15)",
+            borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
+            color: "#E0F0FF",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             gap: "0.4rem",
             flexShrink: 0,
-            textShadow: dashboardOpen ? "0 0 6px #1E90FF44" : "none",
+            transition: "all 0.2s ease",
+            boxShadow: dashboardOpen
+              ? "var(--shadow-pressed)"
+              : "var(--shadow-raised-sm), 0 0 12px rgba(30, 144, 255, 0.35)",
           }}
           title="Toggle Developer Dashboard"
         >
-          <span style={{ fontSize: "0.8rem" }}>🛠</span>
+          <span style={{ fontSize: "0.8rem", color: "#E0F0FF" }}>🛠</span>
           <span>Developer Dashboard</span>
         </button>
       </div>
@@ -1457,23 +1490,24 @@ export default function App() {
       {/* API key missing warning banner */}
       {!apiKeyPresent && (
         <div style={{
-          background: "rgba(255,165,0,0.12)",
-          border: "1px solid rgba(255,165,0,0.4)",
-          borderRadius: "8px",
-          padding: "0.7rem 1.2rem",
+          background: "linear-gradient(145deg, #0d0d0d, #080808)",
+          border: "1px solid rgba(255, 165, 0, 0.35)",
+          borderTop: "1px solid rgba(255, 255, 255, 0.07)",
+          borderLeft: "3px solid #FFA500",
+          borderRadius: "12px",
+          padding: "0.6rem 1.2rem",
           margin: "0.75rem 1.5rem 0",
           display: "flex",
           alignItems: "center",
           gap: "0.6rem",
           zIndex: 15,
           flexShrink: 0,
-          backdropFilter: "blur(10px)",
-          WebkitBackdropFilter: "blur(10px)",
+          boxShadow: "var(--shadow-raised)",
         }}>
           <span style={{ fontSize: "1.25rem" }}>⚠️</span>
           <span style={{ color: "#FFA500", fontSize: "0.82rem", fontFamily: "'Space Mono', monospace", lineHeight: 1.5 }}>
-            <strong>API Key Missing</strong> — VITE_GEMINI_API_KEY is not set. AI-powered answers are disabled.
-            Set the environment variable in Render and redeploy, or add it to your local <code>.env</code> file.
+            <strong>API Key Missing</strong> — Backend GEMINI_API_KEY is not set. AI-powered answers are disabled.
+            Set the environment variable in your backend configuration and restart.
           </span>
         </div>
       )}
@@ -1498,6 +1532,7 @@ export default function App() {
           position: "relative",
           transition: "flex 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
           overflow: "hidden",
+          background: "#050505",
         }}>
           {/* 1. Conversation Area (ONLY this area scrolls) */}
           <div style={{
@@ -1517,10 +1552,10 @@ export default function App() {
           {/* 2. Suggestions (only show when no messages) */}
           {messages.length === 0 && (
             <div style={{
-              padding: "0 1.5rem 1rem",
+              padding: "0 1.5rem 1.25rem",
               flexShrink: 0,
             }}>
-              <p style={{ color: "#3A6A9F", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", marginBottom: "0.6rem", letterSpacing: "0.1em" }}>
+              <p style={{ color: "#8A8A8A", fontSize: "0.7rem", fontFamily: "'Space Mono', monospace", marginBottom: "0.6rem", letterSpacing: "0.1em" }}>
                 ◈ TRY ASKING
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
@@ -1529,19 +1564,9 @@ export default function App() {
                     key={i}
                     className="suggestion-btn"
                     onClick={() => handleSend(s)}
-                    style={{
-                      background: "rgba(30,144,255,0.05)",
-                      border: "1px solid rgba(30,144,255,0.15)",
-                      color: "#6B9FD4",
-                      borderRadius: "8px",
-                      padding: "0.45rem 0.9rem",
-                      fontSize: "0.75rem",
-                      cursor: "pointer",
-                      fontFamily: "'Sora', sans-serif",
-                      backdropFilter: "blur(8px)",
-                      WebkitBackdropFilter: "blur(8px)",
-                    }}
-                  >{s}</button>
+                  >
+                    {s}
+                  </button>
                 ))}
               </div>
             </div>
@@ -1550,25 +1575,24 @@ export default function App() {
           {/* 3. Input Bar (Sticks to bottom of active Chat Panel) */}
           <div style={{
             flexShrink: 0,
-            borderTop: "1px solid rgba(30,144,255,0.1)",
+            borderTop: "1px solid rgba(0, 0, 0, 0.75)",
+            boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.04)",
             padding: "1rem 1.5rem",
-            background: "rgba(8,16,32,0.6)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
+            background: "#050505",
           }}>
             <div style={{
               display: "flex",
               gap: "0.75rem",
               alignItems: "flex-end",
-              background: "rgba(10,20,40,0.6)",
-              border: "1px solid rgba(30,144,255,0.15)",
-              borderRadius: "14px",
-              padding: "0.6rem 0.7rem",
-              animation: "borderGlow 4s ease-in-out infinite",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
+              background: "#030303",
+              border: "1px solid rgba(0, 0, 0, 0.85)",
+              borderBottom: "1px solid rgba(255, 255, 255, 0.03)",
+              borderRight: "1px solid rgba(255, 255, 255, 0.03)",
+              borderRadius: "18px",
+              padding: "0.65rem 0.8rem",
+              boxShadow: "var(--shadow-inset-deep), 0 0 0 1px rgba(255, 255, 255, 0.02)",
             }}>
-              <span style={{ color: "#1E90FF", fontFamily: "'Space Mono', monospace", fontSize: "0.8rem", marginBottom: "0.3rem", flexShrink: 0, textShadow: "0 0 8px #1E90FF66" }}>›</span>
+              <span style={{ color: "#1E90FF", fontFamily: "'Space Mono', monospace", fontSize: "0.85rem", marginBottom: "0.3rem", flexShrink: 0, textShadow: "0 0 6px rgba(30, 144, 255, 0.5)" }}>›</span>
               <textarea
                 ref={inputRef}
                 value={input}
@@ -1580,12 +1604,13 @@ export default function App() {
                   flex: 1,
                   background: "transparent",
                   border: "none",
-                  color: "#D0E0F0",
+                  color: "#F5F5F5",
                   fontSize: "0.88rem",
                   fontFamily: "'Sora', sans-serif",
                   lineHeight: 1.6,
                   maxHeight: "120px",
                   overflowY: "auto",
+                  outline: "none",
                 }}
                 onInput={(e) => {
                   e.target.style.height = "auto";
@@ -1593,28 +1618,31 @@ export default function App() {
                 }}
               />
               <button
-                className="send-btn"
                 onClick={() => handleSend()}
                 disabled={!input.trim() || loading}
                 style={{
-                  background: input.trim() && !loading ? "linear-gradient(135deg, #1E90FF, #3AA8FF)" : "rgba(30,144,255,0.1)",
-                  border: "none",
-                  borderRadius: "10px",
+                  background: input.trim() && !loading ? "linear-gradient(145deg, #101010, #090909)" : "#020202",
+                  border: "1px solid rgba(0, 0, 0, 0.7)",
+                  borderTop: input.trim() && !loading ? "1px solid rgba(255, 255, 255, 0.09)" : "1px solid rgba(0, 0, 0, 0.7)",
+                  borderLeft: input.trim() && !loading ? "1px solid rgba(255, 255, 255, 0.09)" : "1px solid rgba(0, 0, 0, 0.7)",
+                  borderRadius: "12px",
                   width: 38, height: 38,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   cursor: input.trim() && !loading ? "pointer" : "not-allowed",
                   flexShrink: 0,
-                  transition: "all 0.3s ease",
-                  color: input.trim() && !loading ? "#001830" : "#4a5f7f",
+                  transition: "all 0.2s ease",
+                  color: input.trim() && !loading ? "#1E90FF" : "#555555",
                   fontSize: "1rem",
-                  boxShadow: input.trim() && !loading ? "0 0 20px #1E90FF44" : "none",
+                  boxShadow: input.trim() && !loading
+                    ? "var(--shadow-raised-sm), 0 0 10px rgba(30, 144, 255, 0.3)"
+                    : "var(--shadow-pressed)",
                 }}
               >
                 {loading ? "⏳" : "⬆"}
               </button>
             </div>
-            <p style={{ textAlign: "center", color: "#2A4A6B", fontSize: "0.65rem", fontFamily: "'Space Mono', monospace", marginTop: "0.5rem", letterSpacing: "0.05em" }}>
-              Shift+Enter for new line • Enter to send
+            <p style={{ textAlign: "center", color: "#666666", fontSize: "0.65rem", fontFamily: "'Space Mono', monospace", marginTop: "0.5rem", letterSpacing: "0.03em" }}>
+              ⚠️ AI may occasionally have a mind of its own. Snigdha's Agentic Placement RAG can make mistakes. Please verify important results.
             </p>
           </div>
         </div>

@@ -87,18 +87,21 @@ function ToggleSwitch({ checked, onChange, disabled }) {
       disabled={disabled}
       style={{
         position: "relative",
-        width: 36,
-        height: 20,
-        borderRadius: 10,
-        border: "none",
+        width: 38,
+        height: 22,
+        borderRadius: 11,
+        border: "1px solid rgba(0, 0, 0, 0.8)",
+        borderTopColor: checked ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.8)",
         background: checked
-          ? "linear-gradient(135deg, #1E90FF, #3AA8FF)"
-          : "rgba(74,106,138,0.3)",
+          ? "linear-gradient(135deg, rgba(30, 144, 255, 0.55), rgba(15, 106, 196, 0.45))"
+          : "#010101",
+        boxShadow: checked
+          ? "inset 2px 2px 5px rgba(0, 0, 0, 0.85), inset -1px -1px 4px rgba(30, 144, 255, 0.35), 0 0 10px rgba(30, 144, 255, 0.35)"
+          : "inset 2px 2px 5px rgba(0, 0, 0, 0.9), inset -1px -1px 3px rgba(255, 255, 255, 0.03)",
         cursor: disabled ? "not-allowed" : "pointer",
         padding: 0,
-        transition: "background 0.25s ease",
+        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
         flexShrink: 0,
-        boxShadow: checked ? "0 0 10px #1E90FF44" : "none",
         opacity: disabled ? 0.5 : 1,
       }}
       aria-pressed={checked}
@@ -111,9 +114,13 @@ function ToggleSwitch({ checked, onChange, disabled }) {
           width: 16,
           height: 16,
           borderRadius: "50%",
-          background: checked ? "#fff" : "#8AA0B8",
-          transition: "left 0.2s ease, background 0.2s ease",
-          boxShadow: checked ? "0 0 4px rgba(255,255,255,0.4)" : "none",
+          background: checked
+            ? "linear-gradient(145deg, #ffffff, #c9dff7)"
+            : "linear-gradient(145deg, #2a2a2a, #141414)",
+          transition: "left 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+          boxShadow: checked
+            ? "2px 2px 5px rgba(0, 0, 0, 0.6), inset 1px 1px 1px rgba(255, 255, 255, 0.9)"
+            : "2px 2px 5px rgba(0, 0, 0, 0.75), inset 1px 1px 1px rgba(255, 255, 255, 0.08)",
         }}
       />
     </button>
@@ -145,7 +152,10 @@ export default function FeatureToggles({ apiBase }) {
 
     const fetchConfig = async () => {
       try {
-        const res = await fetch(`${apiBase}/api/config`);
+        const apiKey = import.meta.env.VITE_API_KEY || "rag-client-key-2026";
+        const res = await fetch(`${apiBase}/api/config`, {
+          headers: { "X-API-Key": apiKey },
+        });
         if (!res.ok) throw new Error("Failed to fetch config");
         const data = await res.json();
         setToggles(data.features || data.toggles || data);
@@ -175,7 +185,10 @@ export default function FeatureToggles({ apiBase }) {
       try {
         await fetch(`${apiBase}/api/config`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": import.meta.env.VITE_API_KEY || "rag-client-key-2026",
+          },
           body: JSON.stringify({ features: newToggles }),
         });
         setError(null);
@@ -197,7 +210,7 @@ export default function FeatureToggles({ apiBase }) {
 
   if (loading) {
     return (
-      <div style={{ padding: "1rem", color: "#4A6A8A", fontSize: "0.75rem", fontFamily: "'Space Mono', monospace" }}>
+      <div style={{ padding: "1rem", color: "#8A8A8A", fontSize: "0.75rem", fontFamily: "'Space Mono', monospace" }}>
         Loading configuration...
       </div>
     );
@@ -208,14 +221,16 @@ export default function FeatureToggles({ apiBase }) {
       {error && (
         <div
           style={{
-            background: "rgba(234,179,8,0.08)",
-            border: "1px solid rgba(234,179,8,0.2)",
-            borderRadius: 6,
-            padding: "0.4rem 0.6rem",
+            background: "linear-gradient(145deg, #0d0d0d, #080808)",
+            border: "1px solid rgba(255, 165, 0, 0.35)",
+            borderLeft: "3px solid #FFA500",
+            borderRadius: 10,
+            padding: "0.45rem 0.75rem",
             marginBottom: "0.6rem",
-            color: "#EAB308",
+            color: "#FFA500",
             fontSize: "0.68rem",
             fontFamily: "'Space Mono', monospace",
+            boxShadow: "var(--shadow-raised)",
           }}
         >
           ⚠ {error}
@@ -227,14 +242,14 @@ export default function FeatureToggles({ apiBase }) {
           {/* Category header */}
           <div
             style={{
-              color: "#3A5A7A",
+              color: "#8A8A8A",
               fontSize: "0.6rem",
               fontFamily: "'Orbitron', 'Space Mono', monospace",
               textTransform: "uppercase",
               letterSpacing: "0.15em",
               marginBottom: "0.35rem",
               paddingBottom: "0.2rem",
-              borderBottom: "1px solid rgba(30,144,255,0.06)",
+              borderBottom: "1px solid rgba(0, 0, 0, 0.5)",
             }}
           >
             {group.category}
@@ -250,21 +265,34 @@ export default function FeatureToggles({ apiBase }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "0.35rem 0.4rem",
-                borderRadius: 4,
+                padding: "0.45rem 0.6rem",
+                borderRadius: 10,
                 background:
                   hoveredFeature === feature.key
-                    ? "rgba(30,144,255,0.04)"
+                    ? "linear-gradient(145deg, #0e0e0e, #090909)"
                     : "transparent",
-                transition: "background 0.15s",
+                boxShadow: hoveredFeature === feature.key
+                  ? "var(--shadow-raised-sm)"
+                  : "none",
+                border: hoveredFeature === feature.key
+                  ? "1px solid rgba(0,0,0,0.65)"
+                  : "1px solid transparent",
+                borderTop: hoveredFeature === feature.key
+                  ? "1px solid rgba(255,255,255,0.07)"
+                  : "1px solid transparent",
+                borderLeft: hoveredFeature === feature.key
+                  ? "1px solid rgba(255,255,255,0.07)"
+                  : "1px solid transparent",
+                transition: "all 0.15s ease",
               }}
             >
               <div style={{ flex: 1, minWidth: 0 }}>
                 <span
                   style={{
-                    color: toggles[feature.key] ? "#C8D8EA" : "#4A6A8A",
+                    color: toggles[feature.key] ? "#F5F5F5" : "#555555",
                     fontSize: "0.75rem",
                     fontFamily: "'Space Mono', monospace",
+                    fontWeight: toggles[feature.key] ? "bold" : "normal",
                     transition: "color 0.2s",
                   }}
                 >
@@ -274,10 +302,10 @@ export default function FeatureToggles({ apiBase }) {
                 {hoveredFeature === feature.key && (
                   <div
                     style={{
-                      color: "#4A6A8A",
+                      color: "#8A8A8A",
                       fontSize: "0.62rem",
                       fontFamily: "'Space Mono', monospace",
-                      marginTop: "0.1rem",
+                      marginTop: "0.15rem",
                       lineHeight: 1.3,
                     }}
                   >

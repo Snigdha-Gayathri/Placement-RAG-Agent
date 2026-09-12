@@ -19,11 +19,11 @@ const PIPELINE_STAGES = [
 ];
 
 const STATUS_COLORS = {
-  pending: "#4A6A8A",
+  pending: "#555555",
   running: "#1E90FF",
-  completed: "#10B981",
+  completed: "#57B6FF",
   failed: "#EF4444",
-  skipped: "#6B7280",
+  skipped: "#666666",
 };
 
 // ─── Stage Row Component ────────────────────────────────────────────────────
@@ -66,7 +66,11 @@ function StageRow({ stage, status, latency, isLast }) {
             fontSize: isRunning ? "0.75rem" : "0.7rem",
             fontFamily: "'Space Mono', monospace",
             lineHeight: 1,
-            textShadow: isRunning ? `0 0 8px ${color}88` : "none",
+            textShadow: isRunning
+              ? `0 0 8px ${color}88`
+              : isCompleted
+              ? "0 0 6px rgba(87, 182, 255, 0.45)"
+              : "none",
             animation: isRunning ? "pulse 1.5s ease-in-out infinite" : "none",
             flexShrink: 0,
           }}
@@ -101,18 +105,18 @@ function StageRow({ stage, status, latency, isLast }) {
         <span
           style={{
             color: isPending
-              ? "#4A6A8A"
+              ? "#555555"
               : isRunning
-              ? "#E0F0FF"
+              ? "#FFFFFF"
               : isCompleted
-              ? "#C8D8EA"
+              ? "#C9CFD6"
               : isFailed
               ? "#FCA5A5"
-              : "#6B7280",
+              : "#666666",
             fontSize: "0.75rem",
             fontFamily: "'Space Mono', monospace",
             letterSpacing: "0.02em",
-            textShadow: isRunning ? "0 0 6px #1E90FF44" : "none",
+            textShadow: isRunning ? "0 0 8px rgba(30, 144, 255, 0.45)" : "none",
           }}
         >
           {stage.label}
@@ -120,7 +124,7 @@ function StageRow({ stage, status, latency, isLast }) {
         {latency != null && (isCompleted || isFailed) && (
           <span
             style={{
-              color: "#4A6A8A",
+              color: "#555555",
               fontSize: "0.65rem",
               fontFamily: "'Space Mono', monospace",
             }}
@@ -146,7 +150,7 @@ function FallbackDots() {
     >
       <span
         style={{
-          color: "#4A6A8A",
+          color: "#8A8A8A",
           fontSize: "0.75rem",
           fontFamily: "'Space Mono', monospace",
         }}
@@ -161,6 +165,7 @@ function FallbackDots() {
             height: 5,
             borderRadius: "50%",
             background: "#1E90FF",
+            boxShadow: "0 0 6px rgba(30, 144, 255, 0.55)",
             animation: "pulse 1.2s ease-in-out infinite",
             animationDelay: `${i * 0.2}s`,
             opacity: 0.7,
@@ -317,7 +322,7 @@ export default function PipelineProgress({ requestId, apiBase, onComplete }) {
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <span
             style={{
-              color: "#4A6A8A",
+              color: "#8A8A8A",
               fontSize: "0.6rem",
               fontFamily: "'Space Mono', monospace",
             }}
@@ -326,7 +331,7 @@ export default function PipelineProgress({ requestId, apiBase, onComplete }) {
           </span>
           <span
             style={{
-              color: "#3A5A7A",
+              color: "#555555",
               fontSize: "0.6rem",
               fontFamily: "'Space Mono', monospace",
             }}
@@ -339,9 +344,10 @@ export default function PipelineProgress({ requestId, apiBase, onComplete }) {
       {/* Progress bar */}
       <div
         style={{
-          height: 2,
-          background: "rgba(30,144,255,0.1)",
-          borderRadius: 1,
+          height: 4,
+          background: "#010101",
+          boxShadow: "inset 2px 2px 4px rgba(0, 0, 0, 0.9), inset -1px -1px 3px rgba(255, 255, 255, 0.02)",
+          borderRadius: 2,
           marginBottom: "0.5rem",
           overflow: "hidden",
         }}
@@ -350,10 +356,10 @@ export default function PipelineProgress({ requestId, apiBase, onComplete }) {
           style={{
             height: "100%",
             width: `${(completedCount / totalStages) * 100}%`,
-            background: "linear-gradient(90deg, #1E90FF, #10B981)",
-            borderRadius: 1,
+            background: "linear-gradient(90deg, #0F6AC4, #57B6FF)",
+            borderRadius: 2,
             transition: "width 0.3s ease",
-            boxShadow: "0 0 6px #1E90FF44",
+            boxShadow: "0 0 8px rgba(30, 144, 255, 0.5)",
           }}
         />
       </div>
