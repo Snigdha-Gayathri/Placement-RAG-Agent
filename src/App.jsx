@@ -779,7 +779,17 @@ async function callGeminiWithRAG(userMessage, sessionId, requestId) {
     throw new Error(detail);
   }
 
-  const data = await response.json();
+  // Read body as text first to avoid "Unexpected end of JSON input" on empty responses
+  const rawText = await response.text();
+  if (!rawText || !rawText.trim()) {
+    throw new Error("Backend returned an empty response. Please try again.");
+  }
+  let data;
+  try {
+    data = JSON.parse(rawText);
+  } catch (_err) {
+    throw new Error("Backend returned an invalid response. Please try again.");
+  }
   return data;
 }
 
@@ -1486,31 +1496,6 @@ export default function App() {
           <span>Developer Dashboard</span>
         </button>
       </div>
-
-      {/* API key missing warning banner */}
-      {!apiKeyPresent && (
-        <div style={{
-          background: "linear-gradient(145deg, #0d0d0d, #080808)",
-          border: "1px solid rgba(255, 165, 0, 0.35)",
-          borderTop: "1px solid rgba(255, 255, 255, 0.07)",
-          borderLeft: "3px solid #FFA500",
-          borderRadius: "12px",
-          padding: "0.6rem 1.2rem",
-          margin: "0.75rem 1.5rem 0",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.6rem",
-          zIndex: 15,
-          flexShrink: 0,
-          boxShadow: "var(--shadow-raised)",
-        }}>
-          <span style={{ fontSize: "1.25rem" }}>⚠️</span>
-          <span style={{ color: "#FFA500", fontSize: "0.82rem", fontFamily: "'Space Mono', monospace", lineHeight: 1.5 }}>
-            <strong>API Key Missing</strong> — Backend GEMINI_API_KEY is not set. AI-powered answers are disabled.
-            Set the environment variable in your backend configuration and restart.
-          </span>
-        </div>
-      )}
 
       {/* ── Main Workspace Row (takes all remaining height below Header) ── */}
       <div style={{
