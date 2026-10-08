@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import logging
 import os
@@ -60,8 +61,9 @@ class GeminiClient:
         self._api_key = api_key or os.getenv("GEMINI_API_KEY") or cfg.gemini_api_key
         self._model = model or os.getenv("GEMINI_MODEL", os.getenv("RAG_LLM_MODEL", cfg.llm_model or "gemini-2.5-flash"))
 
-    async def generate(self, system_prompt: str, user_prompt: str, max_output_tokens: int = 8192) -> str:
+    async def generate(self, system_prompt: str, user_prompt: str, max_output_tokens: int = 8192, **kwargs: Any) -> str:
         """Non-streaming generation request."""
+        effective_max_tokens = kwargs.get("max_tokens", max_output_tokens)
         if not self._api_key:
             return self._build_context_grounded_fallback("", user_prompt)
 
@@ -70,17 +72,58 @@ class GeminiClient:
         payload = {
             "systemInstruction": {"parts": [{"text": system_prompt}]},
             "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
-            "generationConfig": {"maxOutputTokens": max_output_tokens, "temperature": 0.3},
+            "generationConfig": {"maxOutputTokens": effective_max_tokens, "temperature": 0.3},
         }
 
-        async with httpx.AsyncClient(timeout=45.0) as client:
-            response = await client.post(endpoint, json=payload, headers=headers)
-            response.raise_for_status()
-            data = response.json()
-
-        parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
-        text = "\n".join(part.get("text", "") for part in parts if part.get("text"))
-        return text or "I encountered an issue generating an answer."
+        max_attempts = 6
+        for attempt in range(max_attempts):
+            try:
+                async with httpx.AsyncClient(timeout=60.0) as client:
+                    response = await client.post(endpoint, json=payload, headers=headers)
+                    if response.status_code in (429, 500, 502, 503, 504) and attempt < max_attempts - 1:
+                        sleep_s = min(60.0, 5.0 * (2 ** attempt))
+                        logger.warning(
+                            "Gemini API returned status %d (attempt %d/%d), backing off %.1fs...",
+                            response.status_code,
+                            attempt + 1,
+                            max_attempts,
+                            sleep_s,
+                        )
+                        await asyncio.sleep(sleep_s)
+                        continue
+                    response.raise_for_status()
+                    data = response.json()
+                    parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
+                    text = "\n".join(part.get("text", "") for part in parts if part.get("text"))
+                    return text or "I encountered an issue generating an answer."
+            except httpx.HTTPStatusError as exc:
+                if exc.response.status_code in (429, 500, 502, 503, 504) and attempt < max_attempts - 1:
+                    sleep_s = min(60.0, 5.0 * (2 ** attempt))
+                    logger.warning(
+                        "Gemini API HTTPStatusError %d (attempt %d/%d), backing off %.1fs...",
+                        exc.response.status_code,
+                        attempt + 1,
+                        max_attempts,
+                        sleep_s,
+                    )
+                    await asyncio.sleep(sleep_s)
+                    continue
+                if attempt == max_attempts - 1:
+                    raise
+            except Exception as exc:
+                if attempt < max_attempts - 1:
+                    sleep_s = min(30.0, 3.0 * (2 ** attempt))
+                    logger.warning(
+                        "Gemini API error %s (attempt %d/%d), backing off %.1fs...",
+                        exc,
+                        attempt + 1,
+                        max_attempts,
+                        sleep_s,
+                    )
+                    await asyncio.sleep(sleep_s)
+                else:
+                    raise
+        return "I encountered an issue generating an answer."
 
     async def generate_answer(
         self,

@@ -40,6 +40,7 @@ DEFAULT_FEATURE_TOGGLES: dict[str, bool] = {
     "agent_planning": True,
     "multi_hop_retrieval": True,
     "chunk_enhancement": True,
+    "jev_decision": False,
 }
 
 
@@ -88,6 +89,14 @@ class PipelineConfig:
     # -- Vector DB -------------------------------------------------------------
     vector_db_path: str = "data/chroma_db"
     vector_db_collection: str = "placement_rag"
+
+    # -- TypeSafe AI Jev / System One -----------------------------------------
+    jev_enabled: bool = False
+    typesafe_api_key: str = ""
+    jev_base_url: str = "https://api.beatapi.io"
+    jev_model: str = "jev-1.13-free"
+    jev_timeout_seconds: float = 10.0
+    jev_max_retries: int = 2
 
     # -- Feature toggles -------------------------------------------------------
     feature_toggles: dict[str, bool] = field(default_factory=lambda: dict(DEFAULT_FEATURE_TOGGLES))
@@ -138,6 +147,12 @@ class PipelineConfig:
             vector_db_path=_env("RAG_VECTOR_DB_PATH", "data/chroma_db"),
             vector_db_collection=_env("RAG_VECTOR_DB_COLLECTION", "placement_rag"),
             gemini_api_key=_env("GEMINI_API_KEY", ""),
+            jev_enabled=_env("JEV_ENABLED", False, bool),
+            typesafe_api_key=_env("TYPESAFE_API_KEY", _env("BEATAPI_API_KEY", "")),
+            jev_base_url=_env("TYPESAFE_BASE_URL", _env("BEATAPI_BASE_URL", "https://api.beatapi.io")),
+            jev_model=_env("JEV_MODEL", "jev-1.13-free"),
+            jev_timeout_seconds=_env("JEV_TIMEOUT_SECONDS", 10.0, float),
+            jev_max_retries=_env("JEV_MAX_RETRIES", 2, int),
         )
         # Merge any env-based feature overrides
         for feature in DEFAULT_FEATURE_TOGGLES:
@@ -145,6 +160,8 @@ class PipelineConfig:
             env_val = os.getenv(env_key)
             if env_val is not None:
                 cfg.feature_toggles[feature] = env_val.lower() in ("1", "true", "yes", "on")
+        if cfg.jev_enabled:
+            cfg.feature_toggles["jev_decision"] = True
         return cfg
 
     @classmethod

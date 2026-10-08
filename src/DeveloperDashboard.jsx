@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import FeatureToggles from "./FeatureToggles";
+import JevDecisionPanel from "./components/JevDecisionPanel";
 
 // ─── Collapsible Section ────────────────────────────────────────────────────
 function Section({ title, icon, badge, children, defaultOpen = false }) {
@@ -1059,6 +1060,18 @@ export default function DeveloperDashboard({ isOpen, onClose, requestId, apiBase
             {error}
           </div>
         )}
+
+        {/* ───── 0. Jev System One Calibrated Decision Layer ───── */}
+        <Section title="Jev Decision Model (System One)" icon="⚡" badge="Phase B" defaultOpen={true}>
+          <JevDecisionPanel
+            decisionMetadata={d.decision_metadata || d.agent_info?.decision_metadata}
+            computedMetrics={computedMetrics}
+            isLive={Boolean(
+              (d.decision_metadata?.backend === "jev" || d.agent_info?.decision_metadata?.backend === "jev") &&
+              !(d.decision_metadata?.fallback_occurred ?? d.agent_info?.decision_metadata?.fallback_occurred)
+            )}
+          />
+        </Section>
 
         {/* ───── 1. Visual Agentic Decision Flow ───── */}
         <Section title="Agentic Decision Flow" icon="◈" defaultOpen={true}>

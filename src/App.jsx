@@ -11,9 +11,9 @@ console.log(
   `%c[Agentic Placement RAG] App loaded — ${new Date().toISOString()}`,
   "color:#1E90FF;font-weight:bold"
 );
-if (!import.meta.env.VITE_API_BASE_URL) {
+if (!import.meta.env.VITE_API_BASE_URL && !import.meta.env.VITE_API_URL) {
   console.warn(
-    "[Agentic Placement RAG] VITE_API_BASE_URL is not set. " +
+    "[Agentic Placement RAG] Neither VITE_API_BASE_URL nor VITE_API_URL is set. " +
     "Using same-origin API path /api/chat by default."
   );
 }
@@ -28,11 +28,16 @@ function generateUUID() {
 }
 
 function getApiBase() {
-  let apiBase = (import.meta.env.VITE_API_BASE_URL || "").trim().replace(/\/$/, "");
-  if (apiBase && !/^https?:\/\//i.test(apiBase)) {
-    apiBase = `https://${apiBase}`;
+  // Support both VITE_API_BASE_URL (local) and VITE_API_URL (render.yaml)
+  const raw = (
+    import.meta.env.VITE_API_BASE_URL ||
+    import.meta.env.VITE_API_URL ||
+    ""
+  ).trim().replace(/\/$/, "");
+  if (raw && !/^https?:\/\//i.test(raw)) {
+    return `https://${raw}`;
   }
-  return apiBase;
+  return raw;
 }
 
 function getSessionId() {
@@ -1313,9 +1318,6 @@ export default function App() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeCompanies] = useState(new Set(COMPANIES));
-  // The Gemini API key lives server-side only (never exposed to the browser).
-  // Show the warning only when no backend URL is configured at all.
-  const apiKeyPresent = Boolean(import.meta.env.VITE_API_BASE_URL);
 
   // New state: dashboard, session, and request tracking
   const [dashboardOpen, setDashboardOpen] = useState(false);

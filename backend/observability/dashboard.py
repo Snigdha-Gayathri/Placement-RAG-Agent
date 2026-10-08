@@ -42,6 +42,10 @@ class RetrievedChunkInfo:
     was_rejected: bool = False
     rejection_reason: str = ""
 
+    def __post_init__(self) -> None:
+        if self.text and len(self.text) > 300:
+            self.text = self.text[:300] + "..."
+
 
 @dataclass
 class RetrievalInfo:
@@ -101,6 +105,14 @@ class GenerationInfo:
     throughput_tokens_per_sec: float = 0.0
     streamed_chunks_count: int = 0
 
+    def __post_init__(self) -> None:
+        if self.user_prompt and len(self.user_prompt) > 500:
+            self.user_prompt = self.user_prompt[:500] + "..."
+        if self.system_prompt and len(self.system_prompt) > 300:
+            self.system_prompt = self.system_prompt[:300] + "..."
+        if self.raw_response and len(self.raw_response) > 2000:
+            self.raw_response = self.raw_response[:2000] + "..."
+
 
 @dataclass
 class SecurityInfo:
@@ -133,6 +145,7 @@ class FeatureToggles:
     multi_hop_retrieval: bool = True
     hyde: bool = False
     chunk_enhancement: bool = True
+    jev_decision: bool = False
 
 
 @dataclass
@@ -168,6 +181,7 @@ class DashboardData:
     candidate_count_before_reranking: int = 0
     candidate_count_after_reranking: int = 0
     budgets: dict[str, Any] = field(default_factory=dict)
+    decision_metadata: dict[str, Any] = field(default_factory=dict)
     status: str = "SUCCESS"
     is_blocked: bool = False
 
@@ -299,7 +313,9 @@ class DashboardData:
                 "agent_planning": self.feature_toggles.agent_planning,
                 "multi_hop_retrieval": self.feature_toggles.multi_hop_retrieval,
                 "chunk_enhancement": self.feature_toggles.chunk_enhancement,
+                "jev_decision": getattr(self.feature_toggles, "jev_decision", False),
             },
+            "decision_metadata": self.decision_metadata,
             "metrics": self.computed_metrics,
             "pipeline_stages": self.pipeline_stages,
         }
@@ -308,7 +324,7 @@ class DashboardData:
 class SessionHistoryStore:
     """Thread-safe rolling query history and real-time aggregate statistics engine."""
 
-    def __init__(self, max_history: int = 100) -> None:
+    def __init__(self, max_history: int = 25) -> None:
         self.max_history = max_history
         self._history: list[DashboardData] = []
         self._lock = threading.RLock()
@@ -539,7 +555,7 @@ class SessionHistoryStore:
 class DashboardStore:
     """Thread-safe bounded in-memory store for individual dashboard requests."""
 
-    def __init__(self, max_size: int = 500) -> None:
+    def __init__(self, max_size: int = 50) -> None:
         self._store: dict[str, DashboardData] = {}
         self._order: list[str] = []
         self._max_size = max_size

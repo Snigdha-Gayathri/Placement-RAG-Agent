@@ -33,6 +33,7 @@ chroma_db_backup/
 
 # Deployment & Staging Workspaces
 deploy/
+.git_wt_*
 
 # Environment Variables
 .env

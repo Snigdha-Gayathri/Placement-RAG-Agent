@@ -94,6 +94,16 @@ class AgentPlanner:
         "success and scale bring broad responsibility",
     }
 
+    def __init__(self, decision_backend: Any | None = None) -> None:
+        if decision_backend is not None:
+            self.decision_backend = decision_backend
+        else:
+            try:
+                from backend.core.decision.factory import get_decision_backend
+                self.decision_backend = get_decision_backend()
+            except Exception:
+                self.decision_backend = None
+
     def analyze_query_profile(
         self,
         query: str,
@@ -384,6 +394,118 @@ class AgentPlanner:
             "planned_operations": planned_ops,
             "skipped_operations": skipped_ops,
         }
+
+    async def plan_async(
+        self,
+        query: str,
+        conversation_history: list[dict[str, Any]] | None = None,
+        active_toggles: dict[str, bool] | None = None,
+        query_id: str = "",
+    ) -> dict[str, Any]:
+        profile = self.analyze_query_profile(query, conversation_history)
+        backend = self.decision_backend
+        if active_toggles and "jev_decision" in active_toggles:
+            if not active_toggles["jev_decision"]:
+                from backend.core.decision.factory import get_decision_backend
+                backend = get_decision_backend(name="heuristic")
+            elif backend is None or getattr(backend, "name", "") != "jev":
+                from backend.core.decision.factory import get_decision_backend
+                backend = get_decision_backend(name="jev")
+        elif backend is None:
+            from backend.core.decision.factory import get_decision_backend
+            backend = get_decision_backend()
+
+        if backend is not None and getattr(backend, "name", "") == "jev":
+            decision = await backend.plan_retrieval(
+                query=query,
+                conversation_history=conversation_history,
+                profile=profile,
+                active_toggles=active_toggles,
+                query_id=query_id,
+            )
+
+            jev_success = not decision.fallback_occurred
+            jev_called = getattr(backend, "is_configured", False) and not (
+                decision.fallback_occurred and "unconfigured" in (decision.fallback_reason or "").lower()
+            )
+            decision_backend = "jev" if jev_success else "heuristic"
+
+            decision_meta = {
+                "decision_backend": decision_backend,
+                "requested_backend": "jev",
+                "backend": decision_backend,
+                "jev_enabled": True,
+                "jev_called": jev_called,
+                "jev_success": jev_success,
+                "jev_model": getattr(backend, "model", "jev-1.13-free") if jev_called else "N/A",
+                "jev_action": decision.retrieval_mode.value,
+                "retrieval_mode": decision.retrieval_mode.value,
+                "hop_mode": decision.hop_mode.value,
+                "query_transformation": decision.query_transformation.value,
+                "route_type": decision.route_type.value,
+                "confidence": decision.confidence if jev_success else 0.0,
+                "probabilities": decision.probabilities if jev_success else {},
+                "latency_ms": decision.latency_ms if jev_success else 0.0,
+                "fallback_occurred": decision.fallback_occurred,
+                "fallback_reason": decision.fallback_reason,
+                "cost_usd": decision.log_record.estimated_cost_usd if (decision.log_record and jev_success) else 0.0,
+            }
+
+            return {
+                "profile": profile,
+                "rewrite_needed": decision.rewrite_needed,
+                "rewrite_reason": "Jev: " + decision.reasoning if decision.rewrite_needed else "Jev skipped rewrite.",
+                "metadata_filter_needed": decision.metadata_filter_needed,
+                "metadata_filters": decision.metadata_filters,
+                "metadata_filter_reason": f"Target company constraint: {decision.metadata_filters}" if decision.metadata_filters else "Unfiltered retrieval selected.",
+                "embedding_needed": decision.embedding_needed,
+                "embedding_reason": "Query embedding generated for dense semantic search." if decision.embedding_needed else "Skipped; lexical retrieval only.",
+                "bm25_needed": decision.bm25_needed,
+                "bm25_reason": f"BM25 retrieval ({decision.retrieval_mode.value})",
+                "dense_needed": decision.dense_needed,
+                "dense_reason": f"Dense retrieval ({decision.retrieval_mode.value})",
+                "hybrid_needed": decision.hybrid_needed,
+                "hybrid_reason": f"Hybrid combination ({decision.retrieval_mode.value})",
+                "rrf_needed": decision.rrf_needed,
+                "rrf_reason": "Reciprocal Rank Fusion fuses BM25 and dense ranking signals.",
+                "multi_hop_needed": decision.multi_hop_needed,
+                "multi_hop_reason": "Multi-hop decomposition selected by Jev." if decision.multi_hop_needed else "Single-hop retrieval sufficient.",
+                "hyde_needed": decision.hyde_needed,
+                "hyde_reason": "HyDE hypothetical document expansion selected by Jev." if decision.hyde_needed else "Query vocabulary is well-defined; HyDE skipped.",
+                "chunk_enhancement_needed": decision.chunk_enhancement_needed,
+                "chunk_enhancement_reason": "Chunk enhancement selected." if decision.chunk_enhancement_needed else "Standard chunks utilized.",
+                "rerank_needed": decision.rerank_needed,
+                "rerank_reason": "Candidate set requires cross-encoder reranking.",
+                "planned_operations": decision.planned_operations,
+                "skipped_operations": decision.skipped_operations,
+                "decision": decision,
+                "decision_metadata": decision_meta,
+            }
+
+        # Baseline mode
+        baseline_plan = self.plan(query, conversation_history, active_toggles)
+        baseline_meta = {
+            "decision_backend": "heuristic",
+            "requested_backend": "heuristic",
+            "backend": "heuristic",
+            "jev_enabled": False,
+            "jev_called": False,
+            "jev_success": False,
+            "jev_model": "None",
+            "jev_action": "hybrid" if baseline_plan["hybrid_needed"] else ("bm25" if baseline_plan["bm25_needed"] else "dense"),
+            "retrieval_mode": "hybrid" if baseline_plan["hybrid_needed"] else ("bm25" if baseline_plan["bm25_needed"] else "dense"),
+            "hop_mode": "multi_hop" if baseline_plan["multi_hop_needed"] else "single_hop",
+            "query_transformation": "rewrite" if baseline_plan["rewrite_needed"] else ("hyde" if baseline_plan["hyde_needed"] else "none"),
+            "route_type": "MULTI_HOP" if baseline_plan["multi_hop_needed"] else "SINGLE_HOP",
+            "confidence": 1.0,
+            "probabilities": {},
+            "latency_ms": 0.0,
+            "fallback_occurred": False,
+            "fallback_reason": None,
+            "cost_usd": 0.0,
+        }
+        baseline_plan["decision_metadata"] = baseline_meta
+        return baseline_plan
 
     def plan_escalation(
         self,

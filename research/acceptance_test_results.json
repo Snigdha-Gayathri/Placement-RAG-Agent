@@ -1,0 +1,324 @@
+{
+  "category_1": [
+    {
+      "company": "OpenAI",
+      "matched": true,
+      "top_company": "OpenAI",
+      "chunk_count": 1,
+      "latency_ms": 26105.26,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Anthropic",
+      "matched": true,
+      "top_company": "Anthropic",
+      "chunk_count": 1,
+      "latency_ms": 1424.06,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Databricks",
+      "matched": true,
+      "top_company": "Databricks",
+      "chunk_count": 1,
+      "latency_ms": 1434.46,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Cohere",
+      "matched": true,
+      "top_company": "Cohere",
+      "chunk_count": 1,
+      "latency_ms": 1439.92,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Harvey",
+      "matched": true,
+      "top_company": "Harvey",
+      "chunk_count": 1,
+      "latency_ms": 1318.55,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "NVIDIA",
+      "matched": true,
+      "top_company": "NVIDIA",
+      "chunk_count": 1,
+      "latency_ms": 1439.25,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Microsoft",
+      "matched": true,
+      "top_company": "Microsoft",
+      "chunk_count": 8,
+      "latency_ms": 3492.87,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Google",
+      "matched": true,
+      "top_company": "Google",
+      "chunk_count": 8,
+      "latency_ms": 3178.33,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Meta",
+      "matched": true,
+      "top_company": "Meta",
+      "chunk_count": 8,
+      "latency_ms": 3181.09,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Amazon",
+      "matched": true,
+      "top_company": "Amazon",
+      "chunk_count": 8,
+      "latency_ms": 3270.16,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    }
+  ],
+  "category_2": [
+    {
+      "company": "OpenAI",
+      "passed": true,
+      "has_reported": true,
+      "has_inferred": true,
+      "has_focus": true,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence research and placement materials.  ---  #"
+    },
+    {
+      "company": "Databricks",
+      "passed": true,
+      "has_reported": true,
+      "has_inferred": true,
+      "has_focus": true,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence research and placement materials.  ---  #"
+    },
+    {
+      "company": "Cohere",
+      "passed": true,
+      "has_reported": true,
+      "has_inferred": true,
+      "has_focus": true,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence research and placement materials.  ---  #"
+    }
+  ],
+  "category_3": [
+    {
+      "topic": "LLM agents",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\new_company_interview_research\\Snowflake_interview_intelligence.md",
+      "top_company": "Snowflake"
+    },
+    {
+      "topic": "RAG",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\TCS.pdf",
+      "top_company": "TCS"
+    },
+    {
+      "topic": "multi-hop reasoning",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\Microsoft dsa.pdf",
+      "top_company": "Microsoft"
+    },
+    {
+      "topic": "agent evaluation",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\TCS.pdf",
+      "top_company": "TCS"
+    },
+    {
+      "topic": "reliability",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\Netflix.pdf",
+      "top_company": "Netflix"
+    },
+    {
+      "topic": "production debugging",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\Directi.pdf",
+      "top_company": "Directi"
+    },
+    {
+      "topic": "inference/performance",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\Directi.pdf",
+      "top_company": "Directi"
+    },
+    {
+      "topic": "system design",
+      "passed": true,
+      "chunk_count": 8,
+      "top_source": "data\\Directi.pdf",
+      "top_company": "Directi"
+    }
+  ],
+  "category_4": [
+    {
+      "comparison": "OpenAI vs Anthropic vs Databricks",
+      "passed": true,
+      "multi_hop_unlocked": true,
+      "companies_retrieved": [
+        "Databricks",
+        "OpenAI",
+        "Mastercard",
+        "General",
+        "Anthropic"
+      ],
+      "chunk_count": 8
+    },
+    {
+      "comparison": "NVIDIA vs Google vs Meta",
+      "passed": true,
+      "multi_hop_unlocked": true,
+      "companies_retrieved": [
+        "General",
+        "NVIDIA"
+      ],
+      "chunk_count": 8
+    },
+    {
+      "comparison": "Cohere vs Harvey vs Snowflake",
+      "passed": true,
+      "multi_hop_unlocked": true,
+      "companies_retrieved": [
+        "Microsoft",
+        "Harvey",
+        "Snowflake",
+        "General"
+      ],
+      "chunk_count": 8
+    }
+  ],
+  "category_5": [
+    {
+      "company": "Figma",
+      "passed": true,
+      "hallucinated_company": false,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    },
+    {
+      "company": "Kroger",
+      "passed": true,
+      "hallucinated_company": false,
+      "answer_preview": "# Technical Interview Intelligence & Preparation Guide  ## Overview This guidance is synthesized directly from verified indexed company interview intelligence r"
+    }
+  ],
+  "category_6": [
+    {
+      "company": "OpenAI",
+      "passed": true,
+      "source_file": "data\\new_company_interview_research\\OpenAI_interview_intelligence.md",
+      "has_provenance_link": true
+    },
+    {
+      "company": "Scale AI",
+      "passed": true,
+      "source_file": "data\\new_company_interview_research\\Scale_AI_interview_intelligence.md",
+      "has_provenance_link": true
+    },
+    {
+      "company": "Together AI",
+      "passed": true,
+      "source_file": "data\\new_company_interview_research\\Together_AI_interview_intelligence.md",
+      "has_provenance_link": true
+    }
+  ],
+  "category_7": [
+    {
+      "company": "Amazon",
+      "matched": true,
+      "top_company": "Amazon",
+      "chunk_count": 8
+    },
+    {
+      "company": "Microsoft",
+      "matched": true,
+      "top_company": "Microsoft",
+      "chunk_count": 8
+    },
+    {
+      "company": "Google",
+      "matched": true,
+      "top_company": "Google",
+      "chunk_count": 8
+    },
+    {
+      "company": "NVIDIA",
+      "matched": true,
+      "top_company": "NVIDIA",
+      "chunk_count": 1
+    },
+    {
+      "company": "Meta",
+      "matched": true,
+      "top_company": "Meta",
+      "chunk_count": 8
+    },
+    {
+      "company": "Adobe",
+      "matched": true,
+      "top_company": "Adobe",
+      "chunk_count": 6
+    },
+    {
+      "company": "Walmart",
+      "matched": true,
+      "top_company": "Walmart",
+      "chunk_count": 3
+    },
+    {
+      "company": "Accenture",
+      "matched": true,
+      "top_company": "Accenture",
+      "chunk_count": 1
+    },
+    {
+      "company": "Deloitte",
+      "matched": true,
+      "top_company": "Microsoft",
+      "chunk_count": 8
+    },
+    {
+      "company": "IBM",
+      "matched": true,
+      "top_company": "IBM",
+      "chunk_count": 1
+    }
+  ],
+  "category_8": {
+    "benchmark_queries": 20,
+    "top1_company_accuracy": 1.0,
+    "avg_precision_at_k": 1.0,
+    "duplicate_rate": 0.0
+  },
+  "category_9": {
+    "passed": true,
+    "stages_count": 16,
+    "tool_selections": [
+      "RetrieveTool",
+      "EvaluateEvidenceTool",
+      "GenerateAnswerTool"
+    ],
+    "iterations": 1
+  },
+  "category_10": {
+    "passed": true,
+    "concurrent_tasks": 5,
+    "successful_tasks": 5,
+    "total_concurrency_ms": 2183.96,
+    "avg_latency_per_query_ms": 436.79
+  }
+}
