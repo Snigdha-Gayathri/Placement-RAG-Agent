@@ -1,0 +1,93 @@
+{
+  "manifest_version": "1.0.0",
+  "timestamp_utc": "2026-09-25T18:15:00Z",
+  "system_name": "Agentic Placement RAG",
+  "git": {
+    "commit_sha": "c01961b1461f76bafb093920cb18a809a4b3ef27",
+    "dirty_files_count": 43,
+    "working_tree_status": [
+      "M  backend/app/gemini_client.py",
+      "M  backend/app/main.py",
+      "M  backend/app/service.py",
+      "M  backend/config/settings.py",
+      "M  backend/core/agent/executor.py",
+      "M  backend/core/agent/planner.py",
+      "M  backend/core/agent/tools.py",
+      "M  backend/core/embeddings/gemini.py",
+      "M  backend/core/llm/gemini.py",
+      "M  backend/core/memory/conversation.py",
+      "M  backend/core/reranking/base.py",
+      "M  backend/core/reranking/cross_encoder.py",
+      "M  backend/core/retrieval/hybrid.py",
+      "M  backend/core/retrieval/router.py",
+      "M  backend/evaluation/metrics.py",
+      "M  backend/ingestion/drive_sync.py",
+      "M  backend/ingestion/metadata_extractor.py",
+      "M  backend/observability/dashboard.py",
+      " M render.yaml",
+      "M  security/__init__.py",
+      "M  security/constants.py",
+      "M  security/grounding.py",
+      "M  security/hallucination_guard.py",
+      "M  security/prompt_injection.py",
+      "M  security/rate_limiter.py",
+      "M  security/retrieval_guard.py",
+      "M  security/utils.py",
+      " M src/App.jsx",
+      "M  tests/security/test_logger_and_config.py",
+      "?? backend/core/agent/graph.py",
+      "?? backend/core/agent/state.py",
+      "?? backend/evaluation/ablation_runner.py",
+      "?? backend/evaluation/benchmark_dataset.py",
+      "?? evaluation/",
+      "?? research/acceptance_test_results.json",
+      "?? research/new_company_vector_index.json",
+      "?? run_acceptance_tests.py",
+      "?? security/auth.py",
+      "?? security/file_lock.py",
+      "?? tests/security/test_security_remediations.py",
+      "?? tests/test_agentic_retrieval.py",
+      "?? tests/test_new_company_rag_integration.py",
+      "?? tests/test_production_acceptance.py"
+    ]
+  },
+  "runtime_environment": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\snigd\\PROJECTS\\Agentic Placement RAG\\.venv\\Scripts\\python.exe",
+    "key_packages": {
+      "fastapi": "0.115.0",
+      "chromadb": "1.5.9",
+      "langgraph": "1.2.11",
+      "sentence-transformers": "5.6.0",
+      "google-genai": "2.17.0",
+      "google-generativeai": null,
+      "rank-bm25": "0.2.2",
+      "pydantic": "2.13.4",
+      "pytest": "8.3.3"
+    }
+  },
+  "corpus_and_vector_db": {
+    "vector_db_path": "data/chroma_db",
+    "collection_name": "placement_rag",
+    "indexed_chunk_count": 357,
+    "embedding_model_id": "models/embedding-001",
+    "embedding_dimension": 768
+  },
+  "models": {
+    "generation_llm": "gemini-2.5-flash",
+    "embedding_model": "gemini-embedding-001",
+    "neural_reranker": "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  },
+  "file_hashes_sha256": {
+    "benchmark_dataset": "41d5a51a46dc08a81e5221a21d76531e425c0f175faeec8da7afd2e732833d8c",
+    "security_attack_dataset": "d6616f4eab4df1520663257465527c078af0551f9720172387ae59bf6989b88c",
+    "raw_baseline_results": "ec862f33b6076e6b0d4fb048ba638398a2321f86837e83e774f483df7ee478f1",
+    "aggregated_baseline_metrics": "31e1b353d85cb738b42473f833ba49303151d8bb0a64804c06c8dc311f78d45f",
+    "retrieval_stage_comparison": "23f01cb9fa725da9e6087690c6a9df0c2fe16afbdf58a8ea7a73ba613c417b74",
+    "security_evaluation_results": "cbb347b0361d30562ffdd313d72b5df98aae7397250dfb73da9eba8bb823a2ad",
+    "pipeline_settings": "a06d3938ea8d4b7f62dcb367428856890c3325895483d8f77894183ac2390efc",
+    "service_orchestrator": "4f2393153bafec19798f47fba8550d50cbfc4e8f25116f5d105d4d3525f9cad5",
+    "langgraph_graph": "1847fc4c1bea9227b663ca3fc3f47524470383b494b4f100555cec37fc6d6dfb"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-27T14:52:29Z",
+    "total_queries": 55,
+    "duration_seconds": 716.21,
+    "backend": "jev",
+    "is_live_jev": false,
+    "execution_status": "CERTIFIED_FALLBACK_EVALUATION"
+  },
+  "routing": {
+    "policy_routing_agreement": 0.6909,
+    "policy_agreed_count": 38,
+    "fallback_rate": 1.0,
+    "fallback_count": 55
+  },
+  "latency_breakdown_ms": {
+    "decision": {
+      "mean": 1.01,
+      "median": 0.81,
+      "p50": 0.81,
+      "p90": 1.26,
+      "p95": 2.36,
+      "p99": 6.09,
+      "min": 0.49,
+      "max": 6.09,
+      "n": 55
+    },
+    "end_to_end": {
+      "mean": 9446.26,
+      "median": 3999.45,
+      "p50": 3999.45,
+      "p90": 36394.81,
+      "p95": 40048.82,
+      "p99": 42655.61,
+      "min": 0.6,
+      "max": 42655.61,
+      "n": 55
+    }
+  },
+  "cost_and_usage": {
+    "total_jev_input_tokens": 0,
+    "total_jev_cost_usd": 0.0,
+    "pricing_basis": "TypeSafe Jev ($0.042 / 1M input tokens, free output tokens)"
+  },
+  "reliability": {
+    "success_rate": 1.0,
+    "circuit_breaker_triggered": true,
+    "unhandled_exceptions": 0
+  }
+}

@@ -1,0 +1,160 @@
+[
+  {
+    "query_id": "fact_01",
+    "category": "Simple Factual",
+    "query": "What technical interview questions and topics are asked at OpenAI?",
+    "e2e_latency_ms": 48.74,
+    "backend_used": null,
+    "requested_backend": null,
+    "jev_called": null,
+    "jev_success": null,
+    "model": null,
+    "jev_latency_ms": null,
+    "retrieval_decision": {
+      "retrieval_mode": null,
+      "hop_mode": null,
+      "query_transformation": null,
+      "route_type": null
+    },
+    "confidence": null,
+    "probabilities": null,
+    "fallback_occurred": null,
+    "fallback_reason": null,
+    "evidence_decision": {
+      "status": null,
+      "is_sufficient": null,
+      "confidence": null,
+      "fallback": null,
+      "fallback_reason": null
+    },
+    "answer_preview": "### Covered Technical Interview Topics\n\nThe knowledge corpus contains interview questions and preparation guidance across key domains including:\n\n- **..."
+  },
+  {
+    "query_id": "fact_02",
+    "category": "Simple Factual",
+    "query": "What interview questions and safety topics does Anthropic focus on?",
+    "e2e_latency_ms": 3.28,
+    "backend_used": null,
+    "requested_backend": null,
+    "jev_called": null,
+    "jev_success": null,
+    "model": null,
+    "jev_latency_ms": null,
+    "retrieval_decision": {
+      "retrieval_mode": null,
+      "hop_mode": null,
+      "query_transformation": null,
+      "route_type": null
+    },
+    "confidence": null,
+    "probabilities": null,
+    "fallback_occurred": null,
+    "fallback_reason": null,
+    "evidence_decision": {
+      "status": null,
+      "is_sufficient": null,
+      "confidence": null,
+      "fallback": null,
+      "fallback_reason": null
+    },
+    "answer_preview": "### Covered Technical Interview Topics\n\nThe knowledge corpus contains interview questions and preparation guidance across key domains including:\n\n- **..."
+  },
+  {
+    "query_id": "fact_03",
+    "category": "Simple Factual",
+    "query": "What technical topics and questions are tested in Databricks interviews?",
+    "e2e_latency_ms": 3.61,
+    "backend_used": null,
+    "requested_backend": null,
+    "jev_called": null,
+    "jev_success": null,
+    "model": null,
+    "jev_latency_ms": null,
+    "retrieval_decision": {
+      "retrieval_mode": null,
+      "hop_mode": null,
+      "query_transformation": null,
+      "route_type": null
+    },
+    "confidence": null,
+    "probabilities": null,
+    "fallback_occurred": null,
+    "fallback_reason": null,
+    "evidence_decision": {
+      "status": null,
+      "is_sufficient": null,
+      "confidence": null,
+      "fallback": null,
+      "fallback_reason": null
+    },
+    "answer_preview": "### Covered Technical Interview Topics\n\nThe knowledge corpus contains interview questions and preparation guidance across key domains including:\n\n- **..."
+  },
+  {
+    "query_id": "fact_04",
+    "category": "Simple Factual",
+    "query": "What coding and DSA questions are asked at Google?",
+    "e2e_latency_ms": 77689.26,
+    "backend_used": "jev",
+    "requested_backend": "jev",
+    "jev_called": true,
+    "jev_success": true,
+    "model": "jev-1.13-free",
+    "jev_latency_ms": 1826.78,
+    "retrieval_decision": {
+      "retrieval_mode": "hybrid",
+      "hop_mode": "single_hop",
+      "query_transformation": "none",
+      "route_type": "SINGLE_HOP"
+    },
+    "confidence": 0.99,
+    "probabilities": {
+      "bm25": 0.01,
+      "dense": 0.0,
+      "hybrid": 0.99
+    },
+    "fallback_occurred": false,
+    "fallback_reason": null,
+    "evidence_decision": {
+      "status": "SUFFICIENT",
+      "is_sufficient": true,
+      "confidence": 0.0,
+      "fallback": true,
+      "fallback_reason": "RATE_LIMIT_429 (HTTP 429: TypeSafe rate limit exceeded: POST https://api.beatapi.io/v1/systemone: 429 Rate limit exceeded: this model allows at most 1 successful requests per minute per account. Retry after 60 seconds. Accounts that have topped up get a higher per-minute limit.)"
+    },
+    "answer_preview": "Based on the retrieved context, Google frequently asks Data Structures and Algorithms (DSA) questions during its technical interviews, particularly in..."
+  },
+  {
+    "query_id": "fact_05",
+    "category": "Simple Factual",
+    "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+    "e2e_latency_ms": 6515.6,
+    "backend_used": "jev",
+    "requested_backend": "jev",
+    "jev_called": true,
+    "jev_success": true,
+    "model": "jev-1.13-free",
+    "jev_latency_ms": 854.94,
+    "retrieval_decision": {
+      "retrieval_mode": "hybrid",
+      "hop_mode": "single_hop",
+      "query_transformation": "none",
+      "route_type": "SINGLE_HOP"
+    },
+    "confidence": 0.98,
+    "probabilities": {
+      "bm25": 0.01,
+      "dense": 0.0,
+      "hybrid": 0.99
+    },
+    "fallback_occurred": false,
+    "fallback_reason": null,
+    "evidence_decision": {
+      "status": "SUFFICIENT",
+      "is_sufficient": true,
+      "confidence": 0.0,
+      "fallback": true,
+      "fallback_reason": "RATE_LIMIT_429 (HTTP 429: TypeSafe rate limit exceeded: POST https://api.beatapi.io/v1/systemone: 429 Rate limit exceeded: this model allows at most 1 successful requests per minute per account. Retry after 60 seconds. Accounts that have topped up get a higher per-minute limit.)"
+    },
+    "answer_preview": "Based on the provided NVIDIA interview intelligence, specific questions related to GPU architecture and CUDA are not explicitly listed as `REPORTED_QU..."
+  }
+]

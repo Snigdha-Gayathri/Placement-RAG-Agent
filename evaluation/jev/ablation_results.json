@@ -1,0 +1,31 @@
+{
+  "A_baseline": {
+    "name": "Frozen Baseline (Deterministic Planner)",
+    "policy_routing_agreement": 0.7636,
+    "reranked_mrr": 0.8576,
+    "p50_latency_ms": 5380.58,
+    "status": "FROZEN_REFERENCE"
+  },
+  "B_baseline_plus_jev_routing": {
+    "name": "Baseline + Jev Retrieval Routing",
+    "policy_routing_agreement": 0.6909,
+    "fallback_rate": 1.0,
+    "status": "FALLBACK_VERIFIED"
+  },
+  "C_baseline_plus_jev_sufficiency": {
+    "name": "Baseline + Jev Evidence Sufficiency",
+    "status": "ADAPTER_VERIFIED_STANDBY"
+  },
+  "D_baseline_plus_jev_security": {
+    "name": "Baseline + Jev Security Semantic Classifier",
+    "status": "ADAPTER_VERIFIED_STANDBY"
+  },
+  "E_baseline_plus_jev_routing_and_sufficiency": {
+    "name": "Baseline + Jev Routing + Evidence Sufficiency",
+    "status": "ADAPTER_VERIFIED_STANDBY"
+  },
+  "F_baseline_plus_all_jev": {
+    "name": "Baseline + All Selected Jev Components",
+    "status": "ADAPTER_VERIFIED_STANDBY"
+  }
+}

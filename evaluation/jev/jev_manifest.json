@@ -1,0 +1,19 @@
+{
+  "manifest_version": "1.0.0",
+  "phase": "PHASE_B_JEV_RESEARCH_AND_PRIMARY_EXPERIMENT",
+  "timestamp_utc": "2026-09-27T14:52:29Z",
+  "live_api_access": false,
+  "model": "jev-latest (jev-1.13.0)",
+  "sdk_installed": "typesafe-sdk==0.7.2",
+  "official_endpoint": "https://api.typesafe.ai/v1/systemone",
+  "primary_experiment": "Strategic Retrieval Routing",
+  "secondary_experiments": [
+    "Evidence Sufficiency",
+    "Security Semantic Classification"
+  ],
+  "baseline_frozen_sha": "c01961b1461f76bafb093920cb18a809a4b3ef27",
+  "benchmark_dataset_sha256": "41d5a51a46dc08a81e5221a21d76531e425c0f175faeec8da7afd2e732833d8c",
+  "benchmark_query_count": 55,
+  "circuit_breaker_verified": true,
+  "fallback_rate": 1.0
+}

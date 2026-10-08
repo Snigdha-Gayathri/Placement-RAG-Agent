@@ -1,0 +1,2786 @@
+{
+  "audit_note": "Genuinely isolated ablation runs proving configuration distinctions.",
+  "configurations": [
+    {
+      "config_id": "pure_dense",
+      "config_name": "1. Pure Dense Only",
+      "configuration_active": "isolated_dense",
+      "sample_size": 20,
+      "mrr": 0.6517,
+      "ndcg@5": 0.5331,
+      "recall@5": 0.1972,
+      "precision@5": 0.44,
+      "hit_rate@5": 0.75,
+      "avg_latency_ms": 3973.63,
+      "p95_latency_ms": 10178.65,
+      "bypassed_queries": 0,
+      "per_query_details": [
+        {
+          "query_id": "fact_01",
+          "query": "What technical interview questions and topics are asked at OpenAI?",
+          "retrieved_chunk_ids": [
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1613.35,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_02",
+          "query": "What interview questions and safety topics does Anthropic focus on?",
+          "retrieved_chunk_ids": [
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 7331.74,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_03",
+          "query": "What technical topics and questions are tested in Databricks interviews?",
+          "retrieved_chunk_ids": [
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 7279.37,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_04",
+          "query": "What coding and DSA questions are asked at Google?",
+          "retrieved_chunk_ids": [
+            "c35617a3630fc18dc91229f528ab5f8940f21f97ad8a880dd927e5c344f92944",
+            "44ada378b1ac6b76e80f9ceb6d86d722728f77ecf2b89d329c5b43f8224a3dbd",
+            "b4069a0d03c530da0b035d28ec06aa0df82c60a3db63b0f7ed9f6fd6629136d1",
+            "c5abdbdaa89f92d327b4a7d6718be097e28e97d1654c3c515be00075a49fd464",
+            "6a47b3f65413c2bf6a70fcd333d5f76bd3efb56f481f4d36d149c16f443675f8"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0505,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 812.41,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_05",
+          "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+          "retrieved_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 844.69,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_06",
+          "query": "What technical interview format is used by Microsoft for SDE roles?",
+          "retrieved_chunk_ids": [
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "374454929c0579695a0798f136c42f64b9193bf6410f29ebc34713a91543c482",
+            "5ff4548bae35755fce34c0a142851d86756738674bf9aaa625eb479fb7996d61",
+            "c2be42c0084abbee735d760d605f3d738c013db45c8bd4b6871413d38b922823",
+            "64d778569dbe438b2dab82b164df12bdf789800b32ab3df9d6ef62a650dc5acb"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1562,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1012.86,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_07",
+          "query": "What coding problems and leadership principles are tested at Amazon?",
+          "retrieved_chunk_ids": [
+            "7ccfd6698b2abee07794714cad9ead495620f4c83c62c4d0e8b5fa0b79e7df39",
+            "95ad866336bea9441a72cf9a3c6714ebb106efe2ea948ee435f62a58c5cb6776",
+            "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1191.76,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_08",
+          "query": "What technical interview questions does Meta ask for software engineers?",
+          "retrieved_chunk_ids": [
+            "6c31baba57cdada3a0683d0d4b7dacdcf204c6407043d7ef0f0e40d3ad1e8e64",
+            "9cdfa200ef37b47562c11ef306dc3f817174602ad46d9b22217a6aa01378a471",
+            "54fa09d274417ae9e5bdeba4d13adadfa7b27422c88077235c740a051e3818ea",
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "00e2565f900fe55f28e9af45223b3eae971cc823645f95e78b9c2d2026af3ccb"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 8973.37,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_01",
+          "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+          "retrieved_chunk_ids": [
+            "7ccfd6698b2abee07794714cad9ead495620f4c83c62c4d0e8b5fa0b79e7df39",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+            "6103560762e77e4bb0c028daef233eb41e0683a95d22abb065e29d045a5726a2",
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.5,
+            "ndcg@5": 0.5148,
+            "recall@5": 0.1154,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 2229.35,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_02",
+          "query": "Google Tagged LeetCode Problems and guide",
+          "retrieved_chunk_ids": [
+            "c35617a3630fc18dc91229f528ab5f8940f21f97ad8a880dd927e5c344f92944",
+            "44ada378b1ac6b76e80f9ceb6d86d722728f77ecf2b89d329c5b43f8224a3dbd",
+            "b4069a0d03c530da0b035d28ec06aa0df82c60a3db63b0f7ed9f6fd6629136d1",
+            "e0ad433050ea0c25f8d72f6009abc9ac2a3a64ba5038f0aea4ffd60a27364ae7",
+            "c5abdbdaa89f92d327b4a7d6718be097e28e97d1654c3c515be00075a49fd464"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3392,
+            "recall@5": 0.0667,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 975.44,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_03",
+          "query": "Oracle DSA Interview Question with Solutions",
+          "retrieved_chunk_ids": [
+            "d5762655a74628a32930996c503737ce44d5bb8a9dc8bdc4f38022bea0ada919",
+            "c524f3c3881ff2d90a55441efa94f6a9b01de7b4d59a34703f3fe9a3512b70f5",
+            "358a1fc22a632a22910f1fc21eba317a4177f678393d62d4634a4cc33160e902",
+            "8bdf64236c9a835515db6abde3e451af0c8d3bf2cb784dd69972cf60f329a531",
+            "83d03d657d9d760d2bc45ecfbca252edfc9dcc2a10cbcdedb007843eb043b6b1"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 804.67,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_04",
+          "query": "Goldman Sachs Tagged LeetCode Problems",
+          "retrieved_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 625.24,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_01",
+          "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+          "retrieved_chunk_ids": [
+            "bd1e7ea1b6ad7e6d86ca8eb97d7bebbc12aaeafb22d7c48417a9fe7349d4c573",
+            "c338bf777f9865c239808599efc1331077d6f8cfc2bb5e57c5ef9029c68f0282",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+            "f5a33336a0273e18e74f829ded9e5e0c0adbc08c0bb0d823dd285baa11ee0b33",
+            "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 10178.65,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_02",
+          "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+          "retrieved_chunk_ids": [
+            "2a235de1791eba3d2540e5f34d031b689568b227f85614a66d6a91acd36f1608",
+            "bd679ed64bd143be606bace55193466ab4bc8d3a4588bc1ff93c86a4177caefa",
+            "6a9fc49f1edc7cb9ba5edb9c45933f4736b3f37090eae8ce5d19f0f3a93e0625",
+            "69d84dbce1d3675f5572b93bcb219d8c6e6b7b94053905c9bdb9c3e3ef1f86b3",
+            "b1adbe3e63352f3868885050090c6dd15bf0e042662c79a44f4389562ab2e000"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 10158.22,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_03",
+          "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+          "retrieved_chunk_ids": [
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "363d110e95178312fe969ccd1f63d51d32b026aaa16d43b09afaa2e6631f7a6c"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 7880.56,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_01",
+          "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+          "retrieved_chunk_ids": [
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "40df0ec4af75757bfee34ff5557c95602c53129955fa152ec6697bb3d7049a71"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 1964.33,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_02",
+          "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+          "retrieved_chunk_ids": [
+            "83d03d657d9d760d2bc45ecfbca252edfc9dcc2a10cbcdedb007843eb043b6b1",
+            "5074ccab361e2ae03dbaf152ad77d58717a784cd815ee2ff1e06ff1296903f1a",
+            "ac92a5f047349223cfd2cc6217902e4a7e762373cbce1e959f71ed8c4ef0091e",
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "fd1831afe0de96d379645940b8e2d8f9dd96163f42bd76969eddf8bd14403a40"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.3333,
+            "ndcg@5": 0.4469,
+            "recall@5": 0.0171,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 10154.82,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_03",
+          "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+          "retrieved_chunk_ids": [
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "40df0ec4af75757bfee34ff5557c95602c53129955fa152ec6697bb3d7049a71"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 3096.16,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_04",
+          "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+          "retrieved_chunk_ids": [
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "40df0ec4af75757bfee34ff5557c95602c53129955fa152ec6697bb3d7049a71"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.2,
+            "ndcg@5": 0.1312,
+            "recall@5": 0.1667,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1201.5,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_round_01",
+          "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+          "retrieved_chunk_ids": [
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+            "2dd044fdff876138cd7c63453045da3a249473c945cb9cc6cdedf820cb621417",
+            "95ad866336bea9441a72cf9a3c6714ebb106efe2ea948ee435f62a58c5cb6776",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1144.04,
+          "is_bypassed": false
+        }
+      ]
+    },
+    {
+      "config_id": "pure_bm25",
+      "config_name": "2. Pure BM25 Only",
+      "configuration_active": "isolated_bm25",
+      "sample_size": 20,
+      "mrr": 0.96,
+      "ndcg@5": 0.7747,
+      "recall@5": 0.3648,
+      "precision@5": 0.63,
+      "hit_rate@5": 1.0,
+      "avg_latency_ms": 10.08,
+      "p95_latency_ms": 175.25,
+      "bypassed_queries": 0,
+      "per_query_details": [
+        {
+          "query_id": "fact_01",
+          "query": "What technical interview questions and topics are asked at OpenAI?",
+          "retrieved_chunk_ids": [
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 175.25,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_02",
+          "query": "What interview questions and safety topics does Anthropic focus on?",
+          "retrieved_chunk_ids": [
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.21,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_03",
+          "query": "What technical topics and questions are tested in Databricks interviews?",
+          "retrieved_chunk_ids": [
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.08,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_04",
+          "query": "What coding and DSA questions are asked at Google?",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0505,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.13,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_05",
+          "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+          "retrieved_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.0,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_06",
+          "query": "What technical interview format is used by Microsoft for SDE roles?",
+          "retrieved_chunk_ids": [
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "078e3cb0384ad731f06d852b2d71dd1925fa60061d62b8d00c99b4a85e593c7d",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1562,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.2,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_07",
+          "query": "What coding problems and leadership principles are tested at Amazon?",
+          "retrieved_chunk_ids": [
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "870ec347165fc4b355ff7d4274bf916300a618eb06ab1df77e7cf70060c0c7d6",
+            "58fc85a4ee9a7f917e44d6844c611a46c7c188f04f47ddd69ff058d90f7cf90b",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.39,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_08",
+          "query": "What technical interview questions does Meta ask for software engineers?",
+          "retrieved_chunk_ids": [
+            "9cdfa200ef37b47562c11ef306dc3f817174602ad46d9b22217a6aa01378a471",
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "fb207e0b6bf3e64a99d2c5eb6fecd2a157da9ff9c8645a6cd0151eebd6755cf9",
+            "6a9fc49f1edc7cb9ba5edb9c45933f4736b3f37090eae8ce5d19f0f3a93e0625",
+            "a010a396cc74e59d255504bbbe4495138980e1cc1290875bbb1fa5d8c292cc11"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.85,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_01",
+          "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+          "retrieved_chunk_ids": [
+            "d4dc07c5a387274c0c34e1e17ce91a1506bffd126d9e96809d5439c52a1bac7e",
+            "5287035bb87d957e9ff39cc448e29a492ce5a4b12928d2efcb1b0b0d37aea6db",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8",
+            "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6992,
+            "recall@5": 0.1154,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.95,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_02",
+          "query": "Google Tagged LeetCode Problems and guide",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.3333,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.4,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_03",
+          "query": "Oracle DSA Interview Question with Solutions",
+          "retrieved_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "a50c608f36859a1443ac12ed7b7cf579488f5be54ec3971976094dd0b3cf6b94",
+            "b0b8a239518a9f037c702d4bb4ae7641cbdea321426c6ad656799ca84aa60120",
+            "9331348b7675af2dea8a713944fc32600d05679cbe6e518c680c4dc4f576122d"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.8304,
+            "recall@5": 0.1818,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 0.98,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_04",
+          "query": "Goldman Sachs Tagged LeetCode Problems",
+          "retrieved_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 0.77,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_01",
+          "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+          "retrieved_chunk_ids": [
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "6801062df0c52ba20366bb1f56de857b87b98d5f2da9ac2e940fb64522ebf852",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "bad916035868596a23568e7e7380c79879b333443ed53ecb5f63558d5886b88f"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.2,
+            "ndcg@5": 0.151,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.69,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_02",
+          "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+          "retrieved_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.5531,
+            "recall@5": 0.2857,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.41,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_03",
+          "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+          "retrieved_chunk_ids": [
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f53ad4914e895fc9b1d2fe2d6b88f810814a0799c89f7c5e49b4550688c58915",
+            "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+            "d7c5cc2f70ea98cd6c777d218a7a8141f3fb4237a9a26240e53287a4b49490b8"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.42,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_01",
+          "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+          "retrieved_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "eaeba85e063a2cc71d850fe5ba819e7e2161299c73c57b320837ffdbfe7fdcc4"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.34,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_02",
+          "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+          "retrieved_chunk_ids": [
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0286,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.35,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_03",
+          "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+          "retrieved_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "bad916035868596a23568e7e7380c79879b333443ed53ecb5f63558d5886b88f"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.9558,
+            "recall@5": 1.0,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.3,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_04",
+          "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+          "retrieved_chunk_ids": [
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc",
+            "a004dad4b13eea1cdef07171eb1f9e7c518fd7510214ede1a1c9d1e1d80421da",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6844,
+            "recall@5": 0.5,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1.19,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_round_01",
+          "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 2.68,
+          "is_bypassed": false
+        }
+      ]
+    },
+    {
+      "config_id": "hybrid_rrf",
+      "config_name": "3. Hybrid RRF",
+      "configuration_active": "isolated_hybrid",
+      "sample_size": 20,
+      "mrr": 0.8712,
+      "ndcg@5": 0.6887,
+      "recall@5": 0.2975,
+      "precision@5": 0.57,
+      "hit_rate@5": 0.95,
+      "avg_latency_ms": 1350.38,
+      "p95_latency_ms": 8825.11,
+      "bypassed_queries": 0,
+      "per_query_details": [
+        {
+          "query_id": "fact_01",
+          "query": "What technical interview questions and topics are asked at OpenAI?",
+          "retrieved_chunk_ids": [
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1816.71,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_02",
+          "query": "What interview questions and safety topics does Anthropic focus on?",
+          "retrieved_chunk_ids": [
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 2544.1,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_03",
+          "query": "What technical topics and questions are tested in Databricks interviews?",
+          "retrieved_chunk_ids": [
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 868.14,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_04",
+          "query": "What coding and DSA questions are asked at Google?",
+          "retrieved_chunk_ids": [
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5b3c610379f8e2f590be2d808326261e2a21e8de11be3829b39be7a2e30b1841",
+            "87200b49b52692c480d3df532ede9e37020ee73e9ba69d41bfc84b10f6a24f2e",
+            "f6b01e171af935e58577bfa8333631158f777091e1927f9a60c9ce7d00cb97eb"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0505,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 807.15,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_05",
+          "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+          "retrieved_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 634.94,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_06",
+          "query": "What technical interview format is used by Microsoft for SDE roles?",
+          "retrieved_chunk_ids": [
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "5ff4548bae35755fce34c0a142851d86756738674bf9aaa625eb479fb7996d61",
+            "d6bff93ad50eb78e4576ed515150e6f91445c956befa816726134676d1773511"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1562,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 799.49,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_07",
+          "query": "What coding problems and leadership principles are tested at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 648.57,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_08",
+          "query": "What technical interview questions does Meta ask for software engineers?",
+          "retrieved_chunk_ids": [
+            "9cdfa200ef37b47562c11ef306dc3f817174602ad46d9b22217a6aa01378a471",
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "6c31baba57cdada3a0683d0d4b7dacdcf204c6407043d7ef0f0e40d3ad1e8e64",
+            "6a9fc49f1edc7cb9ba5edb9c45933f4736b3f37090eae8ce5d19f0f3a93e0625",
+            "00e2565f900fe55f28e9af45223b3eae971cc823645f95e78b9c2d2026af3ccb"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 628.67,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_01",
+          "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+          "retrieved_chunk_ids": [
+            "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+            "a22a698d669510530fe0c21f207780f2e362a113ba8af129707fd85d67047c18"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.8304,
+            "recall@5": 0.1538,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 731.32,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_02",
+          "query": "Google Tagged LeetCode Problems and guide",
+          "retrieved_chunk_ids": [
+            "c35617a3630fc18dc91229f528ab5f8940f21f97ad8a880dd927e5c344f92944",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "e0ad433050ea0c25f8d72f6009abc9ac2a3a64ba5038f0aea4ffd60a27364ae7",
+            "ab606e971641bf073de9d133223267d16304975b71148a98025249a1437dc23e",
+            "f6b01e171af935e58577bfa8333631158f777091e1927f9a60c9ce7d00cb97eb"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6844,
+            "recall@5": 0.2,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 981.45,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_03",
+          "query": "Oracle DSA Interview Question with Solutions",
+          "retrieved_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "358a1fc22a632a22910f1fc21eba317a4177f678393d62d4634a4cc33160e902",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "a50c608f36859a1443ac12ed7b7cf579488f5be54ec3971976094dd0b3cf6b94",
+            "8bdf64236c9a835515db6abde3e451af0c8d3bf2cb784dd69972cf60f329a531"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.8539,
+            "recall@5": 0.1818,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1036.69,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_04",
+          "query": "Goldman Sachs Tagged LeetCode Problems",
+          "retrieved_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 8825.11,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_01",
+          "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0909,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 790.6,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_02",
+          "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+          "retrieved_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.4852,
+            "recall@5": 0.2857,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 979.9,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_03",
+          "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+          "retrieved_chunk_ids": [
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.5,
+            "ndcg@5": 0.2463,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1146.11,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_01",
+          "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+          "retrieved_chunk_ids": [
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.5,
+            "ndcg@5": 0.4144,
+            "recall@5": 0.5,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1194.28,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_02",
+          "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+          "retrieved_chunk_ids": [
+            "1772cabd805ace1bcfba485bc1f2710f0a51780d247cf0bf1f70d9c5d8a97bc7",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0286,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 644.56,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_03",
+          "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.3333,
+            "ndcg@5": 0.3462,
+            "recall@5": 0.5,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 651.46,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_04",
+          "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+          "retrieved_chunk_ids": [
+            "40df0ec4af75757bfee34ff5557c95602c53129955fa152ec6697bb3d7049a71",
+            "848b2ff38da874edb97f57960e170361992835d6f7ae9a4a55fcaf858f4f24d8",
+            "838218c2035ac62ada7c071a8b86139b27a804cf224aecf824713310b201da28",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6844,
+            "recall@5": 0.5,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 613.59,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_round_01",
+          "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "2dd044fdff876138cd7c63453045da3a249473c945cb9cc6cdedf820cb621417",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+          ],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 664.77,
+          "is_bypassed": false
+        }
+      ]
+    },
+    {
+      "config_id": "hybrid_rerank",
+      "config_name": "4. Hybrid + Reranker",
+      "configuration_active": "isolated_hybrid_rerank",
+      "sample_size": 20,
+      "mrr": 0.9667,
+      "ndcg@5": 0.808,
+      "recall@5": 0.3834,
+      "precision@5": 0.67,
+      "hit_rate@5": 1.0,
+      "avg_latency_ms": 8605.91,
+      "p95_latency_ms": 55889.73,
+      "bypassed_queries": 0,
+      "per_query_details": [
+        {
+          "query_id": "fact_01",
+          "query": "What technical interview questions and topics are asked at OpenAI?",
+          "retrieved_chunk_ids": [
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+          ],
+          "reranked_chunk_ids": [
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 55889.73,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_02",
+          "query": "What interview questions and safety topics does Anthropic focus on?",
+          "retrieved_chunk_ids": [
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "reranked_chunk_ids": [
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 939.02,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_03",
+          "query": "What technical topics and questions are tested in Databricks interviews?",
+          "retrieved_chunk_ids": [
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346"
+          ],
+          "reranked_chunk_ids": [
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6131,
+            "recall@5": 0.5,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1045.39,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_04",
+          "query": "What coding and DSA questions are asked at Google?",
+          "retrieved_chunk_ids": [
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5b3c610379f8e2f590be2d808326261e2a21e8de11be3829b39be7a2e30b1841",
+            "87200b49b52692c480d3df532ede9e37020ee73e9ba69d41bfc84b10f6a24f2e",
+            "f6b01e171af935e58577bfa8333631158f777091e1927f9a60c9ce7d00cb97eb"
+          ],
+          "reranked_chunk_ids": [
+            "87200b49b52692c480d3df532ede9e37020ee73e9ba69d41bfc84b10f6a24f2e",
+            "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+            "44ada378b1ac6b76e80f9ceb6d86d722728f77ecf2b89d329c5b43f8224a3dbd",
+            "5b3c610379f8e2f590be2d808326261e2a21e8de11be3829b39be7a2e30b1841",
+            "ab606e971641bf073de9d133223267d16304975b71148a98025249a1437dc23e"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0505,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 4448.48,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_05",
+          "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+          "retrieved_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "reranked_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 10395.12,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_06",
+          "query": "What technical interview format is used by Microsoft for SDE roles?",
+          "retrieved_chunk_ids": [
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "eda60dfe35fdba7ac7347779cc6b81283e5231dff13ace5e97fd524b9fda8e12",
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "078e3cb0384ad731f06d852b2d71dd1925fa60061d62b8d00c99b4a85e593c7d"
+          ],
+          "reranked_chunk_ids": [
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "078e3cb0384ad731f06d852b2d71dd1925fa60061d62b8d00c99b4a85e593c7d",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1562,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 12511.45,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_07",
+          "query": "What coding problems and leadership principles are tested at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "reranked_chunk_ids": [
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "28501d33816d910632adf5dee10c679187af641c27c4ad220acd4bcf890a68bf",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 8652.88,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_08",
+          "query": "What technical interview questions does Meta ask for software engineers?",
+          "retrieved_chunk_ids": [
+            "9cdfa200ef37b47562c11ef306dc3f817174602ad46d9b22217a6aa01378a471",
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "6c31baba57cdada3a0683d0d4b7dacdcf204c6407043d7ef0f0e40d3ad1e8e64",
+            "6a9fc49f1edc7cb9ba5edb9c45933f4736b3f37090eae8ce5d19f0f3a93e0625",
+            "00e2565f900fe55f28e9af45223b3eae971cc823645f95e78b9c2d2026af3ccb"
+          ],
+          "reranked_chunk_ids": [
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "fb207e0b6bf3e64a99d2c5eb6fecd2a157da9ff9c8645a6cd0151eebd6755cf9",
+            "43c71dcf6342fcb062604ae95bb45087246f586f2d9bbc7744f24a4b5ccc8816",
+            "983d57bde8c3eab8730fa84a29cfeb60aa884b59333f8035af574cd854ca2f4f",
+            "7633717e6d4cf286206a899387e899d5c56ae23522a75fe27ed2919dd7942cd3"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 6200.79,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_01",
+          "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+          "retrieved_chunk_ids": [
+            "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+            "a22a698d669510530fe0c21f207780f2e362a113ba8af129707fd85d67047c18"
+          ],
+          "reranked_chunk_ids": [
+            "7783c7dc29901e352a9f9cc256cdac606d25232ebc4be9223fd65a53db5717d7",
+            "2dd044fdff876138cd7c63453045da3a249473c945cb9cc6cdedf820cb621417",
+            "1690c9678b9b2bc92676849759d8b716670c4ce7dd20938fa0cefc6efe6a2f42",
+            "a22a698d669510530fe0c21f207780f2e362a113ba8af129707fd85d67047c18",
+            "28501d33816d910632adf5dee10c679187af641c27c4ad220acd4bcf890a68bf"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1923,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 5521.84,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_02",
+          "query": "Google Tagged LeetCode Problems and guide",
+          "retrieved_chunk_ids": [
+            "c35617a3630fc18dc91229f528ab5f8940f21f97ad8a880dd927e5c344f92944",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "e0ad433050ea0c25f8d72f6009abc9ac2a3a64ba5038f0aea4ffd60a27364ae7",
+            "ab606e971641bf073de9d133223267d16304975b71148a98025249a1437dc23e",
+            "f6b01e171af935e58577bfa8333631158f777091e1927f9a60c9ce7d00cb97eb"
+          ],
+          "reranked_chunk_ids": [
+            "e10e113bef0f6ed39f848f8d109d3f623c9b8e24439d24ca00504f92b7fbc283",
+            "c35617a3630fc18dc91229f528ab5f8940f21f97ad8a880dd927e5c344f92944",
+            "a2d1b89adaa0c6f12fc603c33c7cca5d7ffa030a83e60c1b8908615793d4de06",
+            "f6b01e171af935e58577bfa8333631158f777091e1927f9a60c9ce7d00cb97eb",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.3333,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 3148.26,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_03",
+          "query": "Oracle DSA Interview Question with Solutions",
+          "retrieved_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "304f5e1f7a60796c36e2d57e6ee09ab076de3317dc3806fbd84f74e3d50e8b14",
+            "95a5212497bd244ae0d1b094a89e434c16fdee939e2682f5fe38671334681b65",
+            "a50c608f36859a1443ac12ed7b7cf579488f5be54ec3971976094dd0b3cf6b94",
+            "af9d51198ae3e30f2f678c2fedbf0452efda4ba1813f93c88e5175a4367e8005"
+          ],
+          "reranked_chunk_ids": [
+            "b0b8a239518a9f037c702d4bb4ae7641cbdea321426c6ad656799ca84aa60120",
+            "9331348b7675af2dea8a713944fc32600d05679cbe6e518c680c4dc4f576122d",
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "353f1754d19dbe0c884e6325dc2eb5cb563601fcd3c3db534c1845dc95e70410"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 11925.09,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_04",
+          "query": "Goldman Sachs Tagged LeetCode Problems",
+          "retrieved_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "reranked_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1715.67,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_01",
+          "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "reranked_chunk_ids": [
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "bad916035868596a23568e7e7380c79879b333443ed53ecb5f63558d5886b88f",
+            "6801062df0c52ba20366bb1f56de857b87b98d5f2da9ac2e940fb64522ebf852"
+          ],
+          "metrics": {
+            "mrr": 0.3333,
+            "ndcg@5": 0.3633,
+            "recall@5": 0.5,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 3022.45,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_02",
+          "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+          "retrieved_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b"
+          ],
+          "reranked_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141",
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.5087,
+            "recall@5": 0.2857,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 3764.11,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_03",
+          "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+          "retrieved_chunk_ids": [
+            "eeeb265217a6a0ae801aca91095a7d7b0b3a94cc44a21ffea667221d25d38f2b",
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec"
+          ],
+          "reranked_chunk_ids": [
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "cc4893ce00b848da476efe48bc2af909ba2c9be6b7566e96fa84564a39e83038",
+            "f53ad4914e895fc9b1d2fe2d6b88f810814a0799c89f7c5e49b4550688c58915"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 3817.13,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_01",
+          "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+          "retrieved_chunk_ids": [
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc"
+          ],
+          "reranked_chunk_ids": [
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 6958.07,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_02",
+          "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+          "retrieved_chunk_ids": [
+            "1772cabd805ace1bcfba485bc1f2710f0a51780d247cf0bf1f70d9c5d8a97bc7",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc"
+          ],
+          "reranked_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0286,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 3980.59,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_03",
+          "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+          "retrieved_chunk_ids": [
+            "bad916035868596a23568e7e7380c79879b333443ed53ecb5f63558d5886b88f",
+            "d7c5cc2f70ea98cd6c777d218a7a8141f3fb4237a9a26240e53287a4b49490b8",
+            "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+            "f852a9746d2407817b1d760be781f3fdebf3a21625e5c56c0439a9d8345ef94d",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+          ],
+          "reranked_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "bad916035868596a23568e7e7380c79879b333443ed53ecb5f63558d5886b88f",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.9829,
+            "recall@5": 1.0,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 12083.77,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_04",
+          "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+          "retrieved_chunk_ids": [
+            "40df0ec4af75757bfee34ff5557c95602c53129955fa152ec6697bb3d7049a71",
+            "848b2ff38da874edb97f57960e170361992835d6f7ae9a4a55fcaf858f4f24d8",
+            "838218c2035ac62ada7c071a8b86139b27a804cf224aecf824713310b201da28",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6"
+          ],
+          "reranked_chunk_ids": [
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141",
+            "a004dad4b13eea1cdef07171eb1f9e7c518fd7510214ede1a1c9d1e1d80421da",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.6844,
+            "recall@5": 0.5,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 9526.85,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_round_01",
+          "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "2dd044fdff876138cd7c63453045da3a249473c945cb9cc6cdedf820cb621417",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+          ],
+          "reranked_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+            "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 6571.48,
+          "is_bypassed": false
+        }
+      ]
+    },
+    {
+      "config_id": "hybrid_agent",
+      "config_name": "5. Hybrid + Reranker + Bypass",
+      "configuration_active": "pipeline_bypass",
+      "sample_size": 20,
+      "mrr": 0.7821,
+      "ndcg@5": 0.667,
+      "recall@5": 0.2626,
+      "precision@5": 0.6,
+      "hit_rate@5": 0.8,
+      "avg_latency_ms": 9412.66,
+      "p95_latency_ms": 22956.0,
+      "bypassed_queries": 3,
+      "per_query_details": [
+        {
+          "query_id": "fact_01",
+          "query": "What technical interview questions and topics are asked at OpenAI?",
+          "retrieved_chunk_ids": [],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 56.48,
+          "is_bypassed": true
+        },
+        {
+          "query_id": "fact_02",
+          "query": "What interview questions and safety topics does Anthropic focus on?",
+          "retrieved_chunk_ids": [],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 1.95,
+          "is_bypassed": true
+        },
+        {
+          "query_id": "fact_03",
+          "query": "What technical topics and questions are tested in Databricks interviews?",
+          "retrieved_chunk_ids": [],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 1.56,
+          "is_bypassed": true
+        },
+        {
+          "query_id": "fact_04",
+          "query": "What coding and DSA questions are asked at Google?",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56"
+          ],
+          "reranked_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0505,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 10964.93,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_05",
+          "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+          "retrieved_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "reranked_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1836.89,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_06",
+          "query": "What technical interview format is used by Microsoft for SDE roles?",
+          "retrieved_chunk_ids": [
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "5ff4548bae35755fce34c0a142851d86756738674bf9aaa625eb479fb7996d61",
+            "d6bff93ad50eb78e4576ed515150e6f91445c956befa816726134676d1773511"
+          ],
+          "reranked_chunk_ids": [
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "5ff4548bae35755fce34c0a142851d86756738674bf9aaa625eb479fb7996d61",
+            "d6bff93ad50eb78e4576ed515150e6f91445c956befa816726134676d1773511"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1562,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 17024.6,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_07",
+          "query": "What coding problems and leadership principles are tested at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "reranked_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 9981.34,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_08",
+          "query": "What technical interview questions does Meta ask for software engineers?",
+          "retrieved_chunk_ids": [
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "629e6a82b0a7ea6f2331ac3bd933df773f76273ad7ebd62239b734f226a8537a",
+            "fb207e0b6bf3e64a99d2c5eb6fecd2a157da9ff9c8645a6cd0151eebd6755cf9",
+            "a010a396cc74e59d255504bbbe4495138980e1cc1290875bbb1fa5d8c292cc11",
+            "7633717e6d4cf286206a899387e899d5c56ae23522a75fe27ed2919dd7942cd3"
+          ],
+          "reranked_chunk_ids": [
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "629e6a82b0a7ea6f2331ac3bd933df773f76273ad7ebd62239b734f226a8537a",
+            "fb207e0b6bf3e64a99d2c5eb6fecd2a157da9ff9c8645a6cd0151eebd6755cf9",
+            "a010a396cc74e59d255504bbbe4495138980e1cc1290875bbb1fa5d8c292cc11",
+            "7633717e6d4cf286206a899387e899d5c56ae23522a75fe27ed2919dd7942cd3"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 16324.4,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_01",
+          "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+          "retrieved_chunk_ids": [
+            "d4dc07c5a387274c0c34e1e17ce91a1506bffd126d9e96809d5439c52a1bac7e",
+            "5287035bb87d957e9ff39cc448e29a492ce5a4b12928d2efcb1b0b0d37aea6db",
+            "1690c9678b9b2bc92676849759d8b716670c4ce7dd20938fa0cefc6efe6a2f42",
+            "28501d33816d910632adf5dee10c679187af641c27c4ad220acd4bcf890a68bf",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639"
+          ],
+          "reranked_chunk_ids": [
+            "d4dc07c5a387274c0c34e1e17ce91a1506bffd126d9e96809d5439c52a1bac7e",
+            "5287035bb87d957e9ff39cc448e29a492ce5a4b12928d2efcb1b0b0d37aea6db",
+            "1690c9678b9b2bc92676849759d8b716670c4ce7dd20938fa0cefc6efe6a2f42",
+            "28501d33816d910632adf5dee10c679187af641c27c4ad220acd4bcf890a68bf",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1923,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 5497.86,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_02",
+          "query": "Google Tagged LeetCode Problems and guide",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "76d0e4a0224d90211f1a1b1f4593122f2adc52eb860090025a1ae4d9d49b58ce",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "reranked_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "76d0e4a0224d90211f1a1b1f4593122f2adc52eb860090025a1ae4d9d49b58ce",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.3333,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 7271.57,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_03",
+          "query": "Oracle DSA Interview Question with Solutions",
+          "retrieved_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "b0b8a239518a9f037c702d4bb4ae7641cbdea321426c6ad656799ca84aa60120",
+            "9331348b7675af2dea8a713944fc32600d05679cbe6e518c680c4dc4f576122d",
+            "358a1fc22a632a22910f1fc21eba317a4177f678393d62d4634a4cc33160e902"
+          ],
+          "reranked_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "b0b8a239518a9f037c702d4bb4ae7641cbdea321426c6ad656799ca84aa60120",
+            "9331348b7675af2dea8a713944fc32600d05679cbe6e518c680c4dc4f576122d",
+            "358a1fc22a632a22910f1fc21eba317a4177f678393d62d4634a4cc33160e902"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 4196.9,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_04",
+          "query": "Goldman Sachs Tagged LeetCode Problems",
+          "retrieved_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "reranked_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 10605.62,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_01",
+          "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "6801062df0c52ba20366bb1f56de857b87b98d5f2da9ac2e940fb64522ebf852",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450"
+          ],
+          "reranked_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "6801062df0c52ba20366bb1f56de857b87b98d5f2da9ac2e940fb64522ebf852",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450"
+          ],
+          "metrics": {
+            "mrr": 0.1429,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 9986.29,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_02",
+          "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+          "retrieved_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141"
+          ],
+          "reranked_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.5087,
+            "recall@5": 0.2857,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 7590.1,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_03",
+          "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+          "retrieved_chunk_ids": [
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f53ad4914e895fc9b1d2fe2d6b88f810814a0799c89f7c5e49b4550688c58915",
+            "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+            "d7c5cc2f70ea98cd6c777d218a7a8141f3fb4237a9a26240e53287a4b49490b8"
+          ],
+          "reranked_chunk_ids": [
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f53ad4914e895fc9b1d2fe2d6b88f810814a0799c89f7c5e49b4550688c58915",
+            "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+            "d7c5cc2f70ea98cd6c777d218a7a8141f3fb4237a9a26240e53287a4b49490b8"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 16987.94,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_01",
+          "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+          "retrieved_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "reranked_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.9047,
+            "recall@5": 1.0,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 8532.17,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_02",
+          "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+          "retrieved_chunk_ids": [
+            "2b06d9195d56413ea1c72f05d3a66c6e15f3d4155b528f92001d847ac00ba41e",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "078e3cb0384ad731f06d852b2d71dd1925fa60061d62b8d00c99b4a85e593c7d",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e"
+          ],
+          "reranked_chunk_ids": [
+            "2b06d9195d56413ea1c72f05d3a66c6e15f3d4155b528f92001d847ac00ba41e",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "078e3cb0384ad731f06d852b2d71dd1925fa60061d62b8d00c99b4a85e593c7d",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0286,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 22956.0,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_03",
+          "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "reranked_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "metrics": {
+            "mrr": 0.5,
+            "ndcg@5": 0.5925,
+            "recall@5": 0.75,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 7349.92,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_04",
+          "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+          "retrieved_chunk_ids": [
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "89d429023b8d49d1fc776ec9bdd8ad495b39faeeac104393b7c63609097325d2",
+            "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141"
+          ],
+          "reranked_chunk_ids": [
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "89d429023b8d49d1fc776ec9bdd8ad495b39faeeac104393b7c63609097325d2",
+            "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.5531,
+            "recall@5": 0.3333,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 18408.37,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_round_01",
+          "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+            "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+          ],
+          "reranked_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+            "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 12678.29,
+          "is_bypassed": false
+        }
+      ]
+    },
+    {
+      "config_id": "full_agentic",
+      "config_name": "6. Full Agentic Multi-Hop",
+      "configuration_active": "pipeline_full",
+      "sample_size": 20,
+      "mrr": 0.7821,
+      "ndcg@5": 0.667,
+      "recall@5": 0.2626,
+      "precision@5": 0.6,
+      "hit_rate@5": 0.8,
+      "avg_latency_ms": 9488.92,
+      "p95_latency_ms": 28132.2,
+      "bypassed_queries": 3,
+      "per_query_details": [
+        {
+          "query_id": "fact_01",
+          "query": "What technical interview questions and topics are asked at OpenAI?",
+          "retrieved_chunk_ids": [],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 1.31,
+          "is_bypassed": true
+        },
+        {
+          "query_id": "fact_02",
+          "query": "What interview questions and safety topics does Anthropic focus on?",
+          "retrieved_chunk_ids": [],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 1.0,
+          "is_bypassed": true
+        },
+        {
+          "query_id": "fact_03",
+          "query": "What technical topics and questions are tested in Databricks interviews?",
+          "retrieved_chunk_ids": [],
+          "reranked_chunk_ids": [],
+          "metrics": {
+            "mrr": 0.0,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 1.13,
+          "is_bypassed": true
+        },
+        {
+          "query_id": "fact_04",
+          "query": "What coding and DSA questions are asked at Google?",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56"
+          ],
+          "reranked_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0505,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 2949.51,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_05",
+          "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+          "retrieved_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "reranked_chunk_ids": [
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 2083.87,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_06",
+          "query": "What technical interview format is used by Microsoft for SDE roles?",
+          "retrieved_chunk_ids": [
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "5ff4548bae35755fce34c0a142851d86756738674bf9aaa625eb479fb7996d61",
+            "d6bff93ad50eb78e4576ed515150e6f91445c956befa816726134676d1773511"
+          ],
+          "reranked_chunk_ids": [
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450",
+            "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22",
+            "b3748b12c0f27265d8a753f9b13908b63d5a02291f9dcf5bacd8cc9456eaab60",
+            "5ff4548bae35755fce34c0a142851d86756738674bf9aaa625eb479fb7996d61",
+            "d6bff93ad50eb78e4576ed515150e6f91445c956befa816726134676d1773511"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1562,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 20752.02,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_07",
+          "query": "What coding problems and leadership principles are tested at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "reranked_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 14016.47,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "fact_08",
+          "query": "What technical interview questions does Meta ask for software engineers?",
+          "retrieved_chunk_ids": [
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "629e6a82b0a7ea6f2331ac3bd933df773f76273ad7ebd62239b734f226a8537a",
+            "fb207e0b6bf3e64a99d2c5eb6fecd2a157da9ff9c8645a6cd0151eebd6755cf9",
+            "a010a396cc74e59d255504bbbe4495138980e1cc1290875bbb1fa5d8c292cc11",
+            "7633717e6d4cf286206a899387e899d5c56ae23522a75fe27ed2919dd7942cd3"
+          ],
+          "reranked_chunk_ids": [
+            "bb2149a3689ae7e92287a8acc944faf91f62642b4835f564e16adff3e7baf162",
+            "629e6a82b0a7ea6f2331ac3bd933df773f76273ad7ebd62239b734f226a8537a",
+            "fb207e0b6bf3e64a99d2c5eb6fecd2a157da9ff9c8645a6cd0151eebd6755cf9",
+            "a010a396cc74e59d255504bbbe4495138980e1cc1290875bbb1fa5d8c292cc11",
+            "7633717e6d4cf286206a899387e899d5c56ae23522a75fe27ed2919dd7942cd3"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 9783.41,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_01",
+          "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+          "retrieved_chunk_ids": [
+            "d4dc07c5a387274c0c34e1e17ce91a1506bffd126d9e96809d5439c52a1bac7e",
+            "5287035bb87d957e9ff39cc448e29a492ce5a4b12928d2efcb1b0b0d37aea6db",
+            "1690c9678b9b2bc92676849759d8b716670c4ce7dd20938fa0cefc6efe6a2f42",
+            "28501d33816d910632adf5dee10c679187af641c27c4ad220acd4bcf890a68bf",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639"
+          ],
+          "reranked_chunk_ids": [
+            "d4dc07c5a387274c0c34e1e17ce91a1506bffd126d9e96809d5439c52a1bac7e",
+            "5287035bb87d957e9ff39cc448e29a492ce5a4b12928d2efcb1b0b0d37aea6db",
+            "1690c9678b9b2bc92676849759d8b716670c4ce7dd20938fa0cefc6efe6a2f42",
+            "28501d33816d910632adf5dee10c679187af641c27c4ad220acd4bcf890a68bf",
+            "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.1923,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 11516.85,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_02",
+          "query": "Google Tagged LeetCode Problems and guide",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "76d0e4a0224d90211f1a1b1f4593122f2adc52eb860090025a1ae4d9d49b58ce",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "reranked_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "76d0e4a0224d90211f1a1b1f4593122f2adc52eb860090025a1ae4d9d49b58ce",
+            "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+            "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.3333,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 7309.62,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_03",
+          "query": "Oracle DSA Interview Question with Solutions",
+          "retrieved_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "b0b8a239518a9f037c702d4bb4ae7641cbdea321426c6ad656799ca84aa60120",
+            "9331348b7675af2dea8a713944fc32600d05679cbe6e518c680c4dc4f576122d",
+            "358a1fc22a632a22910f1fc21eba317a4177f678393d62d4634a4cc33160e902"
+          ],
+          "reranked_chunk_ids": [
+            "407f61fd221e98ba8bb5a351408b09fb038b26d67208922729ca74afa1f3ec5e",
+            "70fc2f993e4bccae6f8bb6551374db6fd770fc36cbb4d600d8b7e493c4660eed",
+            "b0b8a239518a9f037c702d4bb4ae7641cbdea321426c6ad656799ca84aa60120",
+            "9331348b7675af2dea8a713944fc32600d05679cbe6e518c680c4dc4f576122d",
+            "358a1fc22a632a22910f1fc21eba317a4177f678393d62d4634a4cc33160e902"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.2273,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1866.06,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "exact_04",
+          "query": "Goldman Sachs Tagged LeetCode Problems",
+          "retrieved_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "reranked_chunk_ids": [
+            "301279b3297bb5daeb3e8c98af6af48c50e9039a0822f9c3630a3e5d8a38d644",
+            "74a2cc07c6feceb0ffd801dbc0dcd4f76eeab39f4cae56aeb2c64cf17b3c16b9"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 1.0,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 1003.9,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_01",
+          "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "6801062df0c52ba20366bb1f56de857b87b98d5f2da9ac2e940fb64522ebf852",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450"
+          ],
+          "reranked_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554",
+            "6801062df0c52ba20366bb1f56de857b87b98d5f2da9ac2e940fb64522ebf852",
+            "6fd8abac9903695a26894195b99de2183025e21bfec8a82a499dd7aaae001450"
+          ],
+          "metrics": {
+            "mrr": 0.1429,
+            "ndcg@5": 0.0,
+            "recall@5": 0.0,
+            "precision@5": 0.0,
+            "hit_rate@5": 0.0
+          },
+          "latency_ms": 18015.73,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_02",
+          "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+          "retrieved_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141"
+          ],
+          "reranked_chunk_ids": [
+            "8b939aa662112bbfa096b37a693c1277795ea634f3d37b94345ccd26f4df7fd4",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+            "03b7210d4345bff7cdcb35eb2b6e16d6b68c0d2e77d56509c9d367a53358a141"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.5087,
+            "recall@5": 0.2857,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 6022.03,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "sem_03",
+          "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+          "retrieved_chunk_ids": [
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f53ad4914e895fc9b1d2fe2d6b88f810814a0799c89f7c5e49b4550688c58915",
+            "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc"
+          ],
+          "reranked_chunk_ids": [
+            "aee536d19d28fc22b3bd781d87025b36062c49d484a122aa287324afdbf26235",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a",
+            "f53ad4914e895fc9b1d2fe2d6b88f810814a0799c89f7c5e49b4550688c58915",
+            "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+            "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.3904,
+            "recall@5": 0.25,
+            "precision@5": 0.2,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 15551.34,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_01",
+          "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+          "retrieved_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "reranked_chunk_ids": [
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+            "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65",
+            "05fa3e4c9f10e162ce27b0c97f8aa7e63376042a9867418deca25855e4456346",
+            "c7f7da18692a4c8571ff2fb013a62cb8c7f9b4c06f6173fb03072814d19ebe6a"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.9047,
+            "recall@5": 1.0,
+            "precision@5": 0.8,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 8538.68,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_02",
+          "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+          "retrieved_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "reranked_chunk_ids": [
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+            "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac",
+            "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e",
+            "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0286,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 14789.4,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_03",
+          "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+          "retrieved_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "reranked_chunk_ids": [
+            "b0212e9cf9eafd2b0f827252b52e91fc51cca98e1695d28248429cd2d56a43ca",
+            "68aafafa3ddf0c3c2e2ab5826e66573428bbeef43972c9658b66d6e271452741",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208",
+            "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+            "d437b8ab994401232b99c7c68e2839c85ef160c17ce4b30167b0dda30bb08554"
+          ],
+          "metrics": {
+            "mrr": 0.5,
+            "ndcg@5": 0.5925,
+            "recall@5": 0.75,
+            "precision@5": 0.6,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 11355.86,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_comp_04",
+          "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+          "retrieved_chunk_ids": [
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "89d429023b8d49d1fc776ec9bdd8ad495b39faeeac104393b7c63609097325d2",
+            "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208"
+          ],
+          "reranked_chunk_ids": [
+            "78196ba36bc33c13646d2a3b3dd950d589c3d9232518f3228ae11eac4aa349d6",
+            "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+            "89d429023b8d49d1fc776ec9bdd8ad495b39faeeac104393b7c63609097325d2",
+            "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc",
+            "a8fdfc7adc11cd5aee03d97e03d4da7f60c4d3cb5df217050cbf4ae178668208"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 0.5531,
+            "recall@5": 0.3333,
+            "precision@5": 0.4,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 28132.2,
+          "is_bypassed": false
+        },
+        {
+          "query_id": "multi_round_01",
+          "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+          "retrieved_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+            "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+          ],
+          "reranked_chunk_ids": [
+            "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+            "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+            "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+            "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+            "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+          ],
+          "metrics": {
+            "mrr": 1.0,
+            "ndcg@5": 1.0,
+            "recall@5": 0.0833,
+            "precision@5": 1.0,
+            "hit_rate@5": 1.0
+          },
+          "latency_ms": 16088.09,
+          "is_bypassed": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1083 @@
+{
+  "total_queries_audited": 55,
+  "audit_timestamp": "2026-09-25T18:25:00Z",
+  "taxonomy": {
+    "A": "independently verified ground truth (provable independent fact)",
+    "B": "deterministic metadata-derived truth (verifiable against corpus catalog)",
+    "C": "heuristic-generated label (derived via rule or category mapping)",
+    "D": "LLM-generated judgment (model-as-judge)",
+    "E": "manually reviewed label (human expert annotation)"
+  },
+  "category_assessments": {
+    "Simple Factual": {
+      "verifiability": "High",
+      "description": "Specific single-company technical questions (e.g., OpenAI, Google, NVIDIA, Microsoft). Verified against company documents in corpus.",
+      "label_classification": "B. deterministic metadata-derived truth + E. manually reviewed label",
+      "objective_criteria": "Retrieved chunks must explicitly belong to the queried company's source documents and cover relevant technical topics."
+    },
+    "Exact Lexical": {
+      "verifiability": "Very High",
+      "description": "Exact document titles and verbatim problem sheet names (e.g., 'Amazon Tagged LeetCode Problems', 'Google 450 DSA Sheet').",
+      "label_classification": "B. deterministic metadata-derived truth",
+      "objective_criteria": "Retrieved chunks must originate directly from the exact named PDF/markdown source file."
+    },
+    "Semantic Retrieval": {
+      "verifiability": "Moderate",
+      "description": "Conceptual topics spanning multiple files without specific company keyword (e.g., 'hallucination mitigation in production RAG', 'cold-start optimization').",
+      "label_classification": "C. heuristic-generated label (substring matching) + E. manually reviewed label",
+      "objective_criteria": "Relevance requires semantic conceptual alignment; keyword substring matching against chunk text is an imperfect heuristic."
+    },
+    "Multi-Company Comparison": {
+      "verifiability": "High",
+      "description": "Queries explicitly requesting comparison between 2+ companies (e.g., OpenAI vs Anthropic vs Databricks).",
+      "label_classification": "B. deterministic metadata-derived truth",
+      "objective_criteria": "Retrieved set must contain valid evidence chunks from each compared company."
+    },
+    "Multi-Round": {
+      "verifiability": "High",
+      "description": "Queries inquiring about multi-stage interview progression (e.g., OA vs technical phone screen vs onsite).",
+      "label_classification": "E. manually reviewed label",
+      "objective_criteria": "Evidence must delineate between distinct assessment stages."
+    },
+    "Unsupported Company": {
+      "verifiability": "Absolute",
+      "description": "Queries requesting information for companies provably not indexed in the knowledge base (Figma, Kroger, Notion, Citadel).",
+      "label_classification": "A. independently verified ground truth + B. deterministic metadata-derived truth",
+      "objective_criteria": "Zero matching chunks exist in Chroma. System must abstain/refuse."
+    },
+    "Out of Domain": {
+      "verifiability": "Absolute",
+      "description": "Non-interview queries (e.g., chocolate cake recipe, Premier League standings, live weather, stock prices).",
+      "label_classification": "A. independently verified ground truth",
+      "objective_criteria": "Completely outside interview domain. System must detect OOD and bypass retrieval."
+    },
+    "Metadata Direct": {
+      "verifiability": "Absolute",
+      "description": "Catalog queries requesting system inventory (e.g., 'What companies do you support?', 'List topics available').",
+      "label_classification": "B. deterministic metadata-derived truth",
+      "objective_criteria": "Can be answered deterministically from system metadata catalog with 0 LLM calls."
+    },
+    "AI Startup Intelligence": {
+      "verifiability": "High",
+      "description": "Questions focused on modern AI startup interview questions (e.g., Scale AI, Perplexity, Mistral, Cohere, Cursor, Harvey).",
+      "label_classification": "B. deterministic metadata-derived truth",
+      "objective_criteria": "Chunks must match company metadata in the 122-record structured dataset."
+    },
+    "Topic Factual": {
+      "verifiability": "High",
+      "description": "Topic-specific technical questions (e.g., DP, system design, graph algorithms, concurrency).",
+      "label_classification": "E. manually reviewed label + B. deterministic metadata-derived truth",
+      "objective_criteria": "Evidence must cover the requested computer science topic."
+    },
+    "Behavioral Questions": {
+      "verifiability": "Moderate",
+      "description": "Behavioral questions and Leadership Principles (e.g., STAR method, Amazon Customer Obsession, conflict resolution).",
+      "label_classification": "E. manually reviewed label + C. heuristic-generated label",
+      "objective_criteria": "Relevant documents must provide STAR framework structure or company-specific principles."
+    },
+    "Query Rewriting": {
+      "verifiability": "High",
+      "description": "Follow-up queries with pronoun references (e.g., 'What about their system design round?').",
+      "label_classification": "E. manually reviewed label",
+      "objective_criteria": "Proper evaluation requires conversational history context."
+    },
+    "Ambiguous": {
+      "verifiability": "Low",
+      "description": "Underspecified queries (e.g., 'Tell me about the interview.').",
+      "label_classification": "C. heuristic-generated label",
+      "objective_criteria": "No single correct answer; requires clarifying broad guidance."
+    }
+  },
+  "queries": [
+    {
+      "query_id": "fact_01",
+      "query": "What technical interview questions and topics are asked at OpenAI?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_02",
+      "query": "What interview questions and safety topics does Anthropic focus on?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_03",
+      "query": "What technical topics and questions are tested in Databricks interviews?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_04",
+      "query": "What coding and DSA questions are asked at Google?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 99,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_05",
+      "query": "What GPU architecture and CUDA questions are asked at NVIDIA?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 4,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_06",
+      "query": "What technical interview format is used by Microsoft for SDE roles?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 32,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_07",
+      "query": "What coding problems and leadership principles are tested at Amazon?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 60,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "fact_08",
+      "query": "What technical interview questions does Meta ask for software engineers?",
+      "category": "Simple Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 22,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "exact_01",
+      "query": "Amazon Tagged LeetCode Problems and DSA sheet questions",
+      "category": "Exact Lexical",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 26,
+      "should_abstain": false,
+      "verifiability_tier": "Very High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "exact_02",
+      "query": "Google Tagged LeetCode Problems and guide",
+      "category": "Exact Lexical",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 15,
+      "should_abstain": false,
+      "verifiability_tier": "Very High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "exact_03",
+      "query": "Oracle DSA Interview Question with Solutions",
+      "category": "Exact Lexical",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 22,
+      "should_abstain": false,
+      "verifiability_tier": "Very High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "exact_04",
+      "query": "Goldman Sachs Tagged LeetCode Problems",
+      "category": "Exact Lexical",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "Very High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "sem_01",
+      "query": "How do AI companies evaluate candidate understanding of hallucination mitigation in production RAG?",
+      "category": "Semantic Retrieval",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 4,
+      "should_abstain": false,
+      "verifiability_tier": "Moderate",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "sem_02",
+      "query": "What concepts are tested around distributed cluster training and GPU memory bandwidth?",
+      "category": "Semantic Retrieval",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 7,
+      "should_abstain": false,
+      "verifiability_tier": "Moderate",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "sem_03",
+      "query": "What strategies are asked in interviews for evaluating agent tool calling reliability?",
+      "category": "Semantic Retrieval",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 4,
+      "should_abstain": false,
+      "verifiability_tier": "Moderate",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_comp_01",
+      "query": "Compare the technical interview focus of OpenAI, Anthropic and Databricks.",
+      "category": "Multi-Company Comparison",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 4,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_comp_02",
+      "query": "Compare the interview process and coding questions between Google, Meta and Amazon.",
+      "category": "Multi-Company Comparison",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 175,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_comp_03",
+      "query": "What are the differences in interview expectations between Cohere, Harvey and Snowflake?",
+      "category": "Multi-Company Comparison",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 4,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_comp_04",
+      "query": "Compare NVIDIA vs Groq on hardware and inference interview topics.",
+      "category": "Multi-Company Comparison",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 6,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_round_01",
+      "query": "What are the round 1 online assessment and round 2 technical interview questions at Amazon?",
+      "category": "Multi-Round",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 60,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_round_02",
+      "query": "How does Google structure its coding rounds versus its system design rounds?",
+      "category": "Multi-Round",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 99,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "multi_round_03",
+      "query": "Explain the interview stages at Microsoft from screening to hiring manager round.",
+      "category": "Multi-Round",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 32,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "unsupported_comp_01",
+      "query": "What technical interview questions does Figma ask for software engineers?",
+      "category": "Unsupported Company",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "unsupported_comp_02",
+      "query": "Give me Kroger SDE placement interview questions.",
+      "category": "Unsupported Company",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "unsupported_comp_03",
+      "query": "What coding questions are asked at Notion for backend engineers?",
+      "category": "Unsupported Company",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "unsupported_comp_04",
+      "query": "What interview questions does Citadel ask for quantitative developers?",
+      "category": "Unsupported Company",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "ood_01",
+      "query": "What is the weather forecast in San Francisco tomorrow?",
+      "category": "Out of Domain",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "ood_02",
+      "query": "Give me a recipe for chocolate chip cookies.",
+      "category": "Out of Domain",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "ood_03",
+      "query": "Who won the football world cup in 2022?",
+      "category": "Out of Domain",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "ood_04",
+      "query": "What is the average student placement package and GPA cutoff for Google?",
+      "category": "Out of Domain",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "A. independently verified ground truth (verifiably unindexed/irrelevant)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "A. independently verified ground truth (empty set verified by absence)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": true,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "LOW"
+    },
+    {
+      "query_id": "meta_01",
+      "query": "What companies are indexed in the knowledge base?",
+      "category": "Metadata Direct",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": false,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "meta_02",
+      "query": "List all technical interview topics covered in the corpus",
+      "category": "Metadata Direct",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 0,
+      "should_abstain": false,
+      "verifiability_tier": "Absolute",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_01",
+      "query": "What interview questions does Scale AI ask on data annotation and RLHF?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 20,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_02",
+      "query": "What technical topics are tested at Together AI regarding custom inference kernels?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 9,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_03",
+      "query": "What interview questions focus on LangGraph and agent loops at LangChain?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_04",
+      "query": "What MLOps and tracking interview questions are asked at Weights & Biases?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_05",
+      "query": "What legal AI prompt engineering questions are asked at Harvey?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_06",
+      "query": "What questions does Perplexity ask on live RAG pipelines and search indexing?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_07",
+      "query": "What distributed cluster training questions are asked at xAI?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_08",
+      "query": "What code generation and agent repair questions are asked at Replit?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_09",
+      "query": "What video diffusion model and generative AI questions does Runway ask?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ai_comp_10",
+      "query": "What enterprise search and indexing questions does Glean ask?",
+      "category": "AI Startup Intelligence",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 2,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "topic_01",
+      "query": "Give me interview questions focusing on dynamic programming and memoization.",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 272,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "topic_02",
+      "query": "What system design questions are asked for designing scalable distributed rate limiters?",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 148,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "topic_03",
+      "query": "What graph algorithms and topological sort questions appear in coding interviews?",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 267,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "topic_04",
+      "query": "What SQL and database indexing questions are asked in technical rounds?",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 76,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "topic_05",
+      "query": "What behavioral questions are commonly asked based on Amazon Leadership Principles?",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 60,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "behav_01",
+      "query": "Tell me about a time you handled a disagreement with a team member during a technical project.",
+      "category": "Behavioral Questions",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 141,
+      "should_abstain": false,
+      "verifiability_tier": "Moderate",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "behav_02",
+      "query": "How should a candidate demonstrate Customer Obsession and Ownership in an Amazon SDE interview?",
+      "category": "Behavioral Questions",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 61,
+      "should_abstain": false,
+      "verifiability_tier": "Moderate",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "behav_03",
+      "query": "Describe a scenario where you made a critical technical decision with incomplete information.",
+      "category": "Behavioral Questions",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 103,
+      "should_abstain": false,
+      "verifiability_tier": "Moderate",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "tech_google_graph",
+      "query": "What topological sort and directed acyclic graph questions appear in Google technical rounds?",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 263,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "tech_sys_design",
+      "query": "How to design a scalable distributed rate limiter using sliding window log and Redis?",
+      "category": "Topic Factual",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 45,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "followup_rewrite",
+      "query": "What about their system design round?",
+      "category": "Query Rewriting",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 175,
+      "should_abstain": false,
+      "verifiability_tier": "High",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "ambiguous_query",
+      "query": "Tell me about the interview.",
+      "category": "Ambiguous",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 178,
+      "should_abstain": false,
+      "verifiability_tier": "Low",
+      "circularity_risk": "HIGH"
+    },
+    {
+      "query_id": "exact_doc_title",
+      "query": "How to prepare for your SDE interview at Amazon.pdf",
+      "category": "Exact Lexical",
+      "field_provenance": {
+        "query": "A. independently verified ground truth",
+        "should_abstain": "B. deterministic metadata-derived truth (verified present in corpus)",
+        "relevant_doc_identifiers": "E. manually reviewed label (expert-curated source tags)",
+        "relevant_chunk_ids": "C. heuristic-generated label (automated substring matching on metadata/source/text)",
+        "difficulty": "C. heuristic-generated label (coarse category-to-difficulty lookup table)",
+        "required_retrieval_behavior": "C. heuristic-generated label (deterministic 1-to-1 mapping from category name)",
+        "expected_route": "C. heuristic-generated label (predefined architectural routing policy, not intrinsic truth)"
+      },
+      "ground_truth_chunk_count": 3,
+      "should_abstain": false,
+      "verifiability_tier": "Very High",
+      "circularity_risk": "HIGH"
+    }
+  ]
+}

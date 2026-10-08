@@ -1,0 +1,1264 @@
+{
+  "summary": {
+    "benchmark_name": "Canonical 20-Query Placement RAG Benchmark",
+    "phase": "PHASE 0: Baseline",
+    "evaluation_timestamp": "2026-10-08T19:18:29Z",
+    "total_queries": 20,
+    "total_duration_seconds": 584.21,
+    "llm_judge": {
+      "model": "gemini-3.1-flash-lite",
+      "total_judge_calls": 34,
+      "failed_judge_calls": 0,
+      "retries_performed": 2,
+      "success_rate": 1.0
+    },
+    "retrieval_metrics": {
+      "mrr": 0.3771,
+      "recall@1": 0.1167,
+      "recall@3": 0.26,
+      "recall@5": 0.2933,
+      "recall@10": 0.4133,
+      "precision@1": 0.25,
+      "precision@3": 0.2333,
+      "precision@5": 0.16,
+      "precision@10": 0.12,
+      "ndcg@1": 0.25,
+      "ndcg@3": 0.2684,
+      "ndcg@5": 0.278,
+      "ndcg@10": 0.3378,
+      "map@5": 0.2151,
+      "map@10": 0.2535,
+      "hit_rate@1": 0.25,
+      "hit_rate@3": 0.45,
+      "hit_rate@5": 0.55,
+      "hit_rate@10": 0.65,
+      "context_precision": 0.1975,
+      "context_recall": 0.4133
+    },
+    "ragas_metrics": {
+      "faithfulness": 0.095,
+      "answer_relevancy": 0.835,
+      "context_precision": 0.1975,
+      "context_recall": 0.4133,
+      "faithfulness_evaluated_count": 20,
+      "relevancy_evaluated_count": 20
+    },
+    "latency_metrics": {
+      "mean_ms": 15494.556
+    }
+  },
+  "query_results": [
+    {
+      "query_id": "Q01",
+      "query": "What behavioral interview questions are commonly asked at Amazon, and which Leadership Principles do they test?",
+      "category": "Behavioral",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 86123.03,
+      "retrieved_chunk_ids": [
+        "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+        "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+        "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+        "a22a698d669510530fe0c21f207780f2e362a113ba8af129707fd85d67047c18",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "870ec347165fc4b355ff7d4274bf916300a618eb06ab1df77e7cf70060c0c7d6"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.3333333333333333,
+        "recall@3": 0.2,
+        "ndcg@3": 0.2960819109658652,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.2,
+        "recall@5": 0.2,
+        "ndcg@5": 0.21398626473452756,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.3,
+        "recall@10": 0.6,
+        "ndcg@10": 0.44785096919189377,
+        "mrr": 0.5,
+        "map@5": 0.1,
+        "map@10": 0.2523809523809524,
+        "context_precision": 0.375,
+        "context_recall": 0.6
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.375,
+        "context_recall": 0.6
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer is a complete hallucination. None of the provided context chunks mention the 16 Leadership Principles, the STAR method, specific behavioral interview questions, or the details regarding the HR round, Bar Raiser, or specific interview strategies described in the answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user query by providing specific examples of behavioral questions, mapping them to the corresponding Amazon Leadership Principles, and offering relevant context on the interview process."
+        }
+      },
+      "answer": "Based on the provided documents, Amazon\u2019s interview process is heavily centered on its 16 Leadership Principles (LPs). Candidates are expected to prepare stories using the **STAR method** (Situation, Task, Action, Result) to demonstrate how these principles have been applied in their professional experience.\n\n### Behavioral Interview Approach\n* **The STAR Method**: You must structure your responses by detailing the specific **S**ituation, the **T**ask at hand, the **A**ction you personally took, and the **R**esult of your efforts.\n* **Focus on \"I\"**: When describing actions, use \"I\" rather than \"we.\" While collaboration is understood, the interview is an opportunity to highlight your specific contributions and impact.\n* **Dive Deep**: Provide specific details, including data or metrics, to support your examples. Avoid vague answers; interviewers look for a deep understanding of the work you performed.\n* **Preparation**: It is recommended to have at least two \"STAR\" stories prepared for each of the 16 Leadership Principles.\n\n---\n\n### Commonly Asked Behavioral Questions & Associated Principles\nThe following questions are explicitly linked to specific Leadership Principles in the provided documentation:\n\n| Behavioral Question | Associated Leadership Principle |\n| :--- | :--- |\n| \"Tell me about a time you went above and beyond for a customer.\" | **Customer Obsession** |\n| \"Tell me about a time you took a calculated risk.\" | **Bias for Action** |\n| \"Tell me about a time you had a conflict with a manager.\" | **Have Backbone; Disagree and Commit** |\n\n*Source: [Amazon.pdf]*\n\n---\n\n### Additional Context on Leadership Principles\nThe interview process is designed to evaluate how these values resonate with you. While you do not need to memorize the principles, you should be prepared to discuss how they apply to your past professional experiences.\n\n* **Customer Obsession**: Focuses on starting with the customer and working backwards.\n* **Ownership**: Involves thinking long-term and taking responsibility beyond one's immediate job description.\n* **Bias for Action**: Emphasizes that speed matters and many decisions are reversible.\n* **Dive Deep**: Requires staying connected to details and auditing work frequently.\n* **Have Backbone; Disagree and Commit**: Involves challenging decisions respectfully when you disagree, then committing once a decision is made.\n\n*Source: [Amazon.pdf], [How to prepare for your SDE interview at Amazon.pdf]*\n\n---\n\n### Important Considerations\n* **HR Round**: In the final HR round, you may be asked about your experience at previous companies and specific conflicts you have faced with colleagues or managers.\n* **Technical Rounds**: It is not uncommon to face minor behavioral questions during the Data Structures and Algorithms (DSA) rounds, where Leadership Principles may also be evaluated.\n* **Bar Raiser**: The \"Loop\" (onsite) includes a dedicated \"Bar Raiser\" round, which is conducted by an external interviewer specifically focused on cultural fit and Leadership Principles.\n\n*Source: [Amazon Part 2.pdf], [Amazon.pdf]*\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2713 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus.",
+      "reference_answer": "Amazon behavioral interview questions are structured around its 16 Leadership Principles (LPs). Commonly asked questions include: 1. 'Tell me about a time you had a disagreement with your manager or colleague' (tests 'Have Backbone; Disagree and Commit'). 2. 'Describe a situation where you took on a task outside your formal responsibility' (tests 'Ownership'). 3. 'Give an example of a difficult problem where you had to analyze deep metrics and root causes' (tests 'Dive Deep'). 4. 'Describe a project where you prioritized long-term customer benefit over short-term expediency' (tests 'Customer Obsession'). 5. 'Tell me about a time you delivered a project under tight constraints with limited resources' (tests 'Frugality' and 'Deliver Results'). Candidates are expected to format all behavioral responses using the STAR method (Situation, Task, Action, Result) with quantified impact."
+    },
+    {
+      "query_id": "Q02",
+      "query": "I'm preparing for an Amazon software engineering interview. Give me behavioral questions I should practice, and explain what a strong answer should demonstrate for each.",
+      "category": "Behavioral",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 12292.89,
+      "retrieved_chunk_ids": [
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+        "185aa7a4cd903b5dfbfc09251c368fd71e83e6b4ca997573ca7e9e200025fb0e",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+        "6103560762e77e4bb0c028daef233eb41e0683a95d22abb065e29d045a5726a2",
+        "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+        "7ccfd6698b2abee07794714cad9ead495620f4c83c62c4d0e8b5fa0b79e7df39"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 1.0,
+        "precision@1": 1.0,
+        "recall@1": 0.3333333333333333,
+        "ndcg@1": 1.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.6666666666666666,
+        "ndcg@3": 0.7653606369886217,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.4,
+        "recall@5": 0.6666666666666666,
+        "ndcg@5": 0.7653606369886217,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.2,
+        "recall@10": 0.6666666666666666,
+        "ndcg@10": 0.7653606369886217,
+        "mrr": 1.0,
+        "map@5": 0.6666666666666666,
+        "map@10": 0.6666666666666666,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer contains extensive information about Amazon's 16 Leadership Principles, the STAR method, and specific interview strategies that are not present in the provided retrieved context. The context only mentions that Amazon is a global technology giant and provides a list of LeetCode problems, but it does not contain the behavioral interview advice or methodologies described in the answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's request by providing specific behavioral questions, explaining the required STAR method, and detailing what makes a strong answer in the context of Amazon's Leadership Principles."
+        }
+      },
+      "answer": "To prepare for your Amazon software engineering interview, you must focus on behavioral questions that map to Amazon\u2019s 16 Leadership Principles. Amazon\u2019s interview process is behavioral-based, meaning they look for specific examples of your past work and challenges.\n\n---\n\n### Recommended Behavioral Questions\nBased on the provided documentation, you should prepare stories for the following types of questions:\n\n* **Customer Obsession:** \"Tell me about a time you went above and beyond for a customer.\"\n* **Bias for Action:** \"Tell me about a time you took a calculated risk.\"\n* **Have Backbone; Disagree and Commit:** \"Tell me about a time you had a conflict with a manager.\"\n* **General Experience:** Be prepared to discuss your experience at previous companies and specific conflicts you have faced with colleagues or managers.\n\n---\n\n### How to Structure Your Answers (The STAR Method)\nAmazon explicitly recommends the **STAR method** to ensure your responses are structured and detailed. You should lay out your stories using this format:\n\n1. **S (Situation):** Describe the context of the experience.\n2. **T (Task):** Explain the specific task or challenge you were facing.\n3. **A (Action):** Detail the specific steps **you** took.\n4. **R (Result):** Share the outcome, focusing on the impact you made.\n\n---\n\n### Keys to a Strong Answer\nTo ensure your answers are effective, keep these four guidelines in mind:\n\n* **Dive Deep with Specifics:** Do not remain high-level. Provide a detailed account of one specific situation for each question. Use data, metrics, and numbers to support your results and demonstrate tangible impact.\n* **Focus on \"I,\" Not \"We\":** While Amazon values collaboration, the interview is your opportunity to sell yourself. Clearly articulate your individual contributions and the specific actions you took, rather than focusing on the team's collective effort.\n* **Embrace Failure:** Do not shy away from discussing failures. Amazon views failure as a necessary part of innovation. Come prepared with examples where you took risks, succeeded or failed, and\u2014most importantly\u2014demonstrated how you learned and improved from the experience.\n* **Align with Leadership Principles:** Use the job description to identify which Leadership Principles are most relevant to the role and prepare at least two STAR-formatted stories for each principle.\n\n### Additional Preparation Tips\n* **Know Your \"Why\":** Be prepared to explain why you want to work at Amazon. They are interested in how the company fits into your career path and what you intend to contribute to the organization.\n* **Ask for Clarification:** If an interviewer asks a question that lacks sufficient information, do not hesitate to ask for more context. This is encouraged within Amazon\u2019s culture.\n* **Bring Notes:** You may meet with two to seven employees during the process. It is recommended to bring a notebook to keep track of your stories, key details, and questions you want to ask each interviewer.\n\n***Source References:** How to prepare for your SDE interview at Amazon.pdf; Amazon Part 2.pdf; Amazon.pdf*\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2713 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus.",
+      "reference_answer": "For an Amazon SDE interview, strong practice questions and what an effective answer must demonstrate include: 1. Disagreement / Conflict: 'Tell me about a time you disagreed with a colleague or manager.' Strong answers demonstrate 'Have Backbone; Disagree and Commit'\u2014explaining the technical reasoning with data, maintaining professional respect, and fully committing once a team decision was finalized. 2. Failure / Learning: 'Describe a project that failed or missed a deadline.' Strong answers demonstrate 'Earn Trust' and self-reflection\u2014owning the mistake without deflecting blame, identifying root causes ('Dive Deep'), and showing preventive mechanisms implemented afterward. 3. Ownership: 'Give an example of when you took initiative beyond your job description.' Strong answers demonstrate long-term thinking over 'that's not my job', showing end-to-end accountability. All answers should strictly follow the STAR method, emphasizing specific actions taken by the candidate ('I' rather than vague 'we') and measurable outcomes."
+    },
+    {
+      "query_id": "Q03",
+      "query": "What technical topics should I prepare for a Google software engineering interview, particularly around data structures and algorithms?",
+      "category": "Technical",
+      "target_company": "Google",
+      "should_abstain": false,
+      "latency_ms": 3.72,
+      "retrieved_chunk_ids": [],
+      "ground_truth_chunk_ids": [
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 0.0,
+        "precision@10": 0.0,
+        "recall@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.7,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "reasoning": "Context empty but answer generated ungrounded claims"
+        },
+        "answer_relevancy": {
+          "relevancy_score": 0.7,
+          "reasoning": "The answer provides a list of relevant data structures and algorithms, but it includes many irrelevant topics like AI Safety, LLM Agents, and Fine-Tuning which are not standard for a general Google software engineering interview, diluting the focus of the response."
+        }
+      },
+      "answer": "### Covered Technical Interview Topics\n\nThe knowledge corpus contains interview questions and preparation guidance across key domains including:\n\n- **Data Structures & Algorithms**: Agent, Agents, Ai, Ai Safety, Algorithms, Arrays, Backtracking, Behavioral, Bit Manipulation, Cloud, Data Structures, Database, Deep Learning, Distributed Systems, Dsa, Dynamic Programming, Evaluation, Fine Tuning, Graphs, Greedy, Hash Table, Heap, Hr, Inference Optimization, Linked List\n- **Systems & Architecture**: System Design, Distributed Systems, Scalability, OS, Databases, Networking\n- **AI & Machine Learning**: LLM Agents, RAG Pipelines, Inference Optimization, AI Safety, RLHF, Fine-Tuning\n- **Behavioral & Leadership**: Company Leadership Principles, Behavioral Rounds, HR Rounds\n",
+      "reference_answer": "For a Google software engineering interview, technical preparation should prioritize: 1. Core Data Structures: Arrays, Linked Lists, Stacks, Queues, Hash Tables, Binary Trees, Binary Search Trees (BST), Heaps/Priority Queues, and Trie structures. 2. Graph Algorithms: Breadth-First Search (BFS), Depth-First Search (DFS), Dijkstra's algorithm, Topological Sort, and Union-Find (Disjoint Set). 3. Algorithmic Techniques: Binary Search, Two Pointers, Sliding Window, Recursion & Backtracking, Dynamic Programming (1D and 2D), and Greedy approaches. 4. Complexity Analysis: Rigorous asymptotic Big-O time and space complexity analysis, including trade-offs between iterative and recursive solutions."
+    },
+    {
+      "query_id": "Q04",
+      "query": "For a Google software engineering interview, what kinds of coding problems and problem-solving skills should I expect across the technical rounds?",
+      "category": "Technical",
+      "target_company": "Google",
+      "should_abstain": false,
+      "latency_ms": 11102.56,
+      "retrieved_chunk_ids": [
+        "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+        "5b3c610379f8e2f590be2d808326261e2a21e8de11be3829b39be7a2e30b1841",
+        "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+        "487444c3626f1c6f22766746b111e19cd15c7b51c349acb746c1a5e217c0796a",
+        "cb80fa2da05588864133b8c2ad68b24b78f18e67766349d4c78fa409f344caac",
+        "b65e03318adeddc901a52fc09fdcb7e6acaeec3e9a388edeeab4990774f52f52",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc"
+      ],
+      "ground_truth_chunk_ids": [
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.2,
+        "recall@10": 0.6666666666666666,
+        "ndcg@10": 0.3044671974905181,
+        "mrr": 0.14285714285714285,
+        "map@5": 0.0,
+        "map@10": 0.13095238095238096,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.1,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.1,
+          "reasoning": "The generated answer is almost entirely hallucinated. The retrieved context only mentions that data structures and algorithms are essential, lists 'Arrays' as an example, and provides snippets of code for subsets and dynamic programming. It does not contain the detailed lists of algorithms, preparation strategies, evaluation criteria, or specific interview advice provided in the generated answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly and comprehensively addresses the user's query by categorizing the types of coding problems, listing specific technical competencies (data structures and algorithms), and detailing the problem-solving skills and evaluation criteria expected in Google interviews."
+        }
+      },
+      "answer": "Based on the provided Google interview documentation, the technical interview process for software engineers is designed to evaluate your technical prowess, problem-solving skills, and ability to handle complexity.\n\n---\n\n### 1. Types of Coding Problems\nGoogle categorizes coding interview challenges into three primary types:\n\n* **Coding Interview Challenges:** These gauge your knowledge of data structures and algorithms to optimize solutions for common problems.\n* **System Design Questions:** These assess your ability to handle high-level system architecture with a focus on scalability.\n* **General Analysis Questions:** These are mathematical or opinion-based questions used to evaluate your thought process.\n\n---\n\n### 2. Core Technical Competencies\nTo succeed in the technical rounds, you are expected to demonstrate proficiency in the following areas:\n\n#### **Data Structures**\nYou should be familiar with:\n* Arrays, Linked Lists, Stacks, Queues\n* Trees, Graphs, Heaps\n* Hash sets, Hash tables/maps\n\n#### **Algorithms**\nKey algorithms to master include:\n* Breadth-first search (BFS), Depth-first search (DFS)\n* Binary search\n* Sorting: Quicksort, Mergesort\n* A* search\n* Dynamic programming\n* Divide and conquer\n\n#### **Advanced Concepts**\n* **OS and Concurrency:** Understanding multithreading fundamentals is essential, particularly for standing out for higher hiring levels.\n* **Object-Oriented Programming (OOP):** You should be prepared for questions that test your critical thinking and project-based problem-solving skills.\n\n---\n\n### 3. Essential Problem-Solving Skills\nGoogle emphasizes that they care as much about your **thought process** as the final solution. To demonstrate this effectively:\n\n* **Articulate Your Process:** Explain the \"why\" and \"what\" behind your actions. A clear, communicated problem-solving process is a key differentiator.\n* **Consider Complexity:** Always account for Runtime and Memory (Big-O) complexity for every solution you propose.\n* **Focus on Improvement:** Start with a \"brute force\" solution if necessary, then actively work through how to improve it.\n* **Address Weak Spots:** If you encounter a problem you struggle with, talk through your thought process. This demonstrates an eagerness to learn and improve.\n* **Avoid Common Pitfalls:**\n 1. Not knowing the Big-O complexity of your algorithm.\n 2. Lacking knowledge of Google\u2019s specific expectations.\n 3. Failing to articulate your problem-solving process.\n\n---\n\n### 4. Preparation Strategy\n* **Time Management:** Coding interviews are timed. Practice under time constraints to reduce stress during the actual interview.\n* **Platform Familiarity:** Be prepared to code in Google Docs, on a whiteboard, or on a Chromebook. Practicing coding in a text-only environment (like Google Docs) is recommended.\n* **Data-Driven Answers:** When discussing your past work or technical decisions, provide answers that relate to tangible growth, change, or skill demonstration.\n* **Resources:** The guide suggests using platforms like Educative or LeetCode for practice, and specifically mentions \"Grokking the Coding Interview: Patterns for Coding Questions\" for complex problems.\n\n---\n\n### 5. Evaluation Criteria\nEach interviewer grades candidates on a scale of 1\u20134 based on four core criteria, with a 3 being the threshold for a \"hire\" recommendation:\n1. **Cognitive Ability:** Problem-solving, abstract thinking, and curiosity.\n2. **Technical Skills:** Proficiency in data structures, algorithms, and system design.\n3. **Leadership Skills.**\n4. **\"Googleyness\":** Cultural fit, alignment with values (inclusivity, ethics, and improving human life).\n\n*Source: Google Interview Guide.pdf, Google_Questions_Part1.pdf, Top google question part-1.pdf, Top google question part-2.pdf*\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "Google's technical rounds assess four key competencies: Coding Skills, Analytical Thinking, Computer Science Fundamentals, and Communication. Candidates should expect algorithmic problem solving on Google Docs or whiteboards without auto-complete or compiler assistance. Problem types typically involve LeetCode Medium to Hard algorithmic challenges requiring candidates to: 1. Clarify constraints and edge cases before coding. 2. Propose a baseline approach and evaluate time/space complexity before writing code. 3. Write clean, idiomatic, bug-free code with proper naming conventions and modularity. 4. Dry-run test cases and identify boundary conditions (e.g., null pointers, empty arrays, integer overflows)."
+    },
+    {
+      "query_id": "Q05",
+      "query": "Compare Amazon and Google software engineering interviews in terms of their behavioral and technical interview expectations.",
+      "category": "Multi-Company",
+      "target_company": null,
+      "should_abstain": false,
+      "latency_ms": 14591.1,
+      "retrieved_chunk_ids": [
+        "1772cabd805ace1bcfba485bc1f2710f0a51780d247cf0bf1f70d9c5d8a97bc7",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+        "c46137de970be8e16addaf3c6a0f5831e7088b18b87c29f57da164bcc2702510",
+        "5e78e8a387d3a5eedc168ddfbd0df7e158ff33074f2d50aa5a82d3a48b33fd74",
+        "7354f2ea93c546e55af182de30d0192df97d82a2ec4074346f532d2d735265db",
+        "3f8b3c294da92f281bc078d1d5775a5bcb9fea70105fcfbfdc4d168eaf3e642e"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.5,
+        "ndcg@3": 0.5307212739772434,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.4,
+        "recall@5": 0.5,
+        "ndcg@5": 0.44149241373678083,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.2,
+        "recall@10": 0.5,
+        "ndcg@10": 0.44149241373678083,
+        "mrr": 0.5,
+        "map@5": 0.29166666666666663,
+        "map@10": 0.29166666666666663,
+        "context_precision": 0.25,
+        "context_recall": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.1,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.25,
+        "context_recall": 0.5
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.1,
+          "reasoning": "The generated answer contains extensive information about interview rounds, specific coding topics, behavioral criteria, and preparation strategies that are entirely absent from the provided retrieved context. The context only mentions a few specific questions for Amazon and general company descriptions for Google, making the vast majority of the generated content hallucinated relative to the provided source material."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly compares both companies across the requested dimensions of behavioral and technical expectations, using a structured format that is easy to digest and highly relevant to the user query."
+        }
+      },
+      "answer": "Based on the provided documents, the following comparison outlines the behavioral and technical expectations for software engineering interviews at Google and Amazon.\n\n### **Interview Process Overview**\n\n| Feature | Google | Amazon |\n| :--- | :--- | :--- |\n| **Total Duration** | 2 to 2.5 months | Not specified in retrieved context |\n| **Interview Rounds** | 5\u20137 total (1 phone screen, 4\u20136 onsite) | Not specified in retrieved context |\n| **Technical Focus** | System design, DSA, general analysis | System design, DSA, behavioral |\n| **Coding Platform** | Whiteboard, Google Docs, or Chromebook | Not specified in retrieved context |\n\n---\n\n### **Technical Expectations**\n\n#### **Google**\n* **Coding Challenges:** Focus on data structures (Arrays, Linked Lists, Trees, Graphs, Heaps, Hash tables) and algorithms (BFS, DFS, Binary search, Quicksort, Mergesort, A*, Dynamic programming, Divide and conquer).\n* **System Design:** Candidates are expected to handle high-level system design with a focus on scalability. This is an integral part of the process and impacts the hiring level.\n* **General Analysis:** Includes mathematical or opinion-based questions to gauge thought processes.\n* **Level-Specific:** Higher-level roles (T3 is entry-level) require knowledge of OS, concurrency, multithreading, and object-oriented design.\n\n#### **Amazon**\n* **Coding Challenges:** The retrieved context lists a wide range of DSA topics, including Two Sum, Sliding Window, Graph traversal (Number of Islands, Word Ladder), and Dynamic Programming (Coin Change, House Robber).\n* **System Design:** Expectations focus on scalability and distributed systems. Reported questions include designing a distributed job scheduler, a notification system for 1 billion users, and handling traffic spikes (e.g., Black Friday).\n\n---\n\n### **Behavioral Expectations**\n\n#### **Google**\n* **Core Criteria:** Google evaluates candidates on four criteria: cognitive ability, \"Googleyness,\" leadership skills, and technical skills.\n* **Values:** Google prioritizes inclusivity, the improvement of human life, and ethical behavior.\n* **Focus:** Behavioral interviews test how a candidate acts in employment-related situations, including conflicts and pressure. They assess past experiences, hypothetical situations, and values-based alignment.\n\n#### **Amazon**\n* **Core Criteria:** Behavioral questions are a significant component of the interview, often focusing on leadership and ownership.\n* **Reported Themes:** The retrieved context highlights specific behavioral scenarios, such as:\n * Disagreements with a manager.\n * Taking ownership of a failing project.\n\n---\n\n### **Preparation Tips & Pitfalls**\n\n* **Google:**\n * **Pitfalls:** Not knowing Big-O complexity, lack of knowledge regarding Google\u2019s expectations, and failing to articulate the problem-solving process.\n * **Strategy:** Practice coding in a plain text editor (Google Docs) and focus on explaining the \"why\" and \"what\" behind your solutions.\n* **Amazon:**\n * **Strategy:** The provided context lists a high volume of specific DSA problems (e.g., \"Meeting Rooms II,\" \"Trapping Rain Water,\" \"LRU Cache\") and emphasizes system design for scale.\n\n***\n\n*Note: The indexed interview knowledge corpus does not contain specific details regarding the total number of interview rounds or the specific hiring timeline for Amazon, as these were not provided in the retrieved documents.*\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2717 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "Amazon and Google software engineering interviews differ fundamentally in their evaluation emphasis: 1. Behavioral Emphasis: Amazon places approximately 50% of hiring weight on behavioral fit evaluated against its 16 Leadership Principles (LPs), including a dedicated Bar Raiser round. Google focuses primarily on 'Googliness & Leadership' (intellectual humility, navigating ambiguity, collaborative problem solving), with behavioral assessment integrated into standard rounds. 2. Technical Expectations: Google emphasizes mathematical rigor, complex algorithmic design, dynamic programming, and clean syntax in language-neutral problem solving. Amazon evaluates practical DSA problem-solving and software design with heavy emphasis on object-oriented programming (OOP), system scalability, and pragmatic implementation trade-offs."
+    },
+    {
+      "query_id": "Q06",
+      "query": "What does Amazon's Leadership Principle \"Dive Deep\" mean in an interview context, and what type of behavioral question could be used to evaluate it?",
+      "category": "Behavioral",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 28494.54,
+      "retrieved_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+        "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8",
+        "17806ab57d3fe59ebacac8258b7f9c72b12f4a878520bc598535472b0370dad8",
+        "7783c7dc29901e352a9f9cc256cdac606d25232ebc4be9223fd65a53db5717d7",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "5754f08950e473bd592117d219c28ebd8efb6b7a9d077037077f2e48a7332728",
+        "7ccfd6698b2abee07794714cad9ead495620f4c83c62c4d0e8b5fa0b79e7df39"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 1.0,
+        "precision@1": 1.0,
+        "recall@1": 0.3333333333333333,
+        "ndcg@1": 1.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.6666666666666666,
+        "ndcg@3": 0.7653606369886217,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.4,
+        "recall@5": 0.6666666666666666,
+        "ndcg@5": 0.7653606369886217,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.3,
+        "recall@10": 1.0,
+        "ndcg@10": 0.9325210919548239,
+        "mrr": 1.0,
+        "map@5": 0.6666666666666666,
+        "map@10": 0.8333333333333334,
+        "context_precision": 0.375,
+        "context_recall": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.375,
+        "context_recall": 1.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer is a complete hallucination. None of the provided context chunks contain information about Amazon's 'Dive Deep' leadership principle, the STAR method, or specific behavioral interview strategies. The context provided is limited to general interview preparation tips, company overview, and lists of LeetCode problems."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly defines the Dive Deep principle, explains its application in an interview context, provides actionable advice on how to structure the response, and includes a relevant example question."
+        }
+      },
+      "answer": "Based on the provided documents, here is the breakdown of the \"Dive Deep\" Leadership Principle and how it is evaluated in an Amazon interview.\n\n### Understanding \"Dive Deep\"\nAccording to the *Amazon.pdf* document, the \"Dive Deep\" Leadership Principle requires candidates to demonstrate that they stay connected to the details of their work and audit their projects frequently. It emphasizes a commitment to understanding the granular aspects of a situation rather than just maintaining a high-level overview.\n\n### Behavioral Evaluation\nIn an interview context, Amazon uses behavioral-based questions to assess how you embody this principle. Because Amazon\u2019s interview process is highly standardized, you should prepare specific stories using the **STAR method** (Situation, Task, Action, Result) to demonstrate your ability to \"dive deep.\"\n\n**Key aspects to include in your response:**\n* **Specificity:** As noted in *How to prepare for your SDE interview at Amazon.pdf*, a common mistake is failing to \"dive deep enough.\" You must provide a detailed account of a specific situation.\n* **Data and Metrics:** You are expected to support your examples with data or metrics. Interviewers want to know the specific numbers and the tangible results of your actions.\n* **Individual Contribution:** Focus on \"I\" rather than \"we.\" While collaboration is understood, the interview is an opportunity to highlight your specific steps and individual impact.\n\n### Example Behavioral Question\nWhile the provided documents list general behavioral categories, they suggest that you should prepare stories that align with the Leadership Principles. A question designed to evaluate \"Dive Deep\" would typically ask you to describe a time when you had to investigate a complex problem or project in detail.\n\n* **Example Prompt:** \"Tell me about a time you had to dive deep into a problem to understand the root cause or the underlying details.\"\n\n**Preparation Tip:** The *How to prepare for your SDE interview at Amazon.pdf* document recommends reviewing the job description for the role you are applying to. By identifying the specific technical or operational requirements listed there, you can craft \"Dive Deep\" stories that are directly relevant to the work you would be performing at Amazon.\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2713 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus.",
+      "reference_answer": "In Amazon's interview context, 'Dive Deep' means leaders operate at all levels, stay connected to the details, audit frequently, and remain skeptical when metrics and anecdotes differ. No task is beneath them. Typical behavioral interview questions evaluating 'Dive Deep' include: - 'Tell me about a complex technical problem where you had to dig into the details to find the root cause.' - 'Describe a time when you discovered an anomaly in data or metrics and investigated beyond the surface explanation.' A strong answer demonstrates drilling down through multiple layers of symptoms to identify root causes using data, log inspection, or code profiling."
+    },
+    {
+      "query_id": "Q07",
+      "query": "I keep seeing questions about ownership in Amazon interviews. What interview questions are associated with this theme, and what evidence from Amazon's interview guidance supports that?",
+      "category": "Behavioral",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 63.97,
+      "retrieved_chunk_ids": [],
+      "ground_truth_chunk_ids": [
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 0.0,
+        "precision@10": 0.0,
+        "recall@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "reasoning": "Abstained when no context retrieved"
+        },
+        "answer_relevancy": {
+          "relevancy_score": 0.0,
+          "reasoning": "The model failed to answer the query despite Amazon being explicitly listed in its own supported companies list, resulting in a complete failure to address the user's request."
+        }
+      },
+      "answer": "### Evidence Sufficiency Notice\n\nThe indexed interview knowledge corpus does not contain verified interview records or questions for **Amazon**. To avoid generating ungrounded information, the system cannot synthesize an answer for this company.\n\nSupported indexed companies include Adobe, Amazon, Apple, Goldman Sachs, Google, JP Morgan, LinkedIn, Meta, Meta, Microsoft, Oracle, Twitter, Uber, VMware, Walmart, etc.",
+      "reference_answer": "Amazon defines 'Ownership' as thinking long term and not sacrificing long-term value for short-term results. Leaders act on behalf of the entire company, beyond just their own team, and never say 'that's not my job.' Common interview questions associated with Ownership include: 1. 'Tell me about a time you took on a task or project that was outside your defined responsibilities.' 2. 'Describe a situation where you noticed an issue that wasn't being addressed by anyone and stepped up to fix it.' Amazon's interview guidance emphasizes that candidates must demonstrate personal accountability and explain the long-term benefit of their initiative."
+    },
+    {
+      "query_id": "Q08",
+      "query": "Suppose I am asked a behavioral question about a project that failed during an Amazon interview. Which Leadership Principles could be relevant, and how should I structure my response?",
+      "category": "Multi-Hop",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 39680.93,
+      "retrieved_chunk_ids": [
+        "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+        "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+        "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "870ec347165fc4b355ff7d4274bf916300a618eb06ab1df77e7cf70060c0c7d6"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.2,
+        "recall@5": 0.3333333333333333,
+        "ndcg@5": 0.18154179253735267,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.2,
+        "recall@10": 0.6666666666666666,
+        "ndcg@10": 0.3379680345449381,
+        "mrr": 0.2,
+        "map@5": 0.06666666666666667,
+        "map@10": 0.1619047619047619,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer contains extensive information about Amazon's Leadership Principles, the STAR method, and specific interview strategies that are entirely absent from the provided retrieved context. The context only contains lists of DSA problems and general mentions of interview preparation, not the specific behavioral frameworks described in the answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's query by identifying relevant Amazon Leadership Principles for a failure scenario and providing a clear, actionable structure using the STAR method, consistent with Amazon's interview expectations."
+        }
+      },
+      "answer": "Based on the provided documentation, here is how you should approach a behavioral question regarding a failed project at Amazon.\n\n### Relevant Leadership Principles\nWhile any of the 16 Leadership Principles could potentially apply depending on the specific circumstances of the failure, the following are particularly relevant when discussing a project that did not go as planned:\n\n* **Ownership:** Amazon values employees who think long-term and never say, \"that\u2019s not my job.\" When discussing a failure, demonstrating ownership involves taking responsibility for the outcome rather than shifting blame.\n* **Dive Deep:** This principle emphasizes staying connected to details and auditing frequently. A failure is often an opportunity to show how you \"dived deep\" to identify the root cause of the issue.\n* **Have Backbone; Disagree and Commit:** If the failure resulted from a decision you challenged or a conflict with a manager, this principle allows you to explain how you respectfully challenged the direction while ultimately committing to the team's goal.\n* **Bias for Action:** Since speed matters at Amazon, you may need to explain how you balanced the need for quick decision-making with the risks involved, or how you took a \"calculated risk\" that did not yield the expected result.\n\n---\n\n### Structuring Your Response: The STAR Method\nAmazon explicitly requires candidates to use the **STAR method** to provide structured, evidence-based responses. You should prepare your stories in advance using this format:\n\n1. **Situation**: Describe the specific context of the project. Provide enough detail so the interviewer understands the stakes and the environment.\n2. **Task**: Explain what needed to be done and the specific challenges or goals you were facing.\n3. **Action**: Detail the specific steps **you** took.\n * *Crucial Tip*: Focus on **\"I\" instead of \"we.\"** While collaboration is important, the interview is an opportunity to sell your individual contributions and specific actions.\n * *Provide Details*: Do not be vague. Use data, metrics, and specific examples to support your account of what happened.\n4. **Result**: Explain the outcome of the experience.\n * Highlight the tangible results of your actions.\n * Reflect on the impact the experience had on you, your team, or the project.\n * If the project failed, clearly articulate what you learned and how you applied that knowledge to future work.\n\n---\n\n### Strategic Preparation Tips\n* **Prepare Two Stories per Principle**: It is recommended to have at least two STAR-formatted stories ready for each Leadership Principle.\n* **Use the Job Description**: Align your stories with the specific requirements listed in the job description to ensure your examples are relevant to the role.\n* **Be Honest and Specific**: Interviewers are looking for \"true examples of the work you've performed.\" Do not attempt to memorize the principles; instead, focus on how your past experiences resonate with them.\n* **Keep the Conversation Going**: Treat the interview as a dialogue. If you are unsure how a principle applies, it is acceptable to discuss the situation with the interviewer to ensure your answer addresses their concerns.\n\n***Source References:***\n* *Amazon.pdf (Leadership Principles, STAR Method, Behavioral Questions)*\n* *How to prepare for your SDE interview at Amazon.pdf (STAR Method, \"I\" vs \"We\", Providing Details)*\n* *Amazon Part 2.pdf (STAR Method, Describing Strengths, Conversational Approach)*\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2713 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus.",
+      "reference_answer": "When responding to a project failure question in an Amazon interview, multiple Leadership Principles are evaluated: 1. 'Earn Trust' (being vocally self-critical and owning the failure without blaming colleagues or tools). 2. 'Dive Deep' (identifying the specific technical or operational root cause rather than settling for high-level excuses). 3. 'Are Right, A Lot' (demonstrating how decision-making evolved as new information came to light). The response should be structured strictly using the STAR format: - Situation/Task: Contextualize the ambitious objective. - Action: Highlight what went wrong, how you intervened, and how you communicated transparently. - Result/Learning: Emphasize the concrete lessons learned and what automated checks, guardrails, or architectural changes you enacted to ensure the failure never happens again."
+    },
+    {
+      "query_id": "Q09",
+      "query": "What are the main interview rounds for an Amazon software engineering candidate, and what should I prepare for in each round?",
+      "category": "Interview Process",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 18395.86,
+      "retrieved_chunk_ids": [
+        "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+        "870ec347165fc4b355ff7d4274bf916300a618eb06ab1df77e7cf70060c0c7d6",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "a22a698d669510530fe0c21f207780f2e362a113ba8af129707fd85d67047c18",
+        "7210758c140aeff212942ec42de5f94b78af26057d03af3a1c877279d99e8f47",
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "98eebdad90d3dc5817d946f179a4c7fc158c0c8770f2264c7d704940e4d80aa2"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "957b544449c7d3ed073de9886d80012604b77a8dd6bf98ff5cccc5554da987a7",
+        "b373da1123f0d4141393889a2fb10db8cf3d812844227d363b9e293d861ee324"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 1.0,
+        "precision@1": 1.0,
+        "recall@1": 0.3333333333333333,
+        "ndcg@1": 1.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.6666666666666666,
+        "ndcg@3": 0.7039180890341347,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.4,
+        "recall@5": 0.6666666666666666,
+        "ndcg@5": 0.7039180890341347,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.2,
+        "recall@10": 0.6666666666666666,
+        "ndcg@10": 0.7039180890341347,
+        "mrr": 1.0,
+        "map@5": 0.5555555555555555,
+        "map@10": 0.5555555555555555,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.1,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.25,
+        "context_recall": 0.6666666666666666
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.1,
+          "reasoning": "The generated answer contains extensive information about interview rounds, the STAR method, the Bar Raiser, and specific preparation strategies that are entirely absent from the provided context. The context only mentions general topics like DSA and behavioral preparation but does not detail the specific interview structure, the STAR method, or the logistics described in the answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's query by outlining the specific interview rounds for an Amazon software engineering role and providing actionable preparation advice for each, including behavioral strategies and technical expectations."
+        }
+      },
+      "answer": "Based on the provided documents, the Amazon software engineering interview process consists of three primary stages: an Online Assessment, technical Data Structures and Algorithms (DSA) rounds, and an HR round.\n\n---\n\n### 1. Online Assessment (OA)\n* **Format**: This is an online test designed to gauge your learning and mastery of specific subjects.\n* **Content**: Typically consists of 3 questions with a 1-hour time limit.\n* **Expectation**: You must complete all problems to be considered for the technical interview rounds.\n* **Source**: *Amazon Part 2.pdf*\n\n---\n\n### 2. Technical Data Structures and Algorithms (DSA) Rounds\n* **Format**: There are typically 3 rounds conducted via Amazon Chime.\n* **Content**: You will be asked to solve DSA problems. The interviewer may expect \"production-ready code.\" While the focus is on problem-solving ability, minor behavioral questions may also be included.\n* **Preparation**:\n * **Focus**: Practice coding problems ranging from easy to hard. The provided context lists numerous examples, such as *Kth largest element in BST*, *Longest Palindrome in a String*, *Merge k Sorted Arrays*, and *Search in a Rotated Array*.\n * **Communication**: Discuss your thought process with the interviewer; the goal is to ensure they understand your logic.\n * **Projects**: Having one or two strong projects can provide an advantage.\n* **Source**: *Amazon Part 2.pdf*, *Amazon - LeetCode-1.pdf*, *Amazon Tagged LeetCode Problems .pdf*\n\n---\n\n### 3. HR Round\n* **Format**: 1 round focused on computer science theory and behavioral assessment.\n* **Content**: Questions may cover your experience at previous companies and how you handled conflicts with colleagues or managers.\n* **Source**: *Amazon Part 2.pdf*\n\n---\n\n### General Preparation Strategy\nAcross all stages, Amazon emphasizes specific behavioral and cultural preparation:\n\n* **Behavioral Questions & Leadership Principles**: Amazon uses its **Leadership Principles** to evaluate candidates. You should prepare stories from your past experience that demonstrate these principles.\n* **The STAR Method**: Use this structured format to answer behavioral questions:\n * **S**ituation: Describe the context.\n * **T**ask: Explain what needed to be done.\n * **A**ction: Detail the specific steps *you* took (focus on \"I,\" not \"we\").\n * **R**esult: Share the outcome, using data or metrics to show your impact.\n* **Provide Details**: Do not be vague. Use specific examples and data to support your claims.\n* **Embrace Failure**: Be prepared to discuss failures, focusing on the risks you took and how you grew or improved from the experience.\n* **Know \"Why Amazon\"**: Be ready to explain how Amazon fits into your specific career path and what you hope to contribute to the organization.\n* **Writing Skills**: You may be asked to provide a writing sample, as Amazon\u2019s culture relies heavily on narratively structured memos rather than slide-oriented presentations.\n* **Logistics**: You will meet between two to seven employees, including a \"Bar Raiser\" (an objective third party from another team). It is recommended to bring a pen and notebook to keep track of your stories and questions for the interviewers.\n\n*Sources: How to prepare for your SDE interview at Amazon.pdf, Amazon Part 2.pdf*\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "Amazon's SDE hiring process consists of three main stages: 1. Online Assessment (OA): Typically 2 coding questions (debugging/DSA) plus a Work Style Assessment reflecting Amazon Leadership Principles. 2. Technical Phone Screen: 45-60 minutes covering 1 coding problem (data structures/algorithms) and 1-2 behavioral LP questions. 3. Onsite / Final Loop: 4-5 interviews (60 mins each) including:    - Coding/DSA (2 rounds): In-depth algorithmic problem solving.    - System Design / OOD (1 round): Low-level object-oriented design (for SDE I) or high-level distributed systems design (for SDE II).    - Bar Raiser (1 round): Independent interviewer evaluating candidate fit against Amazon's bar, heavily weighted on Leadership Principles. Every single interview round in the loop contains 15-20 minutes of behavioral LP questions."
+    },
+    {
+      "query_id": "Q10",
+      "query": "I'm interviewing for an AI/ML role at NVIDIA. What technical areas and interview topics should I prioritize?",
+      "category": "Technical",
+      "target_company": "NVIDIA",
+      "should_abstain": false,
+      "latency_ms": 3.19,
+      "retrieved_chunk_ids": [],
+      "ground_truth_chunk_ids": [
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 0.0,
+        "precision@10": 0.0,
+        "recall@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.9,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "reasoning": "Context empty but answer generated ungrounded claims"
+        },
+        "answer_relevancy": {
+          "relevancy_score": 0.9,
+          "reasoning": "The answer provides a comprehensive and relevant list of technical topics tailored to an AI/ML role at NVIDIA. It is well-structured and directly addresses the user's request for prioritization, though it lacks specific context on why these topics are prioritized for NVIDIA specifically."
+        }
+      },
+      "answer": "### Covered Technical Interview Topics\n\nThe knowledge corpus contains interview questions and preparation guidance across key domains including:\n\n- **Data Structures & Algorithms**: Agent, Agents, Ai, Ai Safety, Algorithms, Arrays, Backtracking, Behavioral, Bit Manipulation, Cloud, Data Structures, Database, Deep Learning, Distributed Systems, Dsa, Dynamic Programming, Evaluation, Fine Tuning, Graphs, Greedy, Hash Table, Heap, Hr, Inference Optimization, Linked List\n- **Systems & Architecture**: System Design, Distributed Systems, Scalability, OS, Databases, Networking\n- **AI & Machine Learning**: LLM Agents, RAG Pipelines, Inference Optimization, AI Safety, RLHF, Fine-Tuning\n- **Behavioral & Leadership**: Company Leadership Principles, Behavioral Rounds, HR Rounds\n",
+      "reference_answer": "For an AI/ML engineering role at NVIDIA, candidates should prioritize five core technical areas: 1. Parallel Computing & GPU Architecture: CUDA programming, thread hierarchy (grids, blocks, warps), shared memory vs. global memory bandwidth, and kernel optimization. 2. Deep Learning Frameworks: PyTorch, TensorFlow, and inference acceleration using NVIDIA TensorRT. 3. Generative AI & LLM Systems: Designing scalable distributed model training pipelines and high-throughput low-latency inference engines. 4. Systems & Architecture: CPU vs. GPU architecture, cache hierarchy, memory management, and multi-threading/synchronization primitives in C/C++. 5. Core DSA: Graph algorithms (Dijkstra, Topological Sort), bit manipulation, and arrays/strings optimized for performance."
+    },
+    {
+      "query_id": "Q11",
+      "query": "What kinds of GPU, CUDA, or deep-learning questions might be relevant when preparing for an NVIDIA technical interview?",
+      "category": "Technical",
+      "target_company": "NVIDIA",
+      "should_abstain": false,
+      "latency_ms": 5862.11,
+      "retrieved_chunk_ids": [
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+      ],
+      "ground_truth_chunk_ids": [
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 1.0,
+        "precision@1": 1.0,
+        "recall@1": 1.0,
+        "ndcg@1": 1.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.3333333333333333,
+        "recall@3": 1.0,
+        "ndcg@3": 1.0,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "ndcg@5": 1.0,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.1,
+        "recall@10": 1.0,
+        "ndcg@10": 1.0,
+        "mrr": 1.0,
+        "map@5": 1.0,
+        "map@10": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer contains extensive details about CUDA, C++, deep learning frameworks, and specific interview rounds that are entirely absent from the provided context. The context only contains a brief company overview, making the entire generated response a hallucination relative to the provided source."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user query by categorizing relevant technical topics into GPU programming, CUDA, and deep learning, while providing specific examples and preparation tips tailored to an NVIDIA interview context."
+        }
+      },
+      "answer": "Based on the provided NVIDIA interview documentation, the following areas are identified as critical for technical preparation regarding GPU, CUDA, and deep learning.\n\n---\n\n### **Domain-Specific Technical Focus**\nAccording to the *NVIDIA Interview Handbook*, candidates should prepare for 1\u20132 domain-specific rounds that specifically target GPU programming, CUDA, and ML architecture.\n\n#### **1. CUDA & GPU Programming**\n* **Core Concepts:** You are expected to demonstrate deep knowledge of parallel computing and the underlying GPU architecture.\n* **Key Focus Areas:**\n * **Computer Architecture:** Understand the differences between CPU and GPU architectures, cache hierarchies, and memory bandwidth constraints.\n * **Performance Optimization:** Interviewers prioritize the \"why\" and \"how\" behind performance optimizations. Be prepared to explain how to optimize code for parallel execution.\n * **C/C++ Proficiency:** As the primary language at NVIDIA, you must have a deep understanding of memory management and pointers, which are essential for effective CUDA programming.\n\n#### **2. Deep Learning & AI Architecture**\n* **Framework Proficiency:** You should be prepared to discuss the use and optimization of major deep learning frameworks, specifically **PyTorch**, **TensorFlow**, and **TensorRT**.\n* **Generative AI:** Expect questions related to designing scalable inference engines for Large Language Models (LLMs).\n* **System Design (AI Focus):** In the system design round, you may be asked to architect high-level AI systems. Examples cited include:\n * Designing a scalable model training pipeline.\n * Designing a real-time object detection system.\n\n---\n\n### **Summary of Preparation Requirements**\n| Category | Focus Area |\n| :--- | :--- |\n| **Language** | Mastery of C/C++ (memory management, pointers). |\n| **Architecture** | CPU vs. GPU, cache hierarchy, memory bandwidth. |\n| **Parallelism** | Basics of CUDA and parallel computing principles. |\n| **ML/AI** | PyTorch, TensorFlow, TensorRT, and LLM inference scaling. |\n\n*Source: NVIDIA.pdf (NVIDIA Interview Handbook)*\n\n---\n\n### **Preparation Tips**\n* **Prioritize \"Why\":** NVIDIA interviewers specifically look for your ability to explain the reasoning behind your technical decisions and optimization strategies.\n* **Bridge Theory and Practice:** Ensure you can apply your knowledge of operating systems (multi-threading, synchronization primitives, and virtual memory) to the context of GPU-accelerated computing.\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "Relevant GPU, CUDA, and deep-learning questions for NVIDIA include: 1. GPU Architecture & Memory: Explain the difference between shared memory and global memory in CUDA. How do you prevent warp divergence? What is memory coalescing? 2. CUDA Programming: Write or optimize a basic vector addition or matrix multiplication kernel in CUDA. How do you handle synchronization with __syncthreads()? 3. Deep Learning Acceleration: How does TensorRT optimize neural network execution (layer fusion, precision calibration like FP16/INT8)? 4. System Design for AI: Design a scalable distributed model training pipeline or real-time low-latency object detection system."
+    },
+    {
+      "query_id": "Q12",
+      "query": "What behavioral interview topics should I prepare for at NVIDIA, and how do they differ from the technical topics I should study?",
+      "category": "Behavioral",
+      "target_company": "NVIDIA",
+      "should_abstain": false,
+      "latency_ms": 2.32,
+      "retrieved_chunk_ids": [],
+      "ground_truth_chunk_ids": [
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 0.0,
+        "precision@10": 0.0,
+        "recall@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.4,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "reasoning": "Context empty but answer generated ungrounded claims"
+        },
+        "answer_relevancy": {
+          "relevancy_score": 0.4,
+          "reasoning": "The answer lists categories but fails to explicitly describe the behavioral topics or explain how they differ from technical topics as requested by the user."
+        }
+      },
+      "answer": "### Covered Technical Interview Topics\n\nThe knowledge corpus contains interview questions and preparation guidance across key domains including:\n\n- **Data Structures & Algorithms**: Agent, Agents, Ai, Ai Safety, Algorithms, Arrays, Backtracking, Behavioral, Bit Manipulation, Cloud, Data Structures, Database, Deep Learning, Distributed Systems, Dsa, Dynamic Programming, Evaluation, Fine Tuning, Graphs, Greedy, Hash Table, Heap, Hr, Inference Optimization, Linked List\n- **Systems & Architecture**: System Design, Distributed Systems, Scalability, OS, Databases, Networking\n- **AI & Machine Learning**: LLM Agents, RAG Pipelines, Inference Optimization, AI Safety, RLHF, Fine-Tuning\n- **Behavioral & Leadership**: Company Leadership Principles, Behavioral Rounds, HR Rounds\n",
+      "reference_answer": "NVIDIA behavioral topics focus on cultural fit, innovation drive, and problem solving under constraints: 1. 'Why NVIDIA?' (demonstrating passion for GPU acceleration, gaming, AI, or autonomous systems). 2. Performance Optimization: 'Tell me about a time you had to optimize code for performance.' 3. Rapid Learning: 'Describe a project where you had to learn a complex technology quickly.' 4. Conflict Resolution: 'How do you handle disagreements in a technical discussion?' This differs sharply from NVIDIA's technical rounds, which focus on low-level C++ mechanics, memory bandwidth, CUDA kernels, and deep learning framework optimizations."
+    },
+    {
+      "query_id": "Q13",
+      "query": "If an interviewer asks me to describe a time I disagreed with a teammate, what company-specific interview expectations should I consider when answering for Amazon?",
+      "category": "Behavioral",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 23509.73,
+      "retrieved_chunk_ids": [
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "eb03be571386e345237a542bd9fa5198a98a39f6a194dbc9e8e95e5eea3beee4",
+        "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8",
+        "a3c60bc3c3c5d5cf8d129c61819b3293797519a93abed88a9828611c6bc2b3e7",
+        "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b"
+      ],
+      "ground_truth_chunk_ids": [
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 1.0,
+        "precision@1": 1.0,
+        "recall@1": 0.3333333333333333,
+        "ndcg@1": 1.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.3333333333333333,
+        "recall@3": 0.3333333333333333,
+        "ndcg@3": 0.46927872602275644,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.2,
+        "recall@5": 0.3333333333333333,
+        "ndcg@5": 0.46927872602275644,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.1,
+        "recall@10": 0.3333333333333333,
+        "ndcg@10": 0.46927872602275644,
+        "mrr": 1.0,
+        "map@5": 0.3333333333333333,
+        "map@10": 0.3333333333333333,
+        "context_precision": 0.2,
+        "context_recall": 0.3333333333333333
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.2,
+        "context_recall": 0.3333333333333333
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer is a complete hallucination. None of the provided context chunks contain information about the STAR method, Leadership Principles, or specific behavioral interview advice for Amazon. The context provided is limited to snippets about LeetCode questions and a single sentence fragment about minimizing one's actions, which does not support the detailed claims made in the answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's query by providing specific, actionable advice tailored to Amazon's interview process, including the use of the STAR method, Leadership Principles, and specific behavioral expectations."
+        }
+      },
+      "answer": "To answer a behavioral question about a disagreement with a teammate at Amazon, you should align your response with the company's specific cultural expectations and interview methodology. Based on the provided documentation, here is how you should structure your approach:\n\n### 1. Use the STAR Method\nAmazon explicitly recommends using the **STAR method** (Situation, Task, Action, Result) to format your responses. This ensures your answer is structured, clear, and focused on the specific steps you took and your individual contributions.\n\n### 2. Incorporate Leadership Principles\nAmazon uses its **Leadership Principles** to evaluate candidates. When describing a disagreement:\n* **Tie your story to the principles:** Reflect on how you handled the conflict in a way that demonstrates these values. You do not need to memorize them, but you should be able to articulate how your actions during the disagreement resonate with them.\n* **Show, don't just tell:** Instead of stating you follow a principle, describe a specific instance where you applied one during your professional experience.\n\n### 3. Focus on \"What You Actually Did\"\nRecruiters emphasize that you should avoid minimizing your role by focusing too heavily on the team's collective effort.\n* **Be specific:** Clearly describe the specific steps *you* took to resolve the disagreement.\n* **Own your contribution:** The interviewer wants to know what you actually did, how you contributed to the resolution, and how you navigated the collaborative environment.\n\n### 4. Embrace Lessons from Failure and Risk\nIf the disagreement involved a failed project or a risky decision, do not shy away from it.\n* **Highlight growth:** Amazon values innovation, and they recognize that innovation often involves failure. If the disagreement was related to a project that failed, explain how you took risks, what lessons you learned, and how you improved as a result.\n* **Communicate positively:** Show that you understand how to take risks in a positive way and that you have grown from the experience.\n\n### 5. Maintain Professionalism and Clarity\n* **Ask for clarification:** If the interviewer\u2019s question does not provide enough context for you to give a solid answer, do not hesitate to ask for more information. Amazon encourages this as part of their culture.\n* **Prepare notes:** It is recommended to bring a pen and notebook to keep track of your stories and key details, especially if you are meeting with multiple interviewers (which can range from two to seven people).\n\n### 6. Reflect on \"Why Amazon\"\nWhile answering, keep in mind that the interviewer is also assessing your fit for the company. Your response should demonstrate that you are a person who thinks about how to give back to the organization with your unique skills, while also being open to what you want to learn while working there.\n\n***\n\n**Source References:**\n* *How to prepare for your SDE interview at Amazon.pdf*\n* *Amazon Part 2.pdf*\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2717 BM25 retrieval\n\u2713 Dense retrieval\n\u2717 Hybrid retrieval\n\u2717 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "When answering a disagreement question for Amazon, candidates must align directly with the Leadership Principle 'Have Backbone; Disagree and Commit': 1. Leaders are obligated to respectfully challenge decisions when they disagree, even when doing so is uncomfortable or exhausting. They do not compromise for the sake of social cohesion. 2. The disagreement must be grounded in data, customer impact, or architectural trade-offs, rather than personal preference. 3. Once a decision is determined, leaders commit wholly to the outcome. The response must show professional advocacy during deliberation followed by enthusiastic execution once the final call was made."
+    },
+    {
+      "query_id": "Q14",
+      "query": "Which Amazon interview questions would require me to discuss measurable impact, and what Leadership Principles are most closely connected to them?",
+      "category": "Behavioral",
+      "target_company": "Amazon",
+      "should_abstain": false,
+      "latency_ms": 7338.67,
+      "retrieved_chunk_ids": [
+        "4891a1d64d8ed34f1e7297bb1d1e61fcc023e35952da0c504cc5e59673527639",
+        "0ffee6541c384ef75a4af606448b78e156c36f9c2ffae212ffa311f1e467b9c3",
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "a32eea066af9aab0e6251719f9b8c074252537f93278786d58aecd476969d9c8",
+        "870ec347165fc4b355ff7d4274bf916300a618eb06ab1df77e7cf70060c0c7d6",
+        "261534452e8264b383ed9e15905b1cc6c955fde47161ea267c5fb75b230a21da",
+        "58fc85a4ee9a7f917e44d6844c611a46c7c188f04f47ddd69ff058d90f7cf90b",
+        "a22a698d669510530fe0c21f207780f2e362a113ba8af129707fd85d67047c18"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 0.0,
+        "precision@10": 0.0,
+        "recall@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.7,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer is a complete hallucination. None of the provided context chunks contain information about the STAR method, Leadership Principles, narrative writing, or specific interview advice regarding measurable impact. The context only lists technical DSA problems and brief, unrelated snippets about recruiters."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 0.7,
+          "reasoning": "The answer provides excellent guidance on how to demonstrate measurable impact using the STAR method and relevant Leadership Principles. However, it fails to explicitly list the specific Amazon interview questions that require such discussion, which was a primary part of the user's request, noting instead that the documents do not provide a direct mapping."
+        }
+      },
+      "answer": "Based on the provided documents, Amazon interviewers specifically look for candidates who can describe the specific steps they took, their personal contributions, and the outcomes of their work. While specific interview questions are not mapped directly to \"measurable impact\" in the provided text, the following guidance outlines how to address these requirements and which Leadership Principles are relevant.\n\n### Discussing Measurable Impact\nAccording to the document *How to prepare for your SDE interview at Amazon.pdf*, interviewers expect you to \"sell yourself\" by detailing your specific contributions rather than focusing on team-level achievements. To demonstrate impact effectively:\n\n* **Describe Specific Actions:** You must be ready to explain the specific steps you took and what you actually did.\n* **Use the STAR Method:** The documents *Amazon Part 2.pdf* and *Amazon_DSA.pdf* explicitly recommend using the **STAR method** (Situation, Task, Action, Result) to format your responses. This structure is designed to help you clearly articulate project goals, tactics, and **outcomes**.\n* **Narrative Writing:** Amazon emphasizes the ability to articulate thoughts in written format (memos). These papers are expected to include pertinent information such as **project goals, tactics, and outcomes**, which directly impacts the company's decision-making process.\n* **Embrace Failure:** You should be prepared to discuss instances where you took risks, succeeded, or failed. You must be able to describe how you improved from the lessons learned, as Amazon views failure as a necessary component of innovation.\n\n---\n\n### Relevant Leadership Principles\nThe retrieved context notes that Amazon uses its **Leadership Principles** to evaluate candidates. While the documents do not provide a rigid mapping of specific questions to individual principles, they emphasize the following:\n\n* **Application of Principles:** You are expected to tie your stories back to the Leadership Principles. You should identify which principles resonate with you most and be prepared to cite instances where you have applied them in your professional experience.\n* **Strategic Alignment:** The principle of **Customer Obsession** is highlighted as a core component of Amazon's culture. When discussing impact, framing your results in the context of how they benefited the customer or the organization is essential.\n* **Innovation and Risk:** Because \"some of Amazon's most successful programs have roots in failed projects,\" you should connect your stories of failure and subsequent growth to the company\u2019s value of innovation.\n\n### Interviewer Expectations\n* **Clarification:** If an interviewer asks a question that lacks sufficient information to provide a solid answer regarding your impact, you are encouraged to ask for more context.\n* **Preparation:** It is recommended that you bring a notebook to keep track of your stories and map them to the Leadership Principles that might apply to the specific role.\n\n***\n\n*Source References:*\n* *How to prepare for your SDE interview at Amazon.pdf*\n* *Amazon Part 2.pdf*\n* *Amazon_DSA.pdf*\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2713 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2713 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus.",
+      "reference_answer": "Amazon interview questions requiring measurable impact relate primarily to 'Deliver Results' and 'Customer Obsession': 1. 'Tell me about a time you delivered an important project on time despite tight constraints.' 2. 'Describe a situation where you improved system performance or efficiency.' 3. 'Give an example of a time you exceeded customer expectations.' Amazon explicitly expects metrics in the 'Result' phase of the STAR method\u2014such as percentage latency reductions, cost savings in dollars, uptime improvements (e.g., 99.99%), or user adoption growth numbers."
+    },
+    {
+      "query_id": "Q15",
+      "query": "I'm preparing for interviews at multiple companies. How should my preparation differ between Amazon's behavioral interviews and NVIDIA's technical interviews?",
+      "category": "Multi-Company",
+      "target_company": null,
+      "should_abstain": false,
+      "latency_ms": 12199.9,
+      "retrieved_chunk_ids": [
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+        "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "848b2ff38da874edb97f57960e170361992835d6f7ae9a4a55fcaf858f4f24d8",
+        "7d2c0bfeade13f18d83e11bb5c64643f150877ed8ebe0e1056108c4190736b9b",
+        "b1a7ab80ce4e41749646ba4f42845509b3556538163ff3cbade5621649762a22"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.3333333333333333,
+        "recall@3": 0.5,
+        "ndcg@3": 0.3065735963827292,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.2,
+        "recall@5": 0.5,
+        "ndcg@5": 0.3065735963827292,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.1,
+        "recall@10": 0.5,
+        "ndcg@10": 0.3065735963827292,
+        "mrr": 0.3333333333333333,
+        "map@5": 0.16666666666666666,
+        "map@10": 0.16666666666666666,
+        "context_precision": 0.125,
+        "context_recall": 0.5
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.2,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.125,
+        "context_recall": 0.5
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.2,
+          "reasoning": "The generated answer contains significant hallucinations. While it correctly identifies one Amazon behavioral question (disagreeing with a manager) and mentions NVIDIA's focus on system design, it invents extensive details not present in the context, such as specific NVIDIA interview topics (CUDA, GPU architecture, C++, AI pipelines), Amazon's Leadership Principles, and a comparison table. Most of the content is fabricated and not supported by the provided chunks."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's query by providing a structured, comparative analysis of the preparation strategies for Amazon and NVIDIA, highlighting the specific differences in behavioral and technical expectations for each company."
+        }
+      },
+      "answer": "To prepare effectively for Amazon and NVIDIA, you must tailor your approach to their distinct interview philosophies. Based on the provided interview handbooks, here is how your preparation should differ:\n\n---\n\n### Amazon: Focus on Leadership Principles\nAmazon\u2019s interview process places a heavy emphasis on behavioral assessments, which are integrated into both the technical and HR rounds.\n\n* **Behavioral Strategy:** You should prepare for behavioral questions throughout the entire process, including technical rounds. The company explicitly evaluates candidates against their **Leadership Principles**.\n* **Key Topics:** Expect questions regarding your experience at previous companies and how you have handled conflicts with managers or colleagues.\n* **Evidence-Grounded Examples:**\n * \"Describe a situation where you disagreed with your manager.\" (`knowledge_base.md`)\n * \"Tell me about a time you took ownership of a failing project.\" (`knowledge_base.md`)\n* **Preparation Tip:** Because leadership principles come into play even during technical rounds, your behavioral preparation is as critical as your coding practice.\n\n---\n\n### NVIDIA: Focus on Domain-Specific Technical Depth\nNVIDIA\u2019s interview process is highly technical, with a specific emphasis on performance, hardware architecture, and parallel computing.\n\n* **Technical Strategy:** While you must be proficient in Data Structures and Algorithms (DSA), the interviewers prioritize the \"why\" and \"how\" behind your optimizations. You are expected to demonstrate deep knowledge of how code interacts with hardware.\n* **Domain-Specific Focus:** Unlike general software roles, NVIDIA requires preparation in:\n * **Parallel Computing:** Basics of CUDA and GPU architecture.\n * **Computer Architecture:** Understanding CPU vs. GPU, cache hierarchy, and memory bandwidth.\n * **Systems Programming:** Deep knowledge of C/C++ (the primary language), memory management, and pointers.\n* **System Design:** You will be tested on high-level architecture for AI systems (e.g., \"Design a scalable model training pipeline\" or \"Design a real-time object detection system\").\n* **Behavioral Strategy:** Behavioral questions at NVIDIA focus on cultural fit, passion for technology, and your ability to learn complex systems quickly.\n * *Example:* \"Tell me about a time you had to optimize code for performance.\" (`NVIDIA.pdf`)\n\n---\n\n### Comparison Summary\n\n| Feature | Amazon Preparation | NVIDIA Preparation |\n| :--- | :--- | :--- |\n| **Core Focus** | Leadership Principles & Problem Solving | Performance, Hardware, & Parallelism |\n| **Technical Depth** | Production-ready code (DSA) | C/C++, CUDA, & GPU Architecture |\n| **System Design** | Scalability & Distributed Systems | AI/ML Pipelines & Real-time Systems |\n| **Behavioral** | Conflict resolution & Ownership | Passion for tech & Learning agility |\n\n---\n\n### Preparation Recommendations\n* **For Amazon:** Focus on mapping your past experiences to their specific Leadership Principles. Ensure your coding solutions are \"production-ready\" and clearly articulated.\n* **For NVIDIA:** Master C++ and dedicate significant time to understanding the underlying hardware (memory, cache, and parallel processing). When practicing coding problems, always be prepared to explain the efficiency of your solution in the context of hardware performance.\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2717 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "Preparation differs substantially across these two targets: 1. Amazon Behavioral Preparation: Focus on assembling 6-8 comprehensive STAR stories demonstrating Amazon's 16 Leadership Principles (Customer Obsession, Ownership, Dive Deep, Deliver Results). Prepare to be pressed for granular details and quantifiable results across multiple rounds. 2. NVIDIA Technical Preparation: Focus on low-level systems engineering and hardware acceleration: master modern C++, understand parallel programming in CUDA, review memory bandwidth/cache hierarchies, and prepare for domain-specific questions in TensorRT, GPU architecture, or AI system design."
+    },
+    {
+      "query_id": "Q16",
+      "query": "What interview questions should I practice if I want to demonstrate problem solving, technical depth, and ownership rather than just memorizing coding patterns?",
+      "category": "Semantic",
+      "target_company": null,
+      "should_abstain": false,
+      "latency_ms": 5257.9,
+      "retrieved_chunk_ids": [],
+      "ground_truth_chunk_ids": [
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "06bbe57de2754fd59b09662d918a034e7d81cf608a126ebd33b5f969ddc1c9ac"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 0.0,
+        "precision@10": 0.0,
+        "recall@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "reasoning": "Context empty but answer generated ungrounded claims"
+        },
+        "answer_relevancy": {
+          "relevancy_score": 0.0,
+          "reasoning": "The model failed to answer the query entirely, citing a lack of retrieved context and a refusal policy, despite the query being a general knowledge question that does not require specific retrieved documents."
+        }
+      },
+      "answer": "The indexed interview knowledge corpus does not have enough verified records to provide specific interview questions or guidance regarding problem-solving, technical depth, or ownership for your request.\n\nAs per the mandatory grounding directive, I cannot provide information or suggestions outside of the provided `<retrieved_context>`.\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2713 Metadata filtering\n\u2717 Embedding generation\n\u2713 BM25 retrieval\n\u2717 Dense retrieval\n\u2717 Hybrid retrieval\n\u2717 RRF fusion\n\u2717 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "To demonstrate genuine problem-solving depth and ownership rather than rote pattern memorization: 1. System Design Questions (e.g., 'Design a URL shortener like bit.ly', 'Design a rate limiter', 'Design a model inference pipeline'): Tests data modeling, scalability trade-offs, consistency vs. availability, and capacity planning. 2. Algorithmic Trade-off Challenges: Questions where initial solutions have high complexity and require custom data structure design (e.g., LRU Cache design combining a Hash Map with a Doubly Linked List for O(1) operations). 3. Engineering Ownership Questions: 'Describe an architecture or production bug you investigated and resolved end-to-end', highlighting root cause analysis and proactive mitigation."
+    },
+    {
+      "query_id": "Q17",
+      "query": "Give me examples of technical interview questions where the exact terminology matters, and explain what concepts each question is testing.",
+      "category": "Lexical",
+      "target_company": null,
+      "should_abstain": false,
+      "latency_ms": 9808.45,
+      "retrieved_chunk_ids": [
+        "69a1f04137947b8b607af0a6882f90e88d4df1d66bab543cb7138e7ed2d174fc",
+        "b97817c136875ad521ec7805c0f64cc10f304b23b96b0f6f9e4d3aea3a878d97",
+        "c46137de970be8e16addaf3c6a0f5831e7088b18b87c29f57da164bcc2702510",
+        "fed675b0762f71bed0419a2cc2f2e6974d3aec091f1dd86431037252a8f50762",
+        "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+        "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0",
+        "5ca2c7c6b67284eb2bf4267cb68bfc9e01074c8c700c257a956146d69113a60d",
+        "13fc44f09731a4d7aeb4ef90fcfe659c9004ea8ee63aad555bb5703a9221bc65"
+      ],
+      "ground_truth_chunk_ids": [
+        "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+        "beb48e6261f51fd37365168e6ea74caf149574db4c34aea0eccbe00a781b6417",
+        "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.2,
+        "recall@5": 0.3333333333333333,
+        "ndcg@5": 0.18154179253735267,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.1,
+        "recall@10": 0.3333333333333333,
+        "ndcg@10": 0.18154179253735267,
+        "mrr": 0.2,
+        "map@5": 0.06666666666666667,
+        "map@10": 0.06666666666666667,
+        "context_precision": 0.125,
+        "context_recall": 0.3333333333333333
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.125,
+        "context_recall": 0.3333333333333333
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.0,
+          "reasoning": "The generated answer is a complete hallucination. None of the specific interview questions, company-specific technical topics (like Transformer architecture, Deep Learning, or Distributed Systems), or detailed explanations provided in the answer are present in the retrieved context chunks."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the prompt by providing specific technical interview questions where terminology is critical and clearly explains the underlying concepts for each, including a summary table for clarity."
+        }
+      },
+      "answer": "Based on the provided interview intelligence, several technical questions rely on specific terminology that defines the scope of the problem and the expected technical depth. Below are examples extracted from the retrieved records, categorized by the concepts they test.\n\n---\n\n### 1. Distributed Systems & Inference Optimization\n**Question:** *\"Implement an `all_gather` on noisy nodes, derive how many rounds are needed for a target error, and improve the algorithm using the fact that floats are transmitted.\"*\n* **Company:** OpenAI\n* **Concepts Tested:**\n * **`all_gather`:** This is a specific collective communication primitive used in distributed computing. The candidate must understand how data is synchronized across multiple nodes.\n * **\"Noisy nodes\":** This terminology introduces the requirement for error handling or fault tolerance in a distributed environment.\n * **\"Floats are transmitted\":** This specific constraint tests the candidate's ability to optimize communication bandwidth by leveraging the properties of floating-point data representation (e.g., quantization or compression techniques) rather than treating data as opaque blobs.\n\n---\n\n### 2. Deep Learning & Computer Vision\n**Question:** *\"Explain activation functions including ReLU and PReLU, regularization, object detection workflows, residual connections, and non-maximum suppression.\"*\n* **Company:** AMD\n* **Concepts Tested:**\n * **ReLU vs. PReLU:** The distinction between Rectified Linear Unit (ReLU) and Parametric ReLU (PReLU) tests the candidate's understanding of how neural networks handle the \"dying ReLU\" problem and the role of learnable parameters in activation functions.\n * **Residual Connections:** This tests knowledge of deep network architectures (like ResNet) and how they mitigate vanishing gradient problems.\n * **Non-Maximum Suppression (NMS):** This is a specific algorithmic step in object detection pipelines. The candidate must understand how to filter overlapping bounding boxes to retain only the most confident detection.\n\n---\n\n### 3. Database Management Systems (DBMS)\n**Question:** *\"SQL Joins, Normalization, ACID properties.\"*\n* **Companies:** IBM, TCS, Capgemini\n* **Concepts Tested:**\n * **ACID Properties:** This terminology refers to the four key properties of database transactions: Atomicity, Consistency, Isolation, and Durability. It tests the candidate's understanding of how databases ensure data integrity during concurrent operations.\n * **Normalization:** This tests the candidate's ability to structure a relational database to reduce data redundancy and improve data integrity.\n * **SQL Joins:** This tests the ability to combine rows from two or more tables based on a related column, requiring knowledge of different join types (INNER, LEFT, RIGHT, FULL).\n\n---\n\n### 4. Transformer Architecture\n**Question:** *\"Explain transformer architecture and different types of attention mechanisms and their applications.\"*\n* **Company:** AMD\n* **Concepts Tested:**\n * **Transformer Architecture:** This requires a high-level understanding of the encoder-decoder structure, positional encoding, and feed-forward networks.\n * **Attention Mechanisms:** The candidate must distinguish between various types (e.g., Self-Attention, Multi-Head Attention, Cross-Attention) and explain the specific mathematical or functional utility of each in sequence modeling.\n\n---\n\n### Summary Table of Terminology-Dependent Concepts\n\n| Terminology | Domain | Core Concept Tested |\n| :--- | :--- | :--- |\n| **`all_gather`** | Distributed Systems | Collective communication primitives and synchronization. |\n| **PReLU** | Deep Learning | Handling gradient flow and learnable activation parameters. |\n| **ACID** | DBMS | Transactional integrity and reliability in databases. |\n| **NMS** | Computer Vision | Post-processing logic for object localization. |\n| **Residual Connections** | Deep Learning | Architectural strategies for training very deep networks. |\n\n***Note:** The evidence provided in the retrieved context indicates that for roles at companies like OpenAI, AMD, and Atlassian, interviewers expect precise technical definitions to demonstrate a candidate's depth in specialized domains such as ML infrastructure and system design.*\n\n---\n**Retrieval used:**\n\u2717 Query rewriting\n\u2717 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "Examples where exact technical terminology is critical include: 1. 'Concurrency vs. Parallelism': Concurrency is about dealing with lots of things at once (structure); parallelism is about doing lots of things at once (execution across cores/GPUs). 2. 'ACID vs. BASE Properties': Atomicity, Consistency, Isolation, Durability in relational stores vs. Basically Available, Soft state, Eventual consistency in distributed NoSQL stores. 3. 'Shared Memory vs. Global Memory' in CUDA: Shared memory resides on-chip (extremely high bandwidth, low latency, scoped to a thread block) whereas global memory resides in device DRAM (high latency, accessible across all blocks)."
+    },
+    {
+      "query_id": "Q18",
+      "query": "If the available interview material does not contain enough evidence to answer a company-specific question, how should the system respond instead of making up an answer?",
+      "category": "Insufficient Evidence",
+      "target_company": "UNSUPPORTED_META",
+      "should_abstain": true,
+      "latency_ms": 10567.78,
+      "retrieved_chunk_ids": [
+        "5b3c610379f8e2f590be2d808326261e2a21e8de11be3829b39be7a2e30b1841",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "12902dd891244b77c7b9a311de03eb59e3b8f706ebf800468146bd066cc81a56",
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+        "63ca9464d9701d956cedf155ad62c3971b8b53ed9e6e3b17d162fe92e627c05d",
+        "1c91e3f5bdbe6b201833962b61fd50cb0f4a8421a08774f30670cb2f95d38627",
+        "4ffcb1494c286119cc320788a46a1c5d65896d2835bca423b050ae0ffccfbe9d",
+        "42d756eb37c5620c69f5e60b6a65a97a15096027fdfdf1ddf6a1ddffc79a1ce0"
+      ],
+      "ground_truth_chunk_ids": [],
+      "retrieval_metrics": {
+        "recall@1": 0.0,
+        "precision@1": 0.0,
+        "hit_rate@1": 0.0,
+        "ndcg@1": 0.0,
+        "recall@3": 0.0,
+        "precision@3": 0.0,
+        "hit_rate@3": 0.0,
+        "ndcg@3": 0.0,
+        "recall@5": 0.0,
+        "precision@5": 0.0,
+        "hit_rate@5": 0.0,
+        "ndcg@5": 0.0,
+        "recall@10": 0.0,
+        "precision@10": 0.0,
+        "hit_rate@10": 0.0,
+        "ndcg@10": 0.0,
+        "mrr": 0.0,
+        "map@5": 0.0,
+        "map@10": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "abstained_correctly": false,
+          "reasoning": "Failed to abstain on unanswerable query"
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user query by specifying the required response protocol when evidence is insufficient, while also clarifying the prohibition against hallucination."
+        }
+      },
+      "answer": "According to the mandatory grounding directive provided in the system instructions, if the retrieved context does not contain sufficient evidence to answer a query, the system must **explicitly state that the indexed interview knowledge corpus does not have enough verified records for this question.**\n\nThe system is strictly prohibited from inventing or hallucinating interview information, such as questions, rounds, policies, or experiences, and must not make assumptions based on general software engineering practices.\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2717 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "When the available knowledge corpus does not contain verified interview records or guidance for a queried topic or company, the system must strictly abstain from generating ungrounded advice. It must return an explicit Evidence Sufficiency Notice explaining that the knowledge corpus does not contain verified records for the target domain, and recommend consulting supported companies."
+    },
+    {
+      "query_id": "Q19",
+      "query": "What is the difference between preparing for behavioral questions based on company principles and preparing for technical coding questions? Use the interview material in the knowledge base to explain.",
+      "category": "Interview Process",
+      "target_company": null,
+      "should_abstain": false,
+      "latency_ms": 15276.5,
+      "retrieved_chunk_ids": [
+        "d7b84ea609c722aa56a15b3ab7ad7e50129c4333c96d5e3ecb11d578e250e4fc",
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+        "cc4893ce00b848da476efe48bc2af909ba2c9be6b7566e96fa84564a39e83038",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "870ec347165fc4b355ff7d4274bf916300a618eb06ab1df77e7cf70060c0c7d6",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "f8a827c7b35d7ac000749c8c4a04f46f9a72c5beec8e9ee23de5dc0330d268ec",
+        "363d110e95178312fe969ccd1f63d51d32b026aaa16d43b09afaa2e6631f7a6c"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 0.0,
+        "precision@3": 0.0,
+        "recall@3": 0.0,
+        "ndcg@3": 0.0,
+        "hit_rate@5": 0.0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "ndcg@5": 0.0,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.1,
+        "recall@10": 0.3333333333333333,
+        "ndcg@10": 0.16716045496620227,
+        "mrr": 0.16666666666666666,
+        "map@5": 0.0,
+        "map@10": 0.05555555555555555,
+        "context_precision": 0.125,
+        "context_recall": 0.3333333333333333
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.2,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.125,
+        "context_recall": 0.3333333333333333
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.2,
+          "reasoning": "The generated answer contains significant hallucinations. While the context mentions Amazon and general interview topics, it does not contain the STAR method, the instruction to use I instead of we, leadership principles, specific technical problems like Two Sum or Merge Intervals, or the specific advice regarding Google Docs or whiteboards. The answer fabricates almost all of its instructional content."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's query by contrasting behavioral and technical preparation methods, citing specific documents from the provided knowledge base, and summarizing the differences in a clear, structured format."
+        }
+      },
+      "answer": "Based on the provided interview intelligence, preparing for behavioral questions based on company principles and preparing for technical coding questions require distinct methodologies.\n\n### Preparing for Behavioral Questions (Principles-Based)\nBehavioral preparation focuses on demonstrating alignment with company values and providing structured evidence of your past performance.\n\n* **Evidence-Based Storytelling (STAR Method):** For companies like Amazon, behavioral questions are not \"trick questions\" but opportunities to provide specific examples of your work. You should use the **STAR method** (Situation, Task, Action, Result) to structure your responses. You must provide detailed accounts, including who was involved, specific actions you took, and the tangible results or impact you achieved (Source: *How to prepare for your SDE interview at Amazon.pdf*).\n* **Focus on Individual Contribution:** When describing your actions, use \"I\" rather than \"we.\" While collaboration is understood, the interview is an opportunity to \"sell yourself\" and highlight your specific contributions (Source: *How to prepare for your SDE interview at Amazon.pdf*).\n* **Alignment with Leadership Principles:** You should study the company's specific Leadership Principles. While you do not need to memorize them, you should practice tying your professional stories back to these principles to demonstrate why the company\u2019s values resonate with you (Source: *How to prepare for your SDE interview at Amazon.pdf*).\n* **Data-Driven Detail:** A common failure point is not \"diving deep enough.\" You are expected to use data or metrics to support your examples and provide a detailed account of the situation (Source: *How to prepare for your SDE interview at Amazon.pdf*).\n\n---\n\n### Preparing for Technical Coding Questions\nTechnical preparation focuses on problem-solving proficiency, algorithmic knowledge, and system design capabilities.\n\n* **Algorithmic Proficiency:** Preparation involves mastering common data structures and algorithms (DSA). The knowledge base lists numerous recurring patterns, such as \"Two Sum,\" \"LRU Cache,\" \"Merge Intervals,\" and \"Number of Islands,\" which appear across multiple companies (Source: *documents/knowledge_base.md*).\n* **System Design:** Unlike behavioral questions, system design questions gauge your ability to handle high-level architecture with scalability in mind. Examples include designing distributed job schedulers, notification systems for billions of users, or real-time collaborative editors (Source: *documents/knowledge_base.md*; *Salesforce_interview_intelligence.md*).\n* **Platform Familiarity:** Technical interviews may require coding in specific environments, such as whiteboards, Google Docs, or a Chromebook. For instance, Google explicitly notes that candidates should practice coding in Google Docs for phone screens (Source: *Google Interview Guide.pdf*).\n* **Hands-on Application:** Some technical rounds may involve mini-projects or practical tasks, such as implementing a web crawler to scrape a site, sort content, and export it to CSV (Source: *Salesforce_interview_intelligence.md*).\n\n---\n\n### Summary of Differences\n\n| Feature | Behavioral (Principles-Based) | Technical (Coding/Design) |\n| :--- | :--- | :--- |\n| **Primary Goal** | Demonstrate cultural fit and past impact. | Demonstrate technical prowess and problem-solving. |\n| **Preparation Tool** | STAR Method, Leadership Principles. | DSA practice, System Design patterns. |\n| **Key Metric** | Specificity, data/metrics, \"I\" vs \"we\". | Scalability, efficiency, correctness. |\n| **Documentation** | Stories/scenarios mapped to principles. | Code, architecture diagrams, technical trade-offs. |\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2717 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2713 Multi-hop\n\u2713 Chunk enhancement\n\n*Why:* HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus.",
+      "reference_answer": "Based on the interview handbooks in the knowledge base: 1. Behavioral Preparation (Principle-Based): Requires extracting past projects into structured STAR narratives (Situation, Task, Action, Result) demonstrating specific core values (e.g., Amazon's Leadership Principles or Google's collaborative Googliness). Evaluation focuses on interpersonal conflict, technical ownership, handling failure, and customer advocacy. 2. Technical Coding Preparation: Focuses on algorithmic problem solving, time/space complexity analysis (Big-O), choosing optimal data structures, and writing clean, syntax-error-free code under time pressure."
+    },
+    {
+      "query_id": "Q20",
+      "query": "I have an upcoming software engineering interview and only one week to prepare. Based on the company's interview material in the knowledge base, what should I prioritize across behavioral, technical, and interview-process preparation?",
+      "category": "Multi-Hop",
+      "target_company": null,
+      "should_abstain": false,
+      "latency_ms": 9315.97,
+      "retrieved_chunk_ids": [
+        "b97817c136875ad521ec7805c0f64cc10f304b23b96b0f6f9e4d3aea3a878d97",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d",
+        "de09e6c9d70376f7c8e2f5d8ca8813ffb60e57e3b6bcc727d66e7a33971123bc",
+        "806e40d67ffae54b9d18c54f10b54db9dfe71841f810b05d49dde14b4f9483cc",
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "fed675b0762f71bed0419a2cc2f2e6974d3aec091f1dd86431037252a8f50762",
+        "195ea806dc0cb627bf9c14828b09b2976991b04b344b7be9de5f92d8e660ea64"
+      ],
+      "ground_truth_chunk_ids": [
+        "3c236f46c2b8d19fbdbc209747fbdc6e9c00aa617f81203465e5d4d44e9cb75b",
+        "570cfeea8e2118adc7c88231fa008c5b08649a93f1cc2c10d176d7d6c20ce407",
+        "21104233549d2211e62effbe8268b08f34f641b2a7bfc3090dde444637dfee3d"
+      ],
+      "retrieval_metrics": {
+        "hit_rate@1": 0.0,
+        "precision@1": 0.0,
+        "recall@1": 0.0,
+        "ndcg@1": 0.0,
+        "hit_rate@3": 1.0,
+        "precision@3": 0.6666666666666666,
+        "recall@3": 0.6666666666666666,
+        "ndcg@3": 0.5307212739772434,
+        "hit_rate@5": 1.0,
+        "precision@5": 0.4,
+        "recall@5": 0.6666666666666666,
+        "ndcg@5": 0.5307212739772434,
+        "hit_rate@10": 1.0,
+        "precision@10": 0.3,
+        "recall@10": 1.0,
+        "ndcg@10": 0.6978817289434457,
+        "mrr": 0.5,
+        "map@5": 0.38888888888888884,
+        "map@10": 0.5555555555555555,
+        "context_precision": 0.375,
+        "context_recall": 1.0
+      },
+      "ragas_metrics": {
+        "faithfulness": 0.2,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.375,
+        "context_recall": 1.0
+      },
+      "judge_details": {
+        "faithfulness": {
+          "faithfulness_score": 0.2,
+          "reasoning": "The generated answer contains significant hallucinations. It references specific details like the STAR method, Googleyness specifics, interview formats (5-7 rounds), and technical topics (OOPs, DBMS, Big-O, specific algorithms) that are not present in the provided context chunks. The context only mentions basic company overviews and very limited topics like 'data structures and algorithms' and 'distributed job scheduler' without providing the detailed preparation advice or strategies claimed in the answer."
+        },
+        "answer_relevancy": {
+          "relevancy_score": 1.0,
+          "reasoning": "The answer directly addresses the user's request for a one-week preparation plan by synthesizing specific company requirements from the knowledge base into prioritized categories (Behavioral, Technical, and Process) and providing a actionable summary checklist."
+        }
+      },
+      "answer": "To provide a prioritized one-week preparation plan, I have synthesized the requirements across the companies represented in the knowledge base (Amazon, Google, IBM, and TCS).\n\nBecause you have only one week, you must focus on the specific high-impact areas identified by these companies.\n\n---\n\n### 1. Behavioral Preparation (High Priority)\nBehavioral interviews are critical for companies like Amazon and Google, where they are used to assess cultural fit and leadership potential.\n\n* **Amazon (Leadership Principles):** Focus on preparing stories that align with Amazon\u2019s Leadership Principles. Use the **STAR method** (Situation, Task, Action, Result) to structure your answers. Ensure you provide specific details and metrics, and always use **\"I\"** instead of \"we\" to highlight your individual contributions (*Source: How to prepare for your SDE interview at Amazon.pdf*).\n* **Google (Values & \"Googleyness\"):** Google evaluates candidates on \"Googleyness\" (cultural fit, ethics, and inclusivity) and leadership skills. Prepare for three types of questions: past experiences, hypothetical situations, and values-based questions (*Source: Google Interview Guide.pdf*).\n* **General Strategy:** For any company, be prepared to discuss your strengths, weaknesses, and specific project experiences. Use the job description to tailor your stories to the role's requirements (*Source: IBM.pdf, TCS.pdf, How to prepare for your SDE interview at Amazon.pdf*).\n\n---\n\n### 2. Technical Preparation (High Priority)\nTechnical focus varies by company, but all emphasize fundamental computer science knowledge.\n\n* **Data Structures & Algorithms (DSA):**\n * **Google:** Focus on arrays, linked lists, stacks, queues, trees, graphs, heaps, and hash tables. Algorithms to master include BFS/DFS, binary search, sorting (Quicksort/Mergesort), and dynamic programming. Practice explaining your thought process aloud, as this is how Google gauges cognitive ability (*Source: Google Interview Guide.pdf*).\n * **IBM & TCS:** Focus on fundamental problems. For IBM, prioritize arrays, strings, trees, and sorting (e.g., Bubble Sort). For TCS, focus on basic coding, anagram checks, and math-based problems (e.g., GCD/LCM) (*Source: IBM.pdf, TCS.pdf*).\n* **System Design:**\n * If interviewing for a senior or mid-level role at companies like Google or Amazon, prioritize high-level design, scalability, and distributed systems. For Google, study the \"top 10\" system design questions (*Source: Google Interview Guide.pdf, knowledge_base.md*).\n* **Core CS Fundamentals:**\n * **DBMS:** Review SQL (Joins, Normalization, ACID properties) for IBM and TCS interviews (*Source: IBM.pdf, TCS.pdf*).\n * **OOPs:** Be prepared to explain and implement OOP concepts with real-world examples (*Source: IBM.pdf, TCS.pdf, Microsoft entries in knowledge_base.md*).\n\n---\n\n### 3. Interview Process & Logistics (Medium Priority)\nUnderstanding the format will reduce stress during your one-week sprint.\n\n* **Know the Format:**\n * **Google:** Expect 5\u20137 interviews (1 phone screen, 4\u20136 on-site). Practice coding in a plain text environment like Google Docs, as you will be expected to write code without an IDE (*Source: Google Interview Guide.pdf*).\n * **IBM/TCS:** These often begin with online assessments (cognitive/gamified tests and coding challenges) followed by technical and managerial rounds (*Source: IBM.pdf, TCS.pdf*).\n* **Time Management:** Since your interviews will be timed, practice solving problems under constraints to ensure you can articulate your process while coding (*Source: Google Interview Guide.pdf*).\n\n---\n\n### Summary Checklist for Your Final Week\n\n| Focus Area | Action Item |\n| :--- | :--- |\n| **Behavioral** | Draft 3\u20135 \"STAR\" stories that map to the job description and leadership principles. |\n| **Coding** | Practice \"Easy/Medium\" problems on LeetCode/Educative; focus on explaining your logic aloud. |\n| **Technical** | Review SQL joins, OOP principles, and Big-O complexity for your chosen language (Java, Python, or C++). |\n| **Logistics** | Verify if your interview is on a whiteboard, Google Docs, or a specific coding platform. |\n\n*Note: If you are interviewing for a company not explicitly detailed in the provided context (e.g., Meta, Netflix, Apple), the indexed knowledge corpus does not contain verified records for their specific interview processes.*\n\n---\n**Retrieval used:**\n\u2713 Query rewriting\n\u2717 Metadata filtering\n\u2713 Embedding generation\n\u2713 BM25 retrieval\n\u2713 Dense retrieval\n\u2713 Hybrid retrieval\n\u2713 RRF fusion\n\u2713 Cross-encoder reranking\n\u2717 HyDE\n\u2717 Multi-hop\n\u2717 Chunk enhancement\n\n*Why:* HyDE and multi-hop were unnecessary because the initial retrieval produced sufficient high-confidence evidence.",
+      "reference_answer": "With one week to prepare, candidate guidance from the knowledge base recommends a 3-part triage: 1. Technical Coding (50% of time): Focus on high-frequency patterns\u2014Two Pointers, Sliding Window, Trees/BFS/DFS, Hash Tables. Review Big-O complexity and practice writing code on a plain text editor or whiteboard without auto-complete. 2. Behavioral Preparation (30% of time): Outline 5-6 versatile STAR stories covering high-priority principles (Ownership, Dealing with Conflict, Overcoming Failure, Measurable Results) that can be adapted to multiple questions. 3. Interview Process Familiarization (20% of time): Understand the company's specific loop structure (e.g., Amazon Bar Raiser expectations vs. Google coding rubrics) and prepare thoughtful questions to ask the interviewers."
+    }
+  ]
+}

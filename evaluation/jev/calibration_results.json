@@ -1,0 +1,38 @@
+{
+  "is_live_jev": false,
+  "sample_size": 55,
+  "mode": "fallback_unconfigured",
+  "mean_confidence": 0.0,
+  "brier_score": "N/A (live Jev access unconfigured; fallback confidence is 0.0)",
+  "expected_calibration_error": "N/A (unconfigured)",
+  "confidence_buckets": {
+    "0.0-0.1": 55,
+    "0.1-0.2": 0,
+    "0.2-0.3": 0,
+    "0.3-0.4": 0,
+    "0.4-0.5": 0,
+    "0.5-0.6": 0,
+    "0.6-0.7": 0,
+    "0.7-0.8": 0,
+    "0.8-0.9": 0,
+    "0.9-1.0": 0
+  },
+  "coverage_vs_accuracy": [
+    {
+      "threshold": 0.0,
+      "coverage": 1.0,
+      "empirical_accuracy": 0.6909
+    },
+    {
+      "threshold": 0.5,
+      "coverage": 0.0,
+      "empirical_accuracy": null
+    },
+    {
+      "threshold": 0.8,
+      "coverage": 0.0,
+      "empirical_accuracy": null
+    }
+  ],
+  "methodological_note": "Calibration cannot be evaluated on live predictions because TYPESAFE_API_KEY was unconfigured; all requests engaged circuit-breaker fallback with confidence=0.0 per Rule 2 and Section 34."
+}

@@ -1,0 +1,93 @@
+{
+  "Simple Factual": {
+    "query_count": 8,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 0.7787,
+    "avg_keyword_coverage": 0.75,
+    "avg_latency_ms": 12850.13
+  },
+  "Exact Lexical": {
+    "query_count": 5,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 0.9531,
+    "avg_keyword_coverage": 0.8,
+    "avg_latency_ms": 21293.22
+  },
+  "Semantic Retrieval": {
+    "query_count": 3,
+    "avg_mrr": 0.7778,
+    "avg_ndcg@5": 0.4208,
+    "avg_keyword_coverage": 0.75,
+    "avg_latency_ms": 17963.39
+  },
+  "Multi-Company Comparison": {
+    "query_count": 4,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 0.9168,
+    "avg_keyword_coverage": 0.3,
+    "avg_latency_ms": 12895.53
+  },
+  "Multi-Round": {
+    "query_count": 3,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 1.0,
+    "avg_keyword_coverage": 0.0,
+    "avg_latency_ms": 7868.86
+  },
+  "Unsupported Company": {
+    "query_count": 4,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 1.0,
+    "avg_keyword_coverage": 0.0,
+    "avg_latency_ms": 6329.76
+  },
+  "Out of Domain": {
+    "query_count": 4,
+    "avg_mrr": 0.0,
+    "avg_ndcg@5": 0.0,
+    "avg_keyword_coverage": 1.0,
+    "avg_latency_ms": 1.04
+  },
+  "Metadata Direct": {
+    "query_count": 2,
+    "avg_mrr": 0.0,
+    "avg_ndcg@5": 0.0,
+    "avg_keyword_coverage": 1.0,
+    "avg_latency_ms": 0.92
+  },
+  "AI Startup Intelligence": {
+    "query_count": 10,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 0.5583,
+    "avg_keyword_coverage": 0.075,
+    "avg_latency_ms": 1799.37
+  },
+  "Topic Factual": {
+    "query_count": 7,
+    "avg_mrr": 0.9286,
+    "avg_ndcg@5": 0.8968,
+    "avg_keyword_coverage": 0.0,
+    "avg_latency_ms": 12955.13
+  },
+  "Behavioral Questions": {
+    "query_count": 3,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 1.0,
+    "avg_keyword_coverage": 0.1667,
+    "avg_latency_ms": 2406.16
+  },
+  "Query Rewriting": {
+    "query_count": 1,
+    "avg_mrr": 0.3333,
+    "avg_ndcg@5": 0.1696,
+    "avg_keyword_coverage": 0.0,
+    "avg_latency_ms": 5380.58
+  },
+  "Ambiguous": {
+    "query_count": 1,
+    "avg_mrr": 1.0,
+    "avg_ndcg@5": 0.5087,
+    "avg_keyword_coverage": 0.0,
+    "avg_latency_ms": 13543.46
+  }
+}
