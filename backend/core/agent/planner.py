@@ -121,19 +121,26 @@ class AgentPlanner:
                 if canonical not in detected_companies:
                     detected_companies.append(canonical)
 
-        # 2. Topic Detection
+        # 2. Role Detection (using QueryRouter canonical mapping)
+        detected_roles: list[str] = []
+        for role_key, canonical_role in sorted(QueryRouter.CANONICAL_ROLES.items(), key=lambda x: -len(x[0])):
+            if re.search(r"\b" + re.escape(role_key) + r"\b", lowered):
+                if canonical_role not in detected_roles:
+                    detected_roles.append(canonical_role)
+
+        # 3. Topic Detection
         detected_topics: list[str] = []
         for topic in QueryRouter.TOPICS:
             if re.search(r"\b" + re.escape(topic) + r"\b", lowered):
                 detected_topics.append(topic)
 
-        # 3. Leadership Principle Detection
+        # 4. Leadership Principle Detection
         detected_lps: list[str] = []
         for lp in self.AMAZON_LPS:
             if lp in lowered:
                 detected_lps.append(lp.title())
 
-        # 4. Pronoun and Conversational References
+        # 5. Pronoun and Conversational References
         pronouns = {"it", "this", "that", "they", "them", "these", "those", "he", "she", "previous"}
         has_pronoun = bool(set(words).intersection(pronouns))
         is_followup = bool(
@@ -172,6 +179,7 @@ class AgentPlanner:
             "lowered": lowered,
             "word_count": word_count,
             "detected_companies": detected_companies,
+            "detected_roles": detected_roles,
             "detected_topics": detected_topics,
             "detected_lps": detected_lps,
             "is_followup": is_followup,
@@ -218,6 +226,9 @@ class AgentPlanner:
         if toggles.get("metadata_filtering", True):
             if profile["detected_companies"] and len(profile["detected_companies"]) == 1:
                 meta_filters["company"] = profile["detected_companies"][0]
+                filter_needed = True
+            if toggles.get("role_extraction_enabled", True) and profile.get("detected_roles") and len(profile["detected_roles"]) == 1:
+                meta_filters["role"] = profile["detected_roles"][0]
                 filter_needed = True
             if profile["detected_lps"]:
                 meta_filters["leadership_principle"] = profile["detected_lps"][0]

@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import logging
 import time
 from typing import Any
 
 from backend.core.vector_store.base import ScoredChunk
 from .base import BaseRetriever, RetrievalResult
+
+logger = logging.getLogger(__name__)
 
 
 class HybridRetriever(BaseRetriever):
@@ -31,6 +34,7 @@ class HybridRetriever(BaseRetriever):
         query: str,
         top_k: int = 10,
         metadata_filters: dict[str, Any] | None = None,
+        fallback_unfiltered: bool = True,
     ) -> RetrievalResult:
         start_t = time.perf_counter()
         dense_res = await self.dense_retriever.retrieve(
@@ -77,6 +81,7 @@ class HybridRetriever(BaseRetriever):
                 )
             )
 
+        fallback_occurred = False
         if metadata_filters:
             filtered_fused = []
             for fc in fused_chunks:
@@ -86,12 +91,18 @@ class HybridRetriever(BaseRetriever):
                 )
                 if match:
                     filtered_fused.append(fc)
-            fused_chunks = filtered_fused
+            if filtered_fused:
+                fused_chunks = filtered_fused
+            elif fallback_unfiltered:
+                fallback_occurred = True
+                logger.info("Hybrid fused post-filter %r yielded 0 hits; falling back to unfiltered fused candidates.", metadata_filters)
+            else:
+                fused_chunks = []
 
         latency_ms = round((time.perf_counter() - start_t) * 1000, 2)
         return RetrievalResult(
             chunks=fused_chunks,
             retriever_type="hybrid",
             latency_ms=latency_ms,
-            metadata_filters_applied=metadata_filters,
+            metadata_filters_applied=metadata_filters if not fallback_occurred else None,
         )

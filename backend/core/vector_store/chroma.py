@@ -88,6 +88,7 @@ class ChromaVectorStore(BaseVectorStore):
         query_embedding: list[float],
         top_k: int = 10,
         metadata_filters: dict[str, Any] | None = None,
+        fallback_unfiltered: bool = True,
     ) -> list[ScoredChunk]:
         if not self._collection:
             return []
@@ -115,8 +116,18 @@ class ChromaVectorStore(BaseVectorStore):
                 include=["documents", "metadatas", "distances"],
             )
 
-        scored = []
         docs = results.get("documents", [[]])[0]
+        # Fallback to unfiltered if filtered query returned 0 documents
+        if where_filter and (not docs or len(docs) == 0) and fallback_unfiltered:
+            logger.info("Chroma search with filter %r returned 0 results; falling back to unfiltered search.", where_filter)
+            results = self._collection.query(
+                query_embeddings=[query_embedding],
+                n_results=top_k,
+                include=["documents", "metadatas", "distances"],
+            )
+            docs = results.get("documents", [[]])[0]
+
+        scored = []
         metas = results.get("metadatas", [[]])[0]
         dists = results.get("distances", [[]])[0]
         ids = results.get("ids", [[]])[0]
@@ -132,6 +143,7 @@ class ChromaVectorStore(BaseVectorStore):
                     score=sim,
                 )
             )
+
         if metadata_filters:
             filtered_scored = []
             for sc in scored:
@@ -141,7 +153,13 @@ class ChromaVectorStore(BaseVectorStore):
                 )
                 if match:
                     filtered_scored.append(sc)
-            scored = filtered_scored
+            if filtered_scored:
+                scored = filtered_scored
+            elif fallback_unfiltered:
+                logger.info("Chroma post-filter %r yielded 0 hits; retaining unfiltered candidates.", metadata_filters)
+            else:
+                scored = []
+
         return scored
 
     def get_all_chunks(self) -> list[ScoredChunk]:

@@ -42,6 +42,8 @@ DEFAULT_FEATURE_TOGGLES: dict[str, bool] = {
     "chunk_enhancement": True,
     "jev_decision": False,
     "source_attribution": True,
+    "entity_prefilter_fallback": True,
+    "role_extraction_enabled": True,
 }
 
 
@@ -103,6 +105,10 @@ class PipelineConfig:
     kb_version: str = "all"  # "all", "original", "github_licensed"
     source_attribution_enabled: bool = True
 
+    # -- Retrieval Enhancements ------------------------------------------------
+    entity_prefilter_fallback: bool = True
+    role_extraction_enabled: bool = True
+
     # -- Feature toggles -------------------------------------------------------
     feature_toggles: dict[str, bool] = field(default_factory=lambda: dict(DEFAULT_FEATURE_TOGGLES))
 
@@ -160,6 +166,8 @@ class PipelineConfig:
             jev_max_retries=_env("JEV_MAX_RETRIES", 2, int),
             kb_version=_env("RAG_KB_VERSION", "all"),
             source_attribution_enabled=_env("RAG_SOURCE_ATTRIBUTION_ENABLED", True, bool),
+            entity_prefilter_fallback=_env("RAG_ENTITY_PREFILTER_FALLBACK", True, bool),
+            role_extraction_enabled=_env("RAG_ROLE_EXTRACTION_ENABLED", True, bool),
         )
         # Merge any env-based feature overrides
         for feature in DEFAULT_FEATURE_TOGGLES:

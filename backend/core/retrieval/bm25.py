@@ -45,6 +45,7 @@ class BM25Retriever(BaseRetriever):
         query: str,
         top_k: int = 10,
         metadata_filters: dict[str, Any] | None = None,
+        fallback_unfiltered: bool = True,
     ) -> RetrievalResult:
         start_t = time.perf_counter()
         if not self._all_chunks:
@@ -100,6 +101,40 @@ class BM25Retriever(BaseRetriever):
                         )
                     )
 
+        # Fall back to unfiltered if filtered set returned nothing
+        fallback_occurred = False
+        if metadata_filters and len(scored) == 0 and fallback_unfiltered:
+            fallback_occurred = True
+            logger.info("BM25 metadata filter %r yielded 0 hits; falling back to unfiltered search.", metadata_filters)
+            if self._bm25 and query_tokens:
+                doc_scores = self._bm25.get_scores(query_tokens)
+                max_s = max(doc_scores) if len(doc_scores) > 0 and max(doc_scores) > 0 else 1.0
+                for chunk, s in zip(self._all_chunks, doc_scores):
+                    norm_score = float(s / max_s)
+                    if norm_score > 0.01:
+                        scored.append(
+                            ScoredChunk(
+                                chunk_id=chunk.chunk_id,
+                                text=chunk.text,
+                                metadata=chunk.metadata,
+                                score=round(norm_score, 4),
+                            )
+                        )
+            else:
+                q_set = set(query_tokens)
+                for chunk in self._all_chunks:
+                    c_tokens = set(_tokenize(chunk.text))
+                    overlap = len(q_set.intersection(c_tokens))
+                    if overlap > 0:
+                        scored.append(
+                            ScoredChunk(
+                                chunk_id=chunk.chunk_id,
+                                text=chunk.text,
+                                metadata=chunk.metadata,
+                                score=round(overlap / max(1, len(q_set)), 4),
+                            )
+                        )
+
         scored.sort(key=lambda x: x.score, reverse=True)
         top_chunks = scored[:top_k]
         latency_ms = round((time.perf_counter() - start_t) * 1000, 2)
@@ -107,5 +142,5 @@ class BM25Retriever(BaseRetriever):
             chunks=top_chunks,
             retriever_type="bm25",
             latency_ms=latency_ms,
-            metadata_filters_applied=metadata_filters,
+            metadata_filters_applied=metadata_filters if not fallback_occurred else None,
         )
