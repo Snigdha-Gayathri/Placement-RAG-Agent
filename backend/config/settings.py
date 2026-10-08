@@ -41,6 +41,7 @@ DEFAULT_FEATURE_TOGGLES: dict[str, bool] = {
     "multi_hop_retrieval": True,
     "chunk_enhancement": True,
     "jev_decision": False,
+    "source_attribution": True,
 }
 
 
@@ -98,6 +99,10 @@ class PipelineConfig:
     jev_timeout_seconds: float = 10.0
     jev_max_retries: int = 2
 
+    # -- Knowledge Base Versioning & Attribution -------------------------------
+    kb_version: str = "all"  # "all", "original", "github_licensed"
+    source_attribution_enabled: bool = True
+
     # -- Feature toggles -------------------------------------------------------
     feature_toggles: dict[str, bool] = field(default_factory=lambda: dict(DEFAULT_FEATURE_TOGGLES))
 
@@ -153,6 +158,8 @@ class PipelineConfig:
             jev_model=_env("JEV_MODEL", "jev-1.13-free"),
             jev_timeout_seconds=_env("JEV_TIMEOUT_SECONDS", 10.0, float),
             jev_max_retries=_env("JEV_MAX_RETRIES", 2, int),
+            kb_version=_env("RAG_KB_VERSION", "all"),
+            source_attribution_enabled=_env("RAG_SOURCE_ATTRIBUTION_ENABLED", True, bool),
         )
         # Merge any env-based feature overrides
         for feature in DEFAULT_FEATURE_TOGGLES:
