@@ -395,6 +395,7 @@ class RetrievalGraphBuilder:
     async def _node_execute_retrieval(self, state: AgenticRAGState) -> dict[str, Any]:
         """Dynamically execute the planned retrieval operations."""
         t0 = time.perf_counter()
+        active_q = state.get("rewritten_query") or state.get("original_query", "")
         meta_filters = dict(state.get("metadata_filter", {})) if state.get("metadata_filter_used") else {}
         # Configurable KB versioning: "all", "original", "github_licensed"
         kb_ver = state.get("active_toggles", {}).get("kb_version", "all")
