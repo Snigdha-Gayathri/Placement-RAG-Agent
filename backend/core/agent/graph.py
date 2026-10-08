@@ -113,10 +113,32 @@ def build_disclosure_section(state: AgenticRAGState) -> str:
         why = "Multi-hop was skipped because the query focused on a single entity/topic."
     elif "HyDE" in skipped_names:
         why = "HyDE was skipped because query vocabulary directly matched the indexed knowledge corpus."
-    else:
-        why = "Operations were dynamically selected based on query specificity and evidence quality."
-
     lines.append(f"\n*Why:* {why}")
+
+    # Build Sources & Attribution block if enabled
+    show_attribution = state.get("active_toggles", {}).get("source_attribution", True)
+    chunks = state.get("final_context_chunks", [])
+    if show_attribution and chunks:
+        seen_sources = set()
+        source_items = []
+        for c in chunks:
+            m = getattr(c, "metadata", {}) or {}
+            src_repo = m.get("source_repo", "")
+            src_file = m.get("source_file", "") or getattr(c, "source", "placement_doc")
+            lic = m.get("license", "")
+            key = (src_repo, src_file)
+            if key not in seen_sources:
+                seen_sources.add(key)
+                if src_repo:
+                    lic_str = f" ({lic})" if lic and lic != "Unknown" else ""
+                    source_items.append(f"- **{src_repo}** — `{src_file}`{lic_str}")
+                else:
+                    source_items.append(f"- `{src_file}` (Original Placement Corpus)")
+
+        if source_items:
+            lines.append("\n**Sources & Attribution:**")
+            lines.extend(source_items[:5])
+
     return "\n".join(lines)
 
 
@@ -373,8 +395,12 @@ class RetrievalGraphBuilder:
     async def _node_execute_retrieval(self, state: AgenticRAGState) -> dict[str, Any]:
         """Dynamically execute the planned retrieval operations."""
         t0 = time.perf_counter()
-        active_q = state.get("rewritten_query") or state.get("original_query", "")
-        meta_filters = state.get("metadata_filter", {}) if state.get("metadata_filter_used") else None
+        meta_filters = dict(state.get("metadata_filter", {})) if state.get("metadata_filter_used") else {}
+        # Configurable KB versioning: "all", "original", "github_licensed"
+        kb_ver = state.get("active_toggles", {}).get("kb_version", "all")
+        if kb_ver in ("original", "github_licensed"):
+            meta_filters["source"] = kb_ver
+        meta_filters = meta_filters if meta_filters else None
         trace = list(state.get("retrieval_trace", []))
         executed = list(state.get("executed_operations", []))
         budgets = dict(state.get("budgets", {}))
@@ -812,11 +838,15 @@ class RetrievalGraphBuilder:
                 "termination_reason": "UNSUPPORTED_COMPANY_ABSTAINED",
             }
 
-        # Build clean context lines
-        context_lines = [
-            f"[{getattr(c, 'source', getattr(c, 'metadata', {}).get('source_file', 'Doc'))}] {getattr(c, 'text', str(c))}"
-            for c in chunks
-        ]
+        # Build clean context lines with provenance
+        context_lines = []
+        for c in chunks:
+            m = getattr(c, "metadata", {}) or {}
+            src_repo = m.get("source_repo", "")
+            src_file = m.get("source_file") or getattr(c, "source", "placement_doc")
+            cid = getattr(c, "chunk_id", m.get("chunk_id", ""))
+            prov_tag = f"Source: {src_repo} / {src_file}" if src_repo else f"Source: {src_file}"
+            context_lines.append(f"[{cid} | {prov_tag}] {getattr(c, 'text', str(c))}")
         merged_context = "\n\n".join(context_lines)
 
         t0_gen = time.perf_counter()
