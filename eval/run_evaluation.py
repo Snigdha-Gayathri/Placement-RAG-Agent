@@ -2,10 +2,11 @@
 
 Supports:
 - Evaluation on 'dev' (45 queries), 'test' (20 queries), or 'all' (65 queries).
-- Company + Topic level relevance (PRIMARY).
-- Exact Chunk ID relevance (SECONDARY).
+- Exact Chunk ID relevance (PRIMARY AUTHORITATIVE IR METRIC).
+- Company + Topic level relevance (SECONDARY EXPLORATORY METRIC, strictly bounded NDCG <= 1.0).
 - Complete IR metrics: MRR, HitRate@1/3/5/10, Recall@1/3/5/10, Precision@1/3/5/10, NDCG@1/3/5/10, MAP@5/10.
-- Abstention metrics: Abstention Accuracy (Precision, Recall, F1 on unanswerable queries).
+- Clean separation of answerable query retrieval metrics from unanswerable query metrics.
+- Abstention metrics: Abstention Accuracy, False Answer Count, Inappropriate Abstention Count.
 - LLM Judge RAGAS metrics: Faithfulness & Answer Relevancy with exponential backoff on 429/503.
 - Per-category breakdown: single-hop, multi-hop, metadata, conceptual, unanswerable.
 - Saves results to eval/results/<experiment_name>.json.
@@ -35,6 +36,11 @@ dotenv.load_dotenv(override=True)
 from backend.app.models import ChatRequest
 from backend.app.service import SecureRAGService, build_request_context
 from eval.judge import LLMJudge
+from eval.metrics import (
+    compute_ranking_metrics,
+    check_abstention,
+    deduplicate_chunk_ids,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("eval.suite")
@@ -48,7 +54,7 @@ def is_chunk_relevant_topic_level(
     expected_topics: list[str],
     should_abstain: bool,
 ) -> bool:
-    """Determine if a retrieved chunk is relevant at the Company + Topic level."""
+    """Determine if a retrieved chunk matches at the Company + Topic level."""
     if should_abstain:
         return False
 
@@ -85,48 +91,54 @@ def is_chunk_relevant_topic_level(
     return topic_matched
 
 
-def compute_ir_metrics(
+def compute_topic_metrics(
     relevance_flags: list[int],
     ground_truth_count: int,
     should_abstain: bool,
     k_values: tuple[int, ...] = (1, 3, 5, 10),
-) -> dict[str, float]:
-    """Compute HitRate@k, Precision@k, Recall@k, NDCG@k, MRR, MAP@k given binary relevance list."""
-    metrics: dict[str, float] = {}
-
+) -> dict[str, float | None]:
+    """Exploratory topic-level metric with mathematically bounded NDCG."""
     if should_abstain or ground_truth_count == 0:
-        # If unanswerable, retrieving 0 relevant items is correct
-        for k in k_values:
-            metrics[f"hit_rate@{k}"] = 1.0 if sum(relevance_flags[:k]) == 0 else 0.0
-            metrics[f"precision@{k}"] = 1.0 if sum(relevance_flags[:k]) == 0 else 0.0
-            metrics[f"recall@{k}"] = 1.0 if sum(relevance_flags[:k]) == 0 else 0.0
-            metrics[f"ndcg@{k}"] = 1.0 if sum(relevance_flags[:k]) == 0 else 0.0
-        metrics["mrr"] = 1.0 if sum(relevance_flags) == 0 else 0.0
-        metrics["map@5"] = 1.0 if sum(relevance_flags[:5]) == 0 else 0.0
-        metrics["map@10"] = 1.0 if sum(relevance_flags[:10]) == 0 else 0.0
-        return metrics
+        return {
+            "mrr": None,
+            "hit_rate@1": None,
+            "hit_rate@3": None,
+            "hit_rate@5": None,
+            "hit_rate@10": None,
+            "precision@1": None,
+            "precision@3": None,
+            "precision@5": None,
+            "precision@10": None,
+            "recall@1": None,
+            "recall@3": None,
+            "recall@5": None,
+            "recall@10": None,
+            "ndcg@1": None,
+            "ndcg@3": None,
+            "ndcg@5": None,
+            "ndcg@10": None,
+            "map@5": None,
+            "map@10": None,
+        }
 
+    hits_total = sum(relevance_flags)
+    effective_gt = max(ground_truth_count, hits_total)
+
+    metrics: dict[str, float | None] = {}
     for k in k_values:
         top_k = relevance_flags[:k]
         hits = sum(top_k)
         metrics[f"hit_rate@{k}"] = 1.0 if hits > 0 else 0.0
-        metrics[f"precision@{k}"] = hits / k if k > 0 else 0.0
-        metrics[f"recall@{k}"] = min(1.0, hits / ground_truth_count) if ground_truth_count > 0 else 0.0
+        metrics[f"precision@{k}"] = round(hits / k, 4)
+        metrics[f"recall@{k}"] = round(min(1.0, hits / effective_gt), 4)
 
-        # NDCG@k
         dcg = sum(r / math.log2(i + 2) for i, r in enumerate(top_k))
-        idcg = sum(1.0 / math.log2(i + 2) for i in range(min(ground_truth_count, k)))
-        metrics[f"ndcg@{k}"] = (dcg / idcg) if idcg > 0 else 0.0
+        idcg = sum(1.0 / math.log2(i + 2) for i in range(min(effective_gt, k)))
+        metrics[f"ndcg@{k}"] = round(min(1.0, dcg / idcg), 4) if idcg > 0 else 0.0
 
-    # MRR
-    mrr = 0.0
-    for i, r in enumerate(relevance_flags):
-        if r == 1:
-            mrr = 1.0 / (i + 1)
-            break
-    metrics["mrr"] = mrr
+    first_hit = next((i + 1 for i, r in enumerate(relevance_flags) if r == 1), 0)
+    metrics["mrr"] = round(1.0 / first_hit, 4) if first_hit > 0 else 0.0
 
-    # MAP@k
     for map_k in (5, 10):
         cum_prec = 0.0
         hits = 0
@@ -134,35 +146,10 @@ def compute_ir_metrics(
             if r == 1:
                 hits += 1
                 cum_prec += hits / (i + 1)
-        metrics[f"map@{map_k}"] = cum_prec / min(ground_truth_count, map_k) if ground_truth_count > 0 else 0.0
+        denom = min(effective_gt, map_k)
+        metrics[f"map@{map_k}"] = round(cum_prec / denom, 4) if denom > 0 else 0.0
 
     return metrics
-
-
-def check_abstention(answer: str, should_abstain: bool) -> dict[str, Any]:
-    """Check if the answer correctly abstained when evidence was insufficient."""
-    abstain_signals = [
-        "insufficient evidence",
-        "do not contain",
-        "not covered",
-        "cannot answer",
-        "unable to answer",
-        "no specific information",
-        "not present in the provided context",
-        "not mentioned",
-        "out of domain",
-        "does not provide",
-        "i don't have enough",
-        "no evidence",
-    ]
-    ans_lower = answer.lower()
-    abstained = any(s in ans_lower for s in abstain_signals)
-    correct = (abstained == should_abstain)
-    return {
-        "abstained": abstained,
-        "should_abstain": should_abstain,
-        "correct": correct,
-    }
 
 
 async def run_evaluation(
@@ -182,6 +169,7 @@ async def run_evaluation(
 
     logger.info("Initializing SecureRAGService and Judge for %d queries (split=%s)...", len(dataset), split)
     service = SecureRAGService()
+    service.warmup()
     judge = LLMJudge() if use_llm_judge else None
 
     query_records: list[dict[str, Any]] = []
@@ -211,30 +199,31 @@ async def run_evaluation(
         ret_info = pdata.retrieval_info if pdata else {}
         retrieved_chunks = ret_info.get("retrieved_chunks", [])
 
-        # 1. Company+Topic level relevance (PRIMARY)
+        # 1. Authoritative Chunk-ID level relevance (PRIMARY)
+        retrieved_cids = [ch.get("chunk_id", "") for ch in retrieved_chunks if ch.get("chunk_id")]
+        chunk_metrics = compute_ranking_metrics(
+            retrieved_chunk_ids=retrieved_cids,
+            ground_truth_chunk_ids=gt_chunk_ids if not should_abstain else [],
+        )
+
+        # 2. Exploratory Topic level relevance (SECONDARY)
         topic_rel_flags = [
             1 if is_chunk_relevant_topic_level(ch, target_company, expected_topics, should_abstain) else 0
             for ch in retrieved_chunks
         ]
-        # Ground truth count for topic level: estimated from matched chunks in DB
-        gt_topic_count = max(1, len(gt_chunk_ids)) if not should_abstain else 0
-        topic_metrics = compute_ir_metrics(topic_rel_flags, gt_topic_count, should_abstain)
-
-        # 2. Strict Chunk-ID level relevance (SECONDARY)
-        gt_set = set(gt_chunk_ids)
-        chunk_rel_flags = [
-            1 if (ch.get("chunk_id") in gt_set and not should_abstain) else 0
-            for ch in retrieved_chunks
-        ]
-        chunk_metrics = compute_ir_metrics(chunk_rel_flags, len(gt_set), should_abstain)
+        gt_topic_count = len(gt_chunk_ids) if not should_abstain else 0
+        topic_metrics = compute_topic_metrics(topic_rel_flags, gt_topic_count, should_abstain)
 
         # 3. Abstention check
         abstention_info = check_abstention(resp.answer, should_abstain)
 
-        logger.info("  Retrieved: %d chunks | Topic MRR: %.3f | Rec@5: %.3f | Hit@5: %.1f",
-                    len(retrieved_chunks), topic_metrics["mrr"], topic_metrics["recall@5"], topic_metrics["hit_rate@5"])
-        logger.info("  Abstention: %s (expected=%s, correct=%s)",
-                    abstention_info["abstained"], should_abstain, abstention_info["correct"])
+        mrr_str = f"{chunk_metrics['mrr']:.3f}" if chunk_metrics.get("mrr") is not None else "N/A"
+        rec_str = f"{chunk_metrics['recall@5']:.3f}" if chunk_metrics.get("recall@5") is not None else "N/A"
+        hit_str = f"{chunk_metrics['hit_rate@5']:.1f}" if chunk_metrics.get("hit_rate@5") is not None else "N/A"
+        logger.info("  Retrieved: %d chunks | Chunk MRR: %s | Rec@5: %s | Hit@5: %s",
+                    len(retrieved_chunks), mrr_str, rec_str, hit_str)
+        logger.info("  Abstention: %s (expected=%s, status=%s)",
+                    abstention_info["abstained"], should_abstain, abstention_info["status"])
 
         # 4. LLM Judge RAGAS metrics (if enabled)
         faith_score = None
@@ -264,8 +253,8 @@ async def run_evaluation(
             "should_abstain": should_abstain,
             "latency_ms": latency_ms,
             "retrieved_chunk_count": len(retrieved_chunks),
-            "topic_level_metrics": topic_metrics,
-            "chunk_id_metrics": chunk_metrics,
+            "primary_chunk_metrics": chunk_metrics,
+            "secondary_topic_metrics": topic_metrics,
             "abstention": abstention_info,
             "ragas_metrics": {
                 "faithfulness": faith_score,
@@ -280,7 +269,7 @@ async def run_evaluation(
 
     duration_s = round(time.perf_counter() - t_start_total, 2)
 
-    def mean_val(records: list[dict], getter) -> float:
+    def mean_val(records: list[dict], getter) -> float | None:
         vals = [getter(r) for r in records if getter(r) is not None]
         return round(sum(vals) / len(vals), 4) if vals else 0.0
 
@@ -290,28 +279,34 @@ async def run_evaluation(
         faith_records = [r for r in records if r["ragas_metrics"]["faithfulness"] is not None]
         rel_records = [r for r in records if r["ragas_metrics"]["answer_relevancy"] is not None]
 
-        abstain_accuracy = mean_val(unans_records, lambda r: 1.0 if r["abstention"]["correct"] else 0.0) if unans_records else 1.0
+        correct_abstentions = sum(1 for r in unans_records if r["abstention"]["status"] == "CORRECT_ABSTENTION")
+        abstain_accuracy = round(correct_abstentions / len(unans_records), 4) if unans_records else 1.0
 
         return {
-            "count": len(records),
-            "primary_topic_metrics": {
-                "mrr": mean_val(records, lambda r: r["topic_level_metrics"]["mrr"]),
-                "hit_rate@5": mean_val(records, lambda r: r["topic_level_metrics"]["hit_rate@5"]),
-                "recall@5": mean_val(records, lambda r: r["topic_level_metrics"]["recall@5"]),
-                "precision@5": mean_val(records, lambda r: r["topic_level_metrics"]["precision@5"]),
-                "ndcg@5": mean_val(records, lambda r: r["topic_level_metrics"]["ndcg@5"]),
-                "map@5": mean_val(records, lambda r: r["topic_level_metrics"]["map@5"]),
+            "total_count": len(records),
+            "answerable_count": len(ans_records),
+            "unanswerable_count": len(unans_records),
+            "primary_chunk_metrics": {
+                "mrr": mean_val(ans_records, lambda r: r["primary_chunk_metrics"]["mrr"]),
+                "hit_rate@5": mean_val(ans_records, lambda r: r["primary_chunk_metrics"]["hit_rate@5"]),
+                "recall@5": mean_val(ans_records, lambda r: r["primary_chunk_metrics"]["recall@5"]),
+                "precision@5": mean_val(ans_records, lambda r: r["primary_chunk_metrics"]["precision@5"]),
+                "ndcg@5": mean_val(ans_records, lambda r: r["primary_chunk_metrics"]["ndcg@5"]),
+                "map@5": mean_val(ans_records, lambda r: r["primary_chunk_metrics"]["map@5"]),
             },
-            "secondary_chunk_metrics": {
-                "mrr": mean_val(records, lambda r: r["chunk_id_metrics"]["mrr"]),
-                "hit_rate@5": mean_val(records, lambda r: r["chunk_id_metrics"]["hit_rate@5"]),
-                "recall@5": mean_val(records, lambda r: r["chunk_id_metrics"]["recall@5"]),
-                "precision@5": mean_val(records, lambda r: r["chunk_id_metrics"]["precision@5"]),
-                "ndcg@5": mean_val(records, lambda r: r["chunk_id_metrics"]["ndcg@5"]),
+            "secondary_topic_metrics": {
+                "mrr": mean_val(ans_records, lambda r: r["secondary_topic_metrics"]["mrr"]),
+                "hit_rate@5": mean_val(ans_records, lambda r: r["secondary_topic_metrics"]["hit_rate@5"]),
+                "recall@5": mean_val(ans_records, lambda r: r["secondary_topic_metrics"]["recall@5"]),
+                "precision@5": mean_val(ans_records, lambda r: r["secondary_topic_metrics"]["precision@5"]),
+                "ndcg@5": mean_val(ans_records, lambda r: r["secondary_topic_metrics"]["ndcg@5"]),
+                "map@5": mean_val(ans_records, lambda r: r["secondary_topic_metrics"]["map@5"]),
             },
             "abstention": {
                 "unanswerable_count": len(unans_records),
                 "abstention_accuracy": abstain_accuracy,
+                "false_answer_count": sum(1 for r in unans_records if r["abstention"]["status"] == "FALSE_ANSWER"),
+                "inappropriate_abstention_count": sum(1 for r in ans_records if r["abstention"]["status"] == "INAPPROPRIATE_ABSTENTION"),
             },
             "ragas": {
                 "faithfulness": mean_val(faith_records, lambda r: r["ragas_metrics"]["faithfulness"]),
@@ -348,14 +343,14 @@ async def run_evaluation(
     }
 
     if not output_filename:
-        output_filename = f"expanded_{split}.json"
+        output_filename = f"corrected_{split}_baseline.json"
 
     out_path = PROJECT_ROOT / "eval" / "results" / output_filename
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(results_data, f, indent=2)
 
-    logger.info("Saved evaluation results to: %s", out_path)
+    logger.info("Saved corrected evaluation results to: %s", out_path)
     return results_data
 
 

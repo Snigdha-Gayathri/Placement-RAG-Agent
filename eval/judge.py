@@ -31,7 +31,7 @@ class LLMJudge:
     def __init__(self, api_key: str | None = None, model: str | None = None) -> None:
         cfg = get_config()
         self._api_key = api_key or os.getenv("GEMINI_API_KEY") or cfg.gemini_api_key
-        self._model = model or os.getenv("RAG_LLM_MODEL") or os.getenv("GEMINI_MODEL") or "gemini-3.5-flash"
+        self._model = model or os.getenv("RAG_LLM_MODEL") or os.getenv("GEMINI_MODEL") or getattr(cfg, "llm_model", "gemini-3.1-flash-lite")
         self.total_judge_calls: int = 0
         self.failed_judge_calls: int = 0
         self.retry_count: int = 0

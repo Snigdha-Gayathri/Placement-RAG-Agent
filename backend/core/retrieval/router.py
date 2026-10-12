@@ -233,22 +233,24 @@ class QueryRouter:
                 if topic_key not in detected_topics:
                     detected_topics.append(topic_key)
 
-        # Multi-company or comparison detection
+        # Calibrated Multi-Hop Determination (distinguish true comparisons / multi-stage sequences from single-entity queries)
         is_comparison = bool(
-            len(detected_companies) > 1
-            or ("compare" in lower and ("and" in lower or "vs" in lower))
-            or "difference between" in lower
-            or " vs " in lower
+            len(detected_companies) >= 2
+            and any(term in lower for term in [" vs ", " compare ", "difference between", "differ between", "versus", " compared to "])
         )
-
-        # Multi-round detection (multi-hop within a single company)
-        has_multi_round = bool(
-            ("round" in lower and ("1" in lower or "2" in lower or "technical" in lower or "hr" in lower or "all rounds" in lower or "multiple rounds" in lower))
-            or "interview stages" in lower
-            or "interview process and coding" in lower
+        is_multi_stage_sequence = bool(
+            ("round 1" in lower and "round 2" in lower)
+            or ("screening" in lower and "onsite" in lower)
+            or ("online assessment" in lower and "onsite" in lower)
+            or ("coding round" in lower and "behavioral round" in lower)
+            or ("technical round" in lower and "hr round" in lower)
         )
-
-        needs_multi_hop = is_comparison or has_multi_round or len(query.split()) > 25
+        is_compound_multi_entity = bool(
+            len(detected_companies) >= 2 and (" and " in lower or " as well as " in lower)
+        )
+        needs_multi_hop = bool(
+            is_comparison or is_multi_stage_sequence or is_compound_multi_entity
+        )
 
         if len(detected_companies) == 1 and not is_comparison:
             filters["company"] = detected_companies[0]
@@ -270,6 +272,8 @@ class QueryRouter:
         if len(detected_roles) == 1:
             filters["role"] = detected_roles[0]
             reasoning_parts.append(f"Target role detected: {detected_roles[0]}")
+        elif detected_roles:
+            reasoning_parts.append(f"Target roles detected: {', '.join(detected_roles)}")
 
         # Determine retrieval method
         retriever_type = "hybrid"

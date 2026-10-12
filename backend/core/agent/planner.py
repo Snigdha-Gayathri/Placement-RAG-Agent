@@ -149,17 +149,33 @@ class AgentPlanner:
             or (word_count <= 4 and conversation_history and len(conversation_history) > 0)
         )
 
-        # 5. Multi-Part / Comparative Structure
+        # 5. Multi-Part / Comparative Structure (Calibrated Multi-Hop)
+        # Distinguish true cross-entity comparisons and sequential round pipelines
+        # from single-entity questions that merely contain conjunctions.
         is_comparison = bool(
-            (" vs " in lowered or " compare " in lowered or "difference between" in lowered)
-            and len(detected_companies) >= 2
+            len(detected_companies) >= 2
+            and any(term in lowered for term in [" vs ", " compare ", "difference between", "differ between", "versus", " compared to "])
         )
-        has_multi_aspects = bool(
-            (" and " in lowered and ("principle" in lowered or "criteria" in lowered or "evaluation" in lowered))
-            or (("how should i answer" in lowered or "behavioral" in lowered) and ("demonstrate" in lowered or "evaluate" in lowered))
-            or ("round 1" in lowered and "round 2" in lowered)
+        is_multi_stage_sequence = bool(
+            ("round 1" in lowered and "round 2" in lowered)
+            or ("screening" in lowered and "onsite" in lowered)
+            or ("online assessment" in lowered and "onsite" in lowered)
+            or ("coding round" in lowered and "behavioral round" in lowered)
+            or ("technical round" in lowered and "hr round" in lowered)
         )
-        needs_multi_hop = is_comparison or has_multi_aspects
+        is_compound_multi_entity = bool(
+            len(detected_companies) >= 2 and (" and " in lowered or " as well as " in lowered)
+        )
+        is_complex_behavioral_breakdown = bool(
+            "how should i answer" in lowered
+            and "disagree" in lowered
+            and ("principle" in lowered or "demonstrate" in lowered)
+        )
+
+        needs_multi_hop = bool(
+            is_comparison or is_multi_stage_sequence or is_compound_multi_entity or is_complex_behavioral_breakdown
+        )
+        has_multi_aspects = needs_multi_hop
 
         # 6. Lexical vs Semantic Specificity
         exact_lexical_cues = bool(
